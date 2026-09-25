@@ -261,11 +261,21 @@ const Transactions = () => {
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <p className="truncate text-xs font-bold text-gray-800" title={t.display_customer_name || 'Consumidor final'}>
-                        {t.display_customer_name || 'Consumidor final'}
-                      </p>
+                      <div
+                        title={t.display_customer_name || 'Consumidor final'}
+                        className={`inline-flex max-w-full items-center gap-1.5 rounded-lg px-2.5 py-1 ${
+                          t.display_customer_name
+                            ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-100'
+                            : 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100'
+                        }`}
+                      >
+                        <User className="h-3 w-3 flex-shrink-0" />
+                        <span className="truncate text-[10px] font-black">
+                          {t.display_customer_name || 'Consumidor final'}
+                        </span>
+                      </div>
                       {t.customer_idnumber && (
-                        <p className="truncate text-[9px] text-gray-400">CI {t.customer_idnumber}</p>
+                        <p className="mt-1 truncate pl-1 text-[9px] font-bold text-blue-400">CI {t.customer_idnumber}</p>
                       )}
                     </td>
                     <td className="px-4 py-3 text-right">
