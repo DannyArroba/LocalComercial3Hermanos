@@ -1,0 +1,2 @@
+ALTER TABLE purchase_items
+ADD COLUMN IF NOT EXISTS unit_cost DECIMAL(10,2) NOT NULL DEFAULT 0 AFTER unit_price;

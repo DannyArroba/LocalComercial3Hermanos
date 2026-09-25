@@ -35,7 +35,7 @@ const Navbar = () => {
               <>
                 <div className="hidden md:flex items-center gap-6">
                   <Link to="/dashboard" className="text-xs font-black text-gray-500 hover:text-primary-600 transition-all uppercase tracking-widest">Dashboard</Link>
-                  <Link to="/sales" className="text-xs font-black text-gray-500 hover:text-primary-600 transition-all uppercase tracking-widest">Productos</Link>
+                  <Link to="/sales" className="text-xs font-black text-gray-500 hover:text-primary-600 transition-all uppercase tracking-widest">Ventas</Link>
                   <Link to="/inventory" className="text-xs font-black text-gray-500 hover:text-primary-600 transition-all uppercase tracking-widest">Inventario</Link>
                       <Link to="/suppliers" className="text-xs font-black text-gray-500 hover:text-primary-600 transition-all uppercase tracking-widest">Proveedores</Link>
                       <Link to="/customers" className="text-xs font-black text-gray-500 hover:text-primary-600 transition-all uppercase tracking-widest">Clientes</Link>

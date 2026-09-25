@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {
       }
     } catch (err) {
       console.error("Add to cart failed", err);
-      Swal.fire('Error', 'No se pudo añadir al carrito', 'error');
+      Swal.fire('Error', 'No se pudo agregar la compra', 'error');
     }
   };
 
@@ -82,17 +82,22 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  const cartTotal = Math.round(cart.reduce((total, item) => total + Number(item.price) * item.quantity, 0) * 100) / 100;
   const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
-  const ivaTotal = cartTotal * 0.15; // IVA al 15%
-  const totalWithIva = cartTotal + ivaTotal;
+  const ivaTotal = cart.reduce((total, item) => {
+    const lineBase = Number(item.price) * item.quantity;
+    const lineTax = Number(item.applies_iva) === 1 ? Math.round(lineBase * 0.15 * 100) / 100 : 0;
+    return total + lineTax;
+  }, 0);
+  const roundedIvaTotal = Math.round(ivaTotal * 100) / 100;
+  const totalWithIva = Math.round((cartTotal + roundedIvaTotal) * 100) / 100;
 
   return (
     <CartContext.Provider value={{ 
       cart, 
       cartTotal, 
       cartCount, 
-      ivaTotal,
+      ivaTotal: roundedIvaTotal,
       totalWithIva,
       addToCart, 
       removeFromCart, 

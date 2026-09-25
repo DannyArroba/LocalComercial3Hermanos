@@ -83,6 +83,7 @@ if ($action === 'add') {
         $name = $conn->real_escape_string($_POST['name'] ?? '');
         $barcode = $conn->real_escape_string($_POST['barcode'] ?? '');
         $price = (float)($_POST['price'] ?? 0);
+        $applies_iva = (int)($_POST['applies_iva'] ?? 0) === 1 ? 1 : 0;
         $cost_price = (float)($_POST['cost_price'] ?? 0);
         $stock = (int)($_POST['stock'] ?? 0);
         $category = $conn->real_escape_string($_POST['category'] ?? '');
@@ -90,8 +91,8 @@ if ($action === 'add') {
         $supplier_id = !empty($_POST['supplier_id']) ? (int)$_POST['supplier_id'] : null;
         $image = saveUploadedImage($_FILES['image'] ?? null) ?? "";
 
-        $sql = "INSERT INTO products (name, barcode, price, cost_price, stock, category, description, supplier_id, image)
-                VALUES ('$name', '$barcode', '$price', '$cost_price', '$stock', '$category', '$description', " . ($supplier_id ? $supplier_id : "NULL") . ", '$image')";
+        $sql = "INSERT INTO products (name, barcode, price, applies_iva, cost_price, stock, category, description, supplier_id, image)
+                VALUES ('$name', '$barcode', '$price', '$applies_iva', '$cost_price', '$stock', '$category', '$description', " . ($supplier_id ? $supplier_id : "NULL") . ", '$image')";
 
         if ($conn->query($sql) === TRUE) {
             respond("success", "Producto anadido");
@@ -105,6 +106,7 @@ if ($action === 'add') {
         $name = $conn->real_escape_string($_POST['name'] ?? '');
         $barcode = $conn->real_escape_string($_POST['barcode'] ?? '');
         $price = (float)($_POST['price'] ?? 0);
+        $applies_iva = (int)($_POST['applies_iva'] ?? 0) === 1 ? 1 : 0;
         $cost_price = (float)($_POST['cost_price'] ?? 0);
         $stock = (int)($_POST['stock'] ?? 0);
         $category = $conn->real_escape_string($_POST['category'] ?? '');
@@ -118,7 +120,7 @@ if ($action === 'add') {
         }
 
         $sql = "UPDATE products
-                SET name='$name', barcode='$barcode', price='$price', cost_price='$cost_price', stock='$stock', category='$category',
+                SET name='$name', barcode='$barcode', price='$price', applies_iva='$applies_iva', cost_price='$cost_price', stock='$stock', category='$category',
                     description='$description', supplier_id=" . ($supplier_id ? $supplier_id : "NULL") . " $imageSql
                 WHERE id=$id";
 

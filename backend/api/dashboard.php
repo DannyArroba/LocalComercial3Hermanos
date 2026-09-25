@@ -37,6 +37,12 @@ if ($isAnnual) {
 $today = date('Y-m-d');
 $resSales = $conn->query("SELECT SUM(total) as total FROM purchases WHERE DATE(created_at) = '$today'");
 $salesToday = $resSales->fetch_assoc()['total'] ?? 0;
+$resReturnsToday = $conn->query("SELECT SUM(total_refund) as total FROM sales_returns WHERE DATE(created_at) = '$today'");
+$returnsToday = $resReturnsToday->fetch_assoc()['total'] ?? 0;
+$salesToday = round($salesToday - $returnsToday, 2);
+
+$resExpensesToday = $conn->query("SELECT SUM(total) as total FROM stock_purchases WHERE DATE(paid_at) = '$today' AND status IN ('PAGADO', 'RECIBIDO')");
+$expensesToday = $resExpensesToday->fetch_assoc()['total'] ?? 0;
 
 // Cantidad de productos con bajo stock (menos de 10) Y los detalles de los productos
 $resLowStock = $conn->query("SELECT COUNT(*) as count FROM products WHERE stock < 10");
@@ -103,28 +109,41 @@ while ($row = $resTopProducts->fetch_assoc()) {
     $topProducts[] = $row;
 }
 
-// Monthly Stats (Ganancias, Gastos, Neto)
-// Ganancias totales del mes (total de ventas)
+// Resumen del periodo: ventas, abastecimientos y ganancia estimada.
 $resMonthlyRevenue = $conn->query("SELECT SUM(total) as total FROM purchases WHERE created_at BETWEEN '$startDate' AND '$endDate'");
 $monthlyRevenue = $resMonthlyRevenue->fetch_assoc()['total'] ?? 0;
+$resMonthlyReturns = $conn->query("SELECT SUM(total_refund) as total FROM sales_returns WHERE created_at BETWEEN '$startDate' AND '$endDate'");
+$monthlyReturns = $resMonthlyReturns->fetch_assoc()['total'] ?? 0;
+$monthlyRevenue = round($monthlyRevenue - $monthlyReturns, 2);
 
-// Gastos del mes: (cost_price × quantity) de cada item vendido
-$resMonthlyExpenses = $conn->query("
-    SELECT 
-        SUM(p.cost_price * pi.quantity) as total_cost
+// Salidas de dinero registradas al abastecer inventario.
+$resMonthlyExpenses = $conn->query("SELECT SUM(total) as total FROM stock_purchases WHERE paid_at BETWEEN '$startDate' AND '$endDate' AND status IN ('PAGADO', 'RECIBIDO')");
+$monthlyExpenses = $resMonthlyExpenses->fetch_assoc()['total'] ?? 0;
+
+// Costo de la mercaderia vendida, guardado al momento de cada venta.
+$resCostOfGoodsSold = $conn->query("
+    SELECT SUM(pi.unit_cost * pi.quantity) as total_cost
     FROM purchase_items pi
-    JOIN products p ON pi.product_id = p.id
     JOIN purchases pur ON pi.purchase_id = pur.id
     WHERE pur.created_at BETWEEN '$startDate' AND '$endDate'
 ");
-$monthlyExpenses = $resMonthlyExpenses->fetch_assoc()['total_cost'] ?? 0;
+$costOfGoodsSold = $resCostOfGoodsSold->fetch_assoc()['total_cost'] ?? 0;
+$resReturnedCost = $conn->query("
+    SELECT SUM(sri.unit_cost * sri.quantity) AS total_cost
+    FROM sales_return_items sri
+    JOIN sales_returns sr ON sr.id = sri.return_id
+    WHERE sr.created_at BETWEEN '$startDate' AND '$endDate'
+");
+$returnedCost = $resReturnedCost->fetch_assoc()['total_cost'] ?? 0;
+$costOfGoodsSold = round($costOfGoodsSold - $returnedCost, 2);
 
-$monthlyNetProfit = $monthlyRevenue - $monthlyExpenses;
+$monthlyNetProfit = round($monthlyRevenue - $costOfGoodsSold, 2);
 
 echo json_encode([
     "status" => "success",
     "stats" => [
         "salesToday" => $salesToday,
+        "expensesToday" => $expensesToday,
         "lowStockCount" => $lowStockCount,
         "totalProducts" => $totalProducts
     ],
@@ -138,6 +157,8 @@ echo json_encode([
         "isAnnual" => $isAnnual,
         "revenue" => $monthlyRevenue,
         "expenses" => $monthlyExpenses,
+        "returns" => $monthlyReturns,
+        "costOfGoodsSold" => $costOfGoodsSold,
         "netProfit" => $monthlyNetProfit
     ]
 ]);

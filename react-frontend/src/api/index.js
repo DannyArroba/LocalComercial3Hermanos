@@ -94,7 +94,13 @@ export const customersApi = {
 
 export const transactionsApi = {
   getAll: () => api.get('/transactions.php?action=list'),
-  getDetails: (id) => api.get(`/transactions.php?action=details&id=${id}`),
+  getDetails: (id, type = 'VENTA') => api.get(`/transactions.php?action=details&id=${id}&type=${type}`),
+};
+
+export const returnsApi = {
+  create: (data) => api.post('/returns.php', data, {
+    headers: { 'Content-Type': 'application/json' }
+  }),
 };
 
 export const suppliersApi = {
@@ -103,6 +109,36 @@ export const suppliersApi = {
   add: (formData) => api.post('/suppliers.php', formData),
   update: (formData) => api.post('/suppliers.php', formData),
   delete: (formData) => api.post('/suppliers.php', formData),
+};
+
+export const stockPurchasesApi = {
+  getAll: () => api.get('/stock_purchases.php'),
+  create: (formData) => api.post('/stock_purchases.php', formData),
+  markPaid: (purchaseId) => {
+    const formData = new FormData();
+    formData.append('action', 'mark_paid');
+    formData.append('purchase_id', purchaseId);
+    return api.post('/stock_purchases.php', formData);
+  },
+  markReceived: (purchaseId) => {
+    const formData = new FormData();
+    formData.append('action', 'mark_received');
+    formData.append('purchase_id', purchaseId);
+    return api.post('/stock_purchases.php', formData);
+  },
+  cancel: (purchaseId) => {
+    const formData = new FormData();
+    formData.append('action', 'cancel');
+    formData.append('purchase_id', purchaseId);
+    return api.post('/stock_purchases.php', formData);
+  },
+  refund: (purchaseId, reversalReason) => {
+    const formData = new FormData();
+    formData.append('action', 'refund');
+    formData.append('purchase_id', purchaseId);
+    formData.append('reversal_reason', reversalReason);
+    return api.post('/stock_purchases.php', formData);
+  },
 };
 
 export default api;

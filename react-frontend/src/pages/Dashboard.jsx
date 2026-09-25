@@ -103,12 +103,13 @@ const Dashboard = () => {
       item.product_name,
       item.quantity,
       `$${parseFloat(item.unit_price).toFixed(2)}`,
+      `${parseFloat(item.tax_rate || 0).toFixed(0)}%`,
       `$${parseFloat(item.line_total).toFixed(2)}`
     ]);
 
     autoTable(doc, {
       startY: (purchase.purchase_type === 'FACTURA' && purchase.customer_name) ? 105 : 85,
-      head: [['Producto', 'Cant.', 'P. Unit', 'Subtotal']],
+      head: [['Producto', 'Cant.', 'P. sin IVA', 'IVA', 'Total']],
       body: tableData,
       theme: 'striped',
       headStyles: { fillColor: [22, 163, 74] }
@@ -127,6 +128,16 @@ const Dashboard = () => {
     doc.setFont(undefined, 'bold');
     doc.text(`TOTAL:`, 140, finalY + 16);
     doc.text(`$${parseFloat(purchase.total).toFixed(2)}`, 175, finalY + 16, { align: 'right' });
+
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    doc.text(`FORMA DE PAGO: ${purchase.payment_method || 'No registrada'}`, 20, finalY + 28);
+    if (purchase.payment_method === 'EFECTIVO') {
+      doc.text(`Efectivo recibido: $${parseFloat(purchase.amount_received || 0).toFixed(2)}`, 20, finalY + 35);
+      doc.text(`Cambio entregado: $${parseFloat(purchase.change_amount || 0).toFixed(2)}`, 20, finalY + 42);
+    } else if (purchase.payment_method === 'TRANSFERENCIA') {
+      doc.text(`Nro. comprobante: ${purchase.transfer_reference || 'N/A'}`, 20, finalY + 35);
+    }
 
     // Footer
     doc.setFontSize(8);
@@ -151,7 +162,7 @@ const Dashboard = () => {
       </div>
 
       {/* Stats Grid - More compact */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
         <motion.div 
           whileHover={{ y: -2 }}
           className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4 relative overflow-hidden group"
@@ -164,6 +175,21 @@ const Dashboard = () => {
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Ventas Hoy</p>
             <p className="text-xl font-black text-gray-900 tracking-tight">${parseFloat(data.stats.salesToday).toFixed(2)}</p>
           </div>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ y: -2 }}
+          className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4 relative overflow-hidden group"
+        >
+          <div className="absolute top-0 right-0 w-16 h-16 bg-orange-50 rounded-bl-3xl -z-0 transition-transform group-hover:scale-110 duration-500"></div>
+          <div className="p-3 bg-orange-500 text-white rounded-xl relative z-10 shadow-sm">
+            <TrendingDown className="h-5 w-5" />
+          </div>
+          <Link to="/inventory?history=1" className="relative z-10 hover:opacity-80 transition-opacity text-left">
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Gastos de hoy</p>
+            <p className="text-xl font-black text-gray-900 tracking-tight">${parseFloat(data.stats.expensesToday || 0).toFixed(2)}</p>
+            <p className="text-[9px] font-bold text-orange-600 mt-1">Ver abastecimientos</p>
+          </Link>
         </motion.div>
 
         <motion.div 
@@ -265,7 +291,7 @@ const Dashboard = () => {
               <div className="flex items-center gap-2 text-green-600 mb-1">
                 <TrendingUp className="h-3 w-3" />
                 <span className="text-[9px] font-bold uppercase tracking-widest">
-                  {isAnnual ? `Ingresos ${selectedYear}` : "Ingresos"}
+                  {isAnnual ? `Ventas ${selectedYear}` : "Ingresos por ventas"}
                 </span>
               </div>
               <p className="text-lg font-black text-green-700">
@@ -278,7 +304,7 @@ const Dashboard = () => {
               <div className="flex items-center gap-2 text-orange-600 mb-1">
                 <TrendingDown className="h-3 w-3" />
                 <span className="text-[9px] font-bold uppercase tracking-widest">
-                  {isAnnual ? `Gastos ${selectedYear}` : "Gastos"}
+                  {isAnnual ? `Abastecimiento ${selectedYear}` : "Gastos de abastecimiento"}
                 </span>
               </div>
               <p className="text-lg font-black text-orange-700">
@@ -291,7 +317,7 @@ const Dashboard = () => {
               <div className="flex items-center gap-2 text-primary-600 mb-1">
                 <ArrowUpRight className="h-3 w-3" />
                 <span className="text-[9px] font-bold uppercase tracking-widest">
-                  {isAnnual ? `Ganancia Neta ${selectedYear}` : "Ganancia Neta"}
+                  {isAnnual ? `Ganancia estimada ${selectedYear}` : "Ganancia estimada"}
                 </span>
               </div>
               <p className="text-lg font-black text-primary-700">

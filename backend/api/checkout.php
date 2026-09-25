@@ -34,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $data = json_decode(file_get_contents("php://input"), true) ?? [];
 $userId = (int)$_SESSION['user_id'];
 $purchaseType = $data['purchase_type'] ?? 'CONSUMIDOR_FINAL';
+$paymentMethod = $data['payment_method'] ?? '';
+$amountReceived = isset($data['amount_received']) ? round((float)$data['amount_received'], 2) : null;
+$transferReference = trim($data['transfer_reference'] ?? '');
 
 $customerName = trim($data['customer_name'] ?? '');
 $customerEmail = trim($data['customer_email'] ?? '');
@@ -46,11 +49,56 @@ if (!isset($_SESSION['cart']) || count($_SESSION['cart']) === 0) {
 }
 
 $subtotal = 0;
-foreach ($_SESSION['cart'] as $item) {
-    $subtotal += (float)$item['price'] * (int)$item['quantity'];
+$iva = 0;
+$pricedItems = [];
+$productStmt = $conn->prepare("SELECT id, name, price, cost_price, applies_iva FROM products WHERE id = ?");
+foreach ($_SESSION['cart'] as $cartItem) {
+    $productId = (int)$cartItem['id'];
+    $quantity = (int)$cartItem['quantity'];
+    $productStmt->bind_param("i", $productId);
+    $productStmt->execute();
+    $product = $productStmt->get_result()->fetch_assoc();
+    if (!$product) respond("error", "Uno de los productos ya no esta disponible.");
+
+    $lineBase = round((float)$product['price'] * $quantity, 2);
+    $taxRate = (int)$product['applies_iva'] === 1 ? 15.00 : 0.00;
+    $taxAmount = round($lineBase * ($taxRate / 100), 2);
+    $lineTotal = round($lineBase + $taxAmount, 2);
+    $subtotal += $lineBase;
+    $iva += $taxAmount;
+    $pricedItems[] = [
+        'id' => $productId,
+        'name' => $product['name'],
+        'unit_price' => (float)$product['price'],
+        'unit_cost' => (float)$product['cost_price'],
+        'tax_rate' => $taxRate,
+        'tax_amount' => $taxAmount,
+        'quantity' => $quantity,
+        'line_total' => $lineTotal
+    ];
 }
-$iva = $subtotal * 0.15;
-$total = $subtotal + $iva;
+$productStmt->close();
+$subtotal = round($subtotal, 2);
+$iva = round($iva, 2);
+$total = round($subtotal + $iva, 2);
+
+if (!in_array($paymentMethod, ['EFECTIVO', 'TRANSFERENCIA'], true)) {
+    respond("error", "Selecciona una forma de pago valida.");
+}
+
+$changeAmount = null;
+if ($paymentMethod === 'EFECTIVO') {
+    if ($amountReceived === null || $amountReceived < $total) {
+        respond("error", "El efectivo recibido no cubre el total de la venta.");
+    }
+    $changeAmount = round($amountReceived - $total, 2);
+    $transferReference = null;
+} else {
+    if ($transferReference === '') {
+        respond("error", "Ingresa el numero de comprobante de la transferencia.");
+    }
+    $amountReceived = null;
+}
 
 $conn->begin_transaction();
 
@@ -58,8 +106,8 @@ try {
     $customerId = null;
 
     if ($purchaseType === 'FACTURA') {
-        if (!preg_match('/^22\d{8}$/', $customerIdNumber)) {
-            throw new Exception("La cedula debe iniciar con 22 y contener 10 digitos.");
+        if (!preg_match('/^\d{10}$/', $customerIdNumber)) {
+            throw new Exception("La cedula debe contener exactamente 10 digitos.");
         }
         if (!preg_match('/^09\d{8}$/', $customerPhone)) {
             throw new Exception("El celular debe iniciar con 09 y contener 10 digitos.");
@@ -121,15 +169,17 @@ try {
 
     $purchaseStmt = $conn->prepare("
         INSERT INTO purchases
-        (user_id, customer_id, purchase_type, customer_name, customer_email,
-         customer_phone, customer_address, customer_idnumber, subtotal, iva, total)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (user_id, customer_id, purchase_type, payment_method, customer_name, customer_email,
+         customer_phone, customer_address, customer_idnumber, subtotal, iva, total,
+         amount_received, change_amount, transfer_reference)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $purchaseStmt->bind_param(
-        "iissssssddd",
+        "iisssssssddddds",
         $userId,
         $customerId,
         $purchaseType,
+        $paymentMethod,
         $customerName,
         $customerEmail,
         $customerPhone,
@@ -137,7 +187,10 @@ try {
         $customerIdNumber,
         $subtotal,
         $iva,
-        $total
+        $total,
+        $amountReceived,
+        $changeAmount,
+        $transferReference
     );
     $purchaseStmt->execute();
     $purchaseId = $purchaseStmt->insert_id;
@@ -145,8 +198,8 @@ try {
 
     $itemStmt = $conn->prepare("
         INSERT INTO purchase_items
-        (purchase_id, product_id, product_name, unit_price, quantity, line_total)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (purchase_id, product_id, product_name, unit_price, unit_cost, tax_rate, tax_amount, quantity, line_total)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $stockStmt = $conn->prepare("
         UPDATE products
@@ -154,12 +207,15 @@ try {
         WHERE id = ? AND stock >= ?
     ");
 
-    foreach ($_SESSION['cart'] as $item) {
+    foreach ($pricedItems as $item) {
         $productId = (int)$item['id'];
         $productName = $item['name'];
-        $unitPrice = (float)$item['price'];
+        $unitPrice = (float)$item['unit_price'];
+        $unitCost = (float)$item['unit_cost'];
+        $taxRate = (float)$item['tax_rate'];
+        $taxAmount = (float)$item['tax_amount'];
         $quantity = (int)$item['quantity'];
-        $lineTotal = $unitPrice * $quantity;
+        $lineTotal = (float)$item['line_total'];
 
         $stockStmt->bind_param("iii", $quantity, $productId, $quantity);
         $stockStmt->execute();
@@ -168,11 +224,14 @@ try {
         }
 
         $itemStmt->bind_param(
-            "iisdid",
+            "iisddddid",
             $purchaseId,
             $productId,
             $productName,
             $unitPrice,
+            $unitCost,
+            $taxRate,
+            $taxAmount,
             $quantity,
             $lineTotal
         );
@@ -186,7 +245,11 @@ try {
 
     respond("success", "Venta registrada con exito", [
         "purchase_id" => $purchaseId,
-        "customer_id" => $customerId
+        "customer_id" => $customerId,
+        "subtotal" => $subtotal,
+        "iva" => $iva,
+        "total" => $total,
+        "change_amount" => $changeAmount
     ]);
 } catch (Throwable $error) {
     $conn->rollback();

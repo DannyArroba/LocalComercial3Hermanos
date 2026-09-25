@@ -48,6 +48,7 @@ if ($method === 'GET') {
                     "id" => $product['id'],
                     "name" => $product['name'],
                     "price" => $product['price'],
+                    "applies_iva" => (int)$product['applies_iva'],
                     "image" => "http://localhost/TienditaNexar/frontend/uploads/" . $product['image'],
                     "quantity" => $quantity
                 ];

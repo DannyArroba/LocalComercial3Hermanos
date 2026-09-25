@@ -67,8 +67,8 @@ const Customers = () => {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.currentTarget).entries());
 
-    if (!/^22\d{8}$/.test(data.id_number)) {
-      Swal.fire('Cedula invalida', 'Debe iniciar con 22 y contener 10 digitos', 'error');
+    if (!/^\d{10}$/.test(data.id_number)) {
+      Swal.fire('Cedula invalida', 'Debe contener exactamente 10 digitos', 'error');
       return;
     }
     if (!/^09\d{8}$/.test(data.phone)) {

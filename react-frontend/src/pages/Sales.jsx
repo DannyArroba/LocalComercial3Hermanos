@@ -66,8 +66,13 @@ const ProductCard = ({ product, addToCart, getItemCountInCart }) => {
         <div className="mt-auto space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="text-[9px] font-bold text-gray-400 uppercase">Precio</span>
-              <span className="text-xl font-black text-gray-900 tracking-tighter">${parseFloat(product.price).toFixed(2)}</span>
+              <span className="text-[9px] font-bold text-gray-400 uppercase">Precio al cliente</span>
+              <span className="text-xl font-black text-gray-900 tracking-tighter">
+                ${(Number(product.price) * (Number(product.applies_iva) === 1 ? 1.15 : 1)).toFixed(2)}
+              </span>
+              <span className="text-[9px] font-bold text-gray-400">
+                {Number(product.applies_iva) === 1 ? `Base $${Number(product.price).toFixed(2)} + IVA` : 'Tarifa IVA 0%'}
+              </span>
             </div>
             
             {!outOfStock && (
@@ -106,7 +111,7 @@ const ProductCard = ({ product, addToCart, getItemCountInCart }) => {
             ) : (
               <>
                 <ShoppingCart className="h-3.5 w-3.5" />
-                Agregar al carrito
+                Agregar compra
               </>
             )}
           </button>
@@ -194,7 +199,7 @@ const Sales = () => {
 
   const handleCancelSale = async () => {
     const result = await Swal.fire({
-      title: '¿Vaciar carrito?',
+      title: '¿Vaciar compras del cliente?',
       text: "Se quitarán todos los productos seleccionados",
       icon: 'warning',
       showCancelButton: true,
@@ -210,7 +215,7 @@ const Sales = () => {
         toast: true,
         position: 'top-end',
         icon: 'info',
-        title: 'Carrito vaciado',
+        title: 'Compras eliminadas',
         showConfirmButton: false,
         timer: 2000
       });
@@ -254,7 +259,7 @@ const Sales = () => {
         <div>
           <h1 className="text-2xl font-black text-gray-900 tracking-tighter">Productos</h1>
           <div className="flex items-center gap-2 mt-1">
-            <p className="text-sm text-gray-500 font-medium">Selecciona productos y agrégalos al carrito</p>
+            <p className="text-sm text-gray-500 font-medium">Selecciona los productos que comprará el cliente</p>
             <div className="flex items-center gap-1.5 px-2 py-0.5 bg-green-50 text-green-600 rounded-full border border-green-100">
               <Barcode className="h-3 w-3" />
               <span className="text-[9px] font-black uppercase tracking-widest">Escaner activo</span>
@@ -341,7 +346,7 @@ const Sales = () => {
                 <button
                   onClick={handleCancelSale}
                   className="bg-red-600 hover:bg-red-700 text-white px-6 py-4 rounded-2xl font-black transition-all active:scale-95 flex items-center gap-2 shadow-xl shadow-red-900/20"
-                  title="Vaciar carrito"
+                  title="Vaciar compras del cliente"
                 >
                   <XCircle className="h-6 w-6" />
                   <span className="hidden sm:inline text-xs uppercase tracking-widest">Cancelar</span>
@@ -351,7 +356,7 @@ const Sales = () => {
                   to="/checkout"
                   className="bg-primary-600 hover:bg-primary-500 text-white px-10 py-4 rounded-2xl font-black flex items-center gap-3 transition-all active:scale-95 shadow-xl shadow-primary-900/20"
                 >
-                  PAGAR AHORA
+                  COBRAR
                   <ArrowRight className="h-6 w-6" />
                 </Link>
               </div>

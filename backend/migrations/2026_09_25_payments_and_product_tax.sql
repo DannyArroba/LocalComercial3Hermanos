@@ -1,0 +1,15 @@
+ALTER TABLE products
+ADD COLUMN IF NOT EXISTS applies_iva TINYINT(1) NOT NULL DEFAULT 1 AFTER price;
+
+ALTER TABLE purchases
+ADD COLUMN IF NOT EXISTS payment_method ENUM('EFECTIVO', 'TRANSFERENCIA') NULL AFTER purchase_type,
+ADD COLUMN IF NOT EXISTS amount_received DECIMAL(10,2) NULL AFTER total,
+ADD COLUMN IF NOT EXISTS change_amount DECIMAL(10,2) NULL AFTER amount_received,
+ADD COLUMN IF NOT EXISTS transfer_reference VARCHAR(100) NULL AFTER change_amount;
+
+ALTER TABLE purchase_items
+ADD COLUMN IF NOT EXISTS tax_rate DECIMAL(5,2) NOT NULL DEFAULT 0 AFTER unit_cost,
+ADD COLUMN IF NOT EXISTS tax_amount DECIMAL(10,2) NOT NULL DEFAULT 0 AFTER tax_rate;
+
+UPDATE products SET applies_iva = 0 WHERE id IN (5, 6, 11, 12, 13, 14, 15, 16);
+UPDATE products SET applies_iva = 1 WHERE id IN (7, 8, 9, 10, 17, 18, 19);

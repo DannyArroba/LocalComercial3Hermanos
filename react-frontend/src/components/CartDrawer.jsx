@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CartDrawer = () => {
-  const { cart, cartTotal, removeFromCart, updateQuantity, isOpen, setIsOpen } = useCart();
+  const { cart, cartTotal, ivaTotal, totalWithIva, removeFromCart, updateQuantity, isOpen, setIsOpen } = useCart();
 
   return (
     <AnimatePresence>
@@ -32,7 +32,7 @@ const CartDrawer = () => {
             <div className="p-6 border-b flex items-center justify-between bg-white sticky top-0">
               <div className="flex items-center gap-2">
                 <ShoppingBag className="h-6 w-6 text-primary-600" />
-                <h2 className="text-xl font-bold text-gray-900">Tu Carrito</h2>
+                <h2 className="text-xl font-bold text-gray-900">Compras del cliente</h2>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
@@ -50,8 +50,8 @@ const CartDrawer = () => {
                     <ShoppingBag className="h-12 w-12 text-gray-300" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Carrito vacío</h3>
-                    <p className="text-gray-500">¿Aún no has encontrado nada que te guste?</p>
+                    <h3 className="text-lg font-semibold text-gray-900">Sin compras agregadas</h3>
+                    <p className="text-gray-500">Aún no se han agregado productos para el cliente.</p>
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
@@ -83,7 +83,8 @@ const CartDrawer = () => {
                           </button>
                         </div>
                         <p className="text-sm text-gray-500 font-medium mt-1">
-                          ${parseFloat(item.price).toFixed(2)}
+                          ${(Number(item.price) * (Number(item.applies_iva) === 1 ? 1.15 : 1)).toFixed(2)}
+                          <span className="ml-2 text-[10px] text-gray-400">{Number(item.applies_iva) === 1 ? 'IVA incluido' : 'Tarifa 0%'}</span>
                         </p>
                       </div>
 
@@ -106,7 +107,7 @@ const CartDrawer = () => {
                           </button>
                         </div>
                         <p className="font-bold text-gray-900">
-                          ${(item.price * item.quantity).toFixed(2)}
+                          ${(Number(item.price) * (Number(item.applies_iva) === 1 ? 1.15 : 1) * item.quantity).toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -125,11 +126,11 @@ const CartDrawer = () => {
                   </div>
                   <div className="flex justify-between text-gray-600">
                     <span>IVA (15%)</span>
-                    <span>${(cartTotal * 0.15).toFixed(2)}</span>
+                    <span>${ivaTotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xl font-bold text-gray-900 pt-2 border-t">
                     <span>Total</span>
-                    <span>${(cartTotal * 1.15).toFixed(2)}</span>
+                    <span>${totalWithIva.toFixed(2)}</span>
                   </div>
                 </div>
 

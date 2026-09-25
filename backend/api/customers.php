@@ -35,8 +35,8 @@ function validateCustomer($data) {
     if ($name === '' || $idNumber === '' || $phone === '' || $address === '') {
         respond("error", "Nombre, cedula, telefono y direccion son obligatorios");
     }
-    if (!preg_match('/^22\d{8}$/', $idNumber)) {
-        respond("error", "La cedula debe iniciar con 22 y contener 10 digitos");
+    if (!preg_match('/^\d{10}$/', $idNumber)) {
+        respond("error", "La cedula debe contener exactamente 10 digitos");
     }
     if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         respond("error", "El correo electronico no es valido");
