@@ -343,17 +343,17 @@ const Dashboard = () => {
             ) : (
               <div className="space-y-2">
                 {data.topProducts.map((product, index) => (
+                  <div key={product.id} className="relative">
                   <div 
-                    key={product.id}
                     className={`flex items-center gap-2 p-2 rounded-lg border transition-all ${
                       index === 0 
-                        ? 'bg-red-50 border-red-200' 
+                        ? 'top-seller-metallic'
                         : 'bg-gray-50 border-gray-100 hover:border-primary-200 hover:bg-primary-50'
                     }`}
                   >
                     {/* Rank Badge */}
                     <div className={`w-7 h-7 rounded-md flex items-center justify-center font-black text-sm ${
-                      index === 0 ? 'bg-red-500 text-white' : 'bg-white border border-gray-200 text-gray-600'
+                      index === 0 ? 'top-seller-medal' : 'bg-white border border-gray-200 text-gray-600'
                     }`}>
                       {index + 1}
                     </div>
@@ -370,10 +370,12 @@ const Dashboard = () => {
                     </div>
                     {/* Revenue */}
                     <div className="text-right flex-shrink-0">
-                      <p className={`font-black text-xs ${index === 0 ? 'text-red-600' : 'text-primary-600'}`}>
+                      <p className={`font-black text-xs ${index === 0 ? 'text-amber-950 drop-shadow-[0_1px_0_rgba(255,255,255,0.65)]' : 'text-primary-600'}`}>
                         ${parseFloat(product.total_revenue).toFixed(0)}
                       </p>
                     </div>
+                  </div>
+                  {index === 0 && <span className="top-seller-star" aria-hidden="true">✦</span>}
                   </div>
                 ))}
               </div>
