@@ -19,6 +19,8 @@
 -- Current Database: `tienda`
 --
 
+/*!40000 DROP DATABASE IF EXISTS `tienda`*/;
+
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `tienda` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 USE `tienda`;
@@ -135,7 +137,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `idx_products_supplier_id` (`supplier_id`),
   CONSTRAINT `fk_products_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +146,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (5,2,'Pollo','7861000000055',13.91,0,10.20,'Carnes Rojas',22,'Carne rojita','1932d1225e35f0ad1708bb97.png','2026-01-15 22:29:03'),(6,1,'Arroz','7861000000062',23.20,0,18.00,'Granos',4,'granos','imagen_2026-01-16_004122429.png','2026-01-16 05:41:23'),(7,3,'chocolate','7861000000079',0.50,1,0.32,'dulces',0,'Dulces','c517e7aab06a17a0cbccb41c.png','2026-04-01 22:39:35'),(8,1,'Coca-Cola 2.5L','7861000000086',2.50,1,1.85,'Bebidas',67,'Refresco de cola familiar','620e767f925e901578b7f13e.png','2026-05-07 05:41:53'),(9,1,'Agua Mineral 500ml','7861000000093',0.50,1,0.28,'Bebidas',95,'Agua sin gas','847630c5a2709fa9c921a209.png','2026-05-07 05:41:53'),(10,1,'Jugo de Naranja 1L','7861000000109',1.20,1,0.78,'Bebidas',30,'Jugo natural pasteurizado','catalog-jugo-naranja-1l.jpg','2026-05-07 05:41:53'),(11,2,'Leche Entera 1L','7861000000116',0.90,0,0.64,'Lácteos',40,'Leche de vaca fortificada','catalog-leche-entera-1l.jpg','2026-05-07 05:41:53'),(12,2,'Yogurt de Fresa 1kg','7861000000123',1.80,0,1.25,'Lácteos',14,'Yogurt cremoso con trozos','catalog-yogurt-fresa-1kg.jpg','2026-05-07 05:41:53'),(13,2,'Queso Fresco 500g','7861000000130',3.50,0,2.55,'Lácteos',15,'Queso artesanal','catalog-queso-fresco-500g.jpg','2026-05-07 05:41:53'),(14,1,'Arroz 5kg','7861000000147',4.50,0,3.55,'Abarrotes',60,'Arroz grano largo','catalog-arroz-5kg.jpg','2026-05-07 05:41:53'),(15,1,'Aceite Girasol 1L','7861000000154',2.10,0,1.55,'Abarrotes',35,'Aceite vegetal refinado','catalog-aceite-girasol-1l.jpg','2026-05-07 05:41:53'),(16,3,'Pan de Molde','7861000000161',1.50,0,1.05,'Panadería',20,'Pan blanco tajado','catalog-pan-de-molde.jpg','2026-05-07 05:41:53'),(17,1,'Café Molido 250g','7861000000178',3.20,1,2.25,'Abarrotes',25,'Café de altura seleccionado','catalog-cafe-molido-250g.jpg','2026-05-07 05:41:53'),(18,3,'Gomitas','7861000000185',0.50,1,0.30,'Gomitas S.A',15,'Gomitas','2c44ea8647a8f84f699d5404.png','2026-06-23 05:32:18'),(19,1,'Mayonesa','7861000000192',1.00,1,0.68,'Condimentos',24,'Mayonesa','2b18b743c45112dd1cb8b386.png','2026-06-23 05:37:19');
+INSERT INTO `products` VALUES (5,5,'Pollo','7861000000055',13.91,0,10.20,'Carnes Rojas',19,'Carne rojita','1932d1225e35f0ad1708bb97.png','2026-01-15 22:29:03'),(6,4,'Arroz','7861000000062',23.20,0,18.00,'Granos',5,'granos','imagen_2026-01-16_004122429.png','2026-01-16 05:41:23'),(7,6,'chocolate','7861000000079',0.50,1,0.32,'dulces',8,'Dulces','c517e7aab06a17a0cbccb41c.png','2026-04-01 22:39:35'),(8,4,'Coca-Cola 2.5L','7861000000086',2.50,1,1.85,'Bebidas',59,'Refresco de cola familiar','620e767f925e901578b7f13e.png','2026-05-07 05:41:53'),(9,4,'Agua Mineral 500ml','7861000000093',0.50,1,0.28,'Bebidas',77,'Agua sin gas','847630c5a2709fa9c921a209.png','2026-05-07 05:41:53'),(10,4,'Jugo de Naranja 1L','7861000000109',1.20,1,0.78,'Bebidas',30,'Jugo natural pasteurizado','catalog-jugo-naranja-1l.jpg','2026-05-07 05:41:53'),(11,5,'Leche Entera 1L','7861000000116',0.90,0,0.64,'Lácteos',40,'Leche de vaca fortificada','catalog-leche-entera-1l.jpg','2026-05-07 05:41:53'),(12,5,'Yogurt de Fresa 1kg','7861000000123',1.80,0,1.25,'Lácteos',18,'Yogurt cremoso con trozos','catalog-yogurt-fresa-1kg.jpg','2026-05-07 05:41:53'),(13,5,'Queso Fresco 500g','7861000000130',3.50,0,2.55,'Lácteos',14,'Queso artesanal','catalog-queso-fresco-500g.jpg','2026-05-07 05:41:53'),(14,4,'Arroz 5kg','7861000000147',4.50,0,3.55,'Abarrotes',58,'Arroz grano largo','catalog-arroz-5kg.jpg','2026-05-07 05:41:53'),(15,4,'Aceite Girasol 1L','7861000000154',2.10,0,1.55,'Abarrotes',34,'Aceite vegetal refinado','catalog-aceite-girasol-1l.jpg','2026-05-07 05:41:53'),(16,6,'Pan de Molde','7861000000161',1.50,0,1.05,'Panadería',13,'Pan blanco tajado','catalog-pan-de-molde.jpg','2026-05-07 05:41:53'),(17,4,'Café Molido 250g','7861000000178',3.20,1,2.25,'Abarrotes',24,'Café de altura seleccionado','catalog-cafe-molido-250g.jpg','2026-05-07 05:41:53'),(18,6,'Gomitas','7861000000185',0.50,1,0.30,'Gomitas S.A',15,'Gomitas','2c44ea8647a8f84f699d5404.png','2026-06-23 05:32:18'),(19,4,'Mayonesa','7861000000192',1.00,1,0.68,'Condimentos',9,'Mayonesa','2b18b743c45112dd1cb8b386.png','2026-06-23 05:37:19');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +171,7 @@ CREATE TABLE `purchase_items` (
   PRIMARY KEY (`id`),
   KEY `purchase_id` (`purchase_id`),
   CONSTRAINT `purchase_items_ibfk_1` FOREIGN KEY (`purchase_id`) REFERENCES `purchases` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +180,7 @@ CREATE TABLE `purchase_items` (
 
 LOCK TABLES `purchase_items` WRITE;
 /*!40000 ALTER TABLE `purchase_items` DISABLE KEYS */;
-INSERT INTO `purchase_items` VALUES (1,1,4,'Helado',21.00,0.00,0.00,0.00,2,42.00),(2,1,5,'Pollo',14.00,10.20,0.00,0.00,2,28.00),(3,2,5,'Pollo',14.00,10.20,0.00,0.00,1,14.00),(4,3,5,'Pollo',14.00,10.20,0.00,0.00,1,14.00),(5,4,4,'Helado',21.00,0.00,0.00,0.00,2,42.00),(6,4,5,'Pollo',14.00,10.20,0.00,0.00,1,14.00),(7,5,5,'Pollo',14.00,10.20,0.00,0.00,1,14.00),(8,6,5,'Pollo',14.00,10.20,0.00,0.00,6,84.00),(9,6,4,'Helado',21.00,0.00,0.00,0.00,6,126.00),(10,7,5,'Pollo',14.00,10.20,0.00,0.00,10,140.00),(11,8,5,'Pollo',14.04,10.20,0.00,0.00,1,14.04),(12,8,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(13,9,5,'Pollo',14.04,10.20,0.00,0.00,1,14.04),(14,9,4,'Helado',20.98,0.00,0.00,0.00,2,41.96),(15,10,5,'Pollo',13.91,10.20,0.00,0.00,3,41.73),(19,12,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(20,12,4,'Helado',20.98,0.00,0.00,0.00,1,20.98),(21,12,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(22,13,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(23,14,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(24,15,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(25,15,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(26,16,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(27,17,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(28,18,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(29,19,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(30,20,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(31,21,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(32,22,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(33,23,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(34,24,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,3,7.50),(35,25,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(36,25,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(37,26,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(38,26,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(39,27,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,4,10.00),(40,27,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(41,28,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(42,28,12,'Yogurt de Fresa 1kg',1.80,1.25,0.00,0.00,5,9.00),(43,29,12,'Yogurt de Fresa 1kg',1.80,1.25,0.00,0.00,2,3.60),(44,29,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(45,30,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,3,7.50),(46,30,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(48,32,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(49,32,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(50,32,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,3,1.50),(51,33,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,3,7.50),(52,33,5,'Pollo',13.91,10.20,0.00,0.00,3,41.73),(53,33,12,'Yogurt de Fresa 1kg',1.80,1.25,0.00,0.00,4,7.20),(54,34,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(55,34,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,2,5.00),(56,34,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(60,37,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(61,37,8,'Coca-Cola 2.5L',2.50,1.85,15.00,0.38,1,2.88);
+INSERT INTO `purchase_items` VALUES (1,1,4,'Helado',21.00,0.00,0.00,0.00,2,42.00),(2,1,5,'Pollo',14.00,10.20,0.00,0.00,2,28.00),(3,2,5,'Pollo',14.00,10.20,0.00,0.00,1,14.00),(4,3,5,'Pollo',14.00,10.20,0.00,0.00,1,14.00),(5,4,4,'Helado',21.00,0.00,0.00,0.00,2,42.00),(6,4,5,'Pollo',14.00,10.20,0.00,0.00,1,14.00),(7,5,5,'Pollo',14.00,10.20,0.00,0.00,1,14.00),(8,6,5,'Pollo',14.00,10.20,0.00,0.00,6,84.00),(9,6,4,'Helado',21.00,0.00,0.00,0.00,6,126.00),(10,7,5,'Pollo',14.00,10.20,0.00,0.00,10,140.00),(11,8,5,'Pollo',14.04,10.20,0.00,0.00,1,14.04),(12,8,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(13,9,5,'Pollo',14.04,10.20,0.00,0.00,1,14.04),(14,9,4,'Helado',20.98,0.00,0.00,0.00,2,41.96),(15,10,5,'Pollo',13.91,10.20,0.00,0.00,3,41.73),(19,12,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(20,12,4,'Helado',20.98,0.00,0.00,0.00,1,20.98),(21,12,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(22,13,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(23,14,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(24,15,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(25,15,6,'Arroz',23.20,18.00,0.00,0.00,1,23.20),(26,16,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(27,17,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(28,18,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(29,19,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(30,20,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(31,21,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(32,22,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(33,23,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(34,24,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,3,7.50),(35,25,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(36,25,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(37,26,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(38,26,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(39,27,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,4,10.00),(40,27,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(41,28,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(42,28,12,'Yogurt de Fresa 1kg',1.80,1.25,0.00,0.00,5,9.00),(43,29,12,'Yogurt de Fresa 1kg',1.80,1.25,0.00,0.00,2,3.60),(44,29,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(45,30,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,3,7.50),(46,30,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(48,32,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(49,32,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(50,32,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,3,1.50),(51,33,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(52,34,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,3,7.50),(53,36,19,'Mayonesa',1.00,0.68,0.00,0.00,15,15.00),(54,37,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(55,37,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,1,0.50),(56,37,13,'Queso Fresco 500g',3.50,2.55,0.00,0.00,1,3.50),(57,37,14,'Arroz 5kg',4.50,3.55,0.00,0.00,1,4.50),(58,38,17,'Café Molido 250g',3.20,2.25,0.00,0.00,1,3.20),(59,38,16,'Pan de Molde',1.50,1.05,0.00,0.00,7,10.50),(60,38,15,'Aceite Girasol 1L',2.10,1.55,0.00,0.00,1,2.10),(61,38,14,'Arroz 5kg',4.50,3.55,0.00,0.00,1,4.50),(62,39,8,'Coca-Cola 2.5L',2.50,1.85,0.00,0.00,1,2.50),(63,39,5,'Pollo',13.91,10.20,0.00,0.00,1,13.91),(64,39,9,'Agua Mineral 500ml',0.50,0.28,0.00,0.00,2,1.00),(65,39,23,'Paquete de Hojas',1.00,0.85,0.00,0.00,1,1.00),(66,40,8,'Coca-Cola 2.5L',2.50,1.85,15.00,1.13,3,8.63),(67,41,9,'Agua Mineral 500ml',0.50,0.28,15.00,0.38,5,2.88),(68,42,9,'Agua Mineral 500ml',0.50,0.28,15.00,0.83,11,6.33);
 /*!40000 ALTER TABLE `purchase_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +214,7 @@ CREATE TABLE `purchases` (
   KEY `created_at` (`created_at`),
   KEY `idx_purchases_customer_id` (`customer_id`),
   CONSTRAINT `fk_purchases_customer` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +223,7 @@ CREATE TABLE `purchases` (
 
 LOCK TABLES `purchases` WRITE;
 /*!40000 ALTER TABLE `purchases` DISABLE KEYS */;
-INSERT INTO `purchases` VALUES (1,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,70.00,8.40,78.40,NULL,NULL,NULL,'2026-01-15 23:35:12'),(2,1,NULL,'FACTURA',NULL,'a','a@2','a','a','a',14.00,1.68,15.68,NULL,NULL,NULL,'2026-01-15 23:53:14'),(3,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,14.00,1.68,15.68,NULL,NULL,NULL,'2026-01-15 23:56:33'),(4,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,56.00,6.72,62.72,NULL,NULL,NULL,'2026-01-15 23:57:11'),(5,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,14.00,1.68,15.68,NULL,NULL,NULL,'2026-01-16 00:11:23'),(6,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,210.00,25.20,235.20,NULL,NULL,NULL,'2026-01-16 00:21:19'),(7,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,140.00,16.80,156.80,NULL,NULL,NULL,'2026-01-16 00:33:47'),(8,2,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,37.24,4.47,41.71,NULL,NULL,NULL,'2026-01-16 00:41:34'),(9,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,56.00,6.72,62.72,NULL,NULL,NULL,'2026-01-16 00:42:42'),(10,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,41.73,5.01,46.74,NULL,NULL,NULL,'2026-01-16 00:43:23'),(12,3,NULL,'FACTURA',NULL,'Melisa','meli@gmail.com','098798674','centro','2200272215',58.09,6.97,65.06,NULL,NULL,NULL,'2026-01-17 20:41:00'),(13,4,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,13.91,1.67,15.58,NULL,NULL,NULL,'2026-04-01 17:52:44'),(14,4,NULL,'FACTURA',NULL,'mariana','mopositamariana@gmail.com','0968','centro','0202135463',23.20,2.78,25.98,NULL,NULL,NULL,'2026-04-01 17:57:27'),(15,5,NULL,'FACTURA',NULL,'fumando','acadamia1110@gmail.com','0968','centro','5555555555',37.11,4.45,41.56,NULL,NULL,NULL,'2026-05-07 00:08:17'),(16,5,NULL,'CONSUMIDOR_FINAL',NULL,'','','','','',2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:21:02'),(17,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:24:29'),(18,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:28:29'),(19,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,13.91,2.09,16.00,NULL,NULL,NULL,'2026-05-07 01:32:29'),(20,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:32:36'),(21,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:35:03'),(22,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,0.50,0.08,0.58,NULL,NULL,NULL,'2026-05-07 01:36:15'),(23,5,NULL,'FACTURA',NULL,'Fernando Xavier Bravo Valladolid','fernandobravo6582@gmail.com','0987168084','Ecuador, El Coca Orellana','e',2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:36:32'),(24,6,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,7.50,1.13,8.63,NULL,NULL,NULL,'2026-05-07 23:08:58'),(25,6,NULL,'FACTURA',NULL,'Fernando Xavier Bravo Valladolid','fernandobravo6582@gmail.com','0987168084','Ecuador, El Coca Orellana','343434',14.41,2.16,16.57,NULL,NULL,NULL,'2026-05-07 23:09:35'),(26,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,3.00,0.45,3.45,NULL,NULL,NULL,'2026-05-08 00:21:27'),(27,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,10.50,1.58,12.08,NULL,NULL,NULL,'2026-05-08 12:04:14'),(28,5,NULL,'FACTURA',NULL,'cristhian','ajbskvdkvs343@ls.cpm343','09934939434','34343','232323232323',9.50,1.43,10.93,NULL,NULL,NULL,'2026-05-08 12:05:22'),(29,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,17.51,2.63,20.14,NULL,NULL,NULL,'2026-05-08 13:04:55'),(30,5,NULL,'FACTURA',NULL,'mariana','cualquiera@hotmail.com','0365254155','las americas','2014569878',8.00,1.20,9.20,NULL,NULL,NULL,'2026-05-08 13:06:08'),(32,6,9,'FACTURA',NULL,'Erick Diaz','erick@gmail.com','0988776655','Coca','2250040850',17.91,2.69,20.60,NULL,NULL,NULL,'2026-06-22 02:04:19'),(33,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,56.43,8.46,64.89,NULL,NULL,NULL,'2026-09-22 00:40:03'),(34,5,9,'FACTURA',NULL,'Erick Diaz','erick@gmail.com','0988776655','Coca','2250040850',19.41,2.91,22.32,NULL,NULL,NULL,'2026-09-22 00:46:01'),(37,5,NULL,'CONSUMIDOR_FINAL','TRANSFERENCIA',NULL,NULL,NULL,NULL,NULL,25.70,0.38,26.08,NULL,NULL,'123132132132','2026-09-25 00:27:42');
+INSERT INTO `purchases` VALUES (1,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,70.00,8.40,78.40,NULL,NULL,NULL,'2026-01-15 23:35:12'),(2,1,NULL,'FACTURA',NULL,'a','a@2','a','a','a',14.00,1.68,15.68,NULL,NULL,NULL,'2026-01-15 23:53:14'),(3,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,14.00,1.68,15.68,NULL,NULL,NULL,'2026-01-15 23:56:33'),(4,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,56.00,6.72,62.72,NULL,NULL,NULL,'2026-01-15 23:57:11'),(5,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,14.00,1.68,15.68,NULL,NULL,NULL,'2026-01-16 00:11:23'),(6,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,210.00,25.20,235.20,NULL,NULL,NULL,'2026-01-16 00:21:19'),(7,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,140.00,16.80,156.80,NULL,NULL,NULL,'2026-01-16 00:33:47'),(8,2,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,37.24,4.47,41.71,NULL,NULL,NULL,'2026-01-16 00:41:34'),(9,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,56.00,6.72,62.72,NULL,NULL,NULL,'2026-01-16 00:42:42'),(10,1,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,41.73,5.01,46.74,NULL,NULL,NULL,'2026-01-16 00:43:23'),(12,3,NULL,'FACTURA',NULL,'Melisa','meli@gmail.com','098798674','centro','2200272215',58.09,6.97,65.06,NULL,NULL,NULL,'2026-01-17 20:41:00'),(13,4,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,13.91,1.67,15.58,NULL,NULL,NULL,'2026-04-01 17:52:44'),(14,4,NULL,'FACTURA',NULL,'mariana','mopositamariana@gmail.com','0968','centro','0202135463',23.20,2.78,25.98,NULL,NULL,NULL,'2026-04-01 17:57:27'),(15,5,NULL,'FACTURA',NULL,'fumando','acadamia1110@gmail.com','0968','centro','5555555555',37.11,4.45,41.56,NULL,NULL,NULL,'2026-05-07 00:08:17'),(16,5,NULL,'CONSUMIDOR_FINAL',NULL,'','','','','',2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:21:02'),(17,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:24:29'),(18,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:28:29'),(19,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,13.91,2.09,16.00,NULL,NULL,NULL,'2026-05-07 01:32:29'),(20,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:32:36'),(21,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:35:03'),(22,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,0.50,0.08,0.58,NULL,NULL,NULL,'2026-05-07 01:36:15'),(23,5,NULL,'FACTURA',NULL,'Fernando Xavier Bravo Valladolid','fernandobravo6582@gmail.com','0987168084','Ecuador, El Coca Orellana','e',2.50,0.38,2.88,NULL,NULL,NULL,'2026-05-07 01:36:32'),(24,6,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,7.50,1.13,8.63,NULL,NULL,NULL,'2026-05-07 23:08:58'),(25,6,NULL,'FACTURA',NULL,'Fernando Xavier Bravo Valladolid','fernandobravo6582@gmail.com','0987168084','Ecuador, El Coca Orellana','343434',14.41,2.16,16.57,NULL,NULL,NULL,'2026-05-07 23:09:35'),(26,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,3.00,0.45,3.45,NULL,NULL,NULL,'2026-05-08 00:21:27'),(27,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,10.50,1.58,12.08,NULL,NULL,NULL,'2026-05-08 12:04:14'),(28,5,NULL,'FACTURA',NULL,'cristhian','ajbskvdkvs343@ls.cpm343','09934939434','34343','232323232323',9.50,1.43,10.93,NULL,NULL,NULL,'2026-05-08 12:05:22'),(29,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,17.51,2.63,20.14,NULL,NULL,NULL,'2026-05-08 13:04:55'),(30,5,NULL,'FACTURA',NULL,'mariana','cualquiera@hotmail.com','0365254155','las americas','2014569878',8.00,1.20,9.20,NULL,NULL,NULL,'2026-05-08 13:06:08'),(32,6,9,'FACTURA',NULL,'Erick Diaz','erick@gmail.com','0988776655','Coca','2250040850',17.91,2.69,20.60,NULL,NULL,NULL,'2026-06-22 02:04:19'),(33,5,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,13.91,2.09,16.00,NULL,NULL,NULL,'2026-06-24 01:11:49'),(34,6,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,7.50,1.13,8.63,NULL,NULL,NULL,'2026-06-24 17:01:42'),(36,6,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,15.00,2.25,17.25,NULL,NULL,NULL,'2026-06-24 17:08:40'),(37,6,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,11.00,1.65,12.65,NULL,NULL,NULL,'2026-06-24 17:17:32'),(38,6,NULL,'CONSUMIDOR_FINAL',NULL,NULL,NULL,NULL,NULL,NULL,20.30,3.04,23.34,NULL,NULL,NULL,'2026-06-24 17:20:15'),(39,5,5,'FACTURA',NULL,'Daniela Estefania Tanguila Gualinga','daniela.tanguila@example.com','0957362148','Av. Camilo de Torrano y Rio Payamino, barrio Flor de Oriente, El Coca','2205718246',18.41,2.76,21.17,NULL,NULL,NULL,'2026-07-02 20:01:31'),(40,5,NULL,'CONSUMIDOR_FINAL','EFECTIVO',NULL,NULL,NULL,NULL,NULL,7.50,1.13,8.63,20.00,11.37,NULL,'2026-10-05 19:21:28'),(41,5,NULL,'CONSUMIDOR_FINAL','EFECTIVO',NULL,NULL,NULL,NULL,NULL,2.50,0.38,2.88,20.00,17.12,NULL,'2026-10-05 19:21:43'),(42,5,NULL,'CONSUMIDOR_FINAL','EFECTIVO',NULL,NULL,NULL,NULL,NULL,5.50,0.83,6.33,10.00,3.67,NULL,'2026-10-05 19:22:00');
 /*!40000 ALTER TABLE `purchases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -314,7 +316,7 @@ CREATE TABLE `sales_return_items` (
   CONSTRAINT `fk_sales_return_items_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `fk_sales_return_items_purchase_item` FOREIGN KEY (`purchase_item_id`) REFERENCES `purchase_items` (`id`),
   CONSTRAINT `fk_sales_return_items_return` FOREIGN KEY (`return_id`) REFERENCES `sales_returns` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +354,7 @@ CREATE TABLE `sales_returns` (
   KEY `fk_sales_returns_user` (`user_id`),
   CONSTRAINT `fk_sales_returns_purchase` FOREIGN KEY (`purchase_id`) REFERENCES `purchases` (`id`),
   CONSTRAINT `fk_sales_returns_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +384,7 @@ CREATE TABLE `stock_purchase_items` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `stock_purchase_items_ibfk_1` FOREIGN KEY (`purchase_id`) REFERENCES `stock_purchases` (`id`),
   CONSTRAINT `stock_purchase_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,7 +393,6 @@ CREATE TABLE `stock_purchase_items` (
 
 LOCK TABLES `stock_purchase_items` WRITE;
 /*!40000 ALTER TABLE `stock_purchase_items` DISABLE KEYS */;
-INSERT INTO `stock_purchase_items` VALUES (1,1,6,3,18.00),(3,3,6,2,18.00),(9,9,8,6,1.85);
 /*!40000 ALTER TABLE `stock_purchase_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -419,7 +420,7 @@ CREATE TABLE `stock_purchases` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `stock_purchases_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -428,7 +429,6 @@ CREATE TABLE `stock_purchases` (
 
 LOCK TABLES `stock_purchases` WRITE;
 /*!40000 ALTER TABLE `stock_purchases` DISABLE KEYS */;
-INSERT INTO `stock_purchases` VALUES (1,5,NULL,54.00,'REEMBOLSADO','2026-09-25 04:48:11','2026-09-24 23:58:44',NULL,NULL,'2026-09-25 00:41:37','REV-20260925-F17570','nada',5),(3,5,1,36.00,'RECIBIDO','2026-09-25 04:58:07','2026-09-24 23:58:38','2026-09-24 23:59:17',NULL,NULL,NULL,NULL,NULL),(9,5,1,11.10,'RECIBIDO','2026-09-25 05:42:00','2026-09-25 00:42:07','2026-09-25 00:42:13',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `stock_purchases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,7 +450,7 @@ CREATE TABLE `suppliers` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -459,7 +459,7 @@ CREATE TABLE `suppliers` (
 
 LOCK TABLES `suppliers` WRITE;
 /*!40000 ALTER TABLE `suppliers` DISABLE KEYS */;
-INSERT INTO `suppliers` VALUES (1,'Distribuidora Amazonica Paredes','Andrea Paredes','pedidos@distribuidoraparedes.ec','2200158479001','099 482 7316','Av. 9 de Octubre y Quito, Puerto Francisco de Orellana','2026-09-25 04:45:29','2026-09-25 04:45:29'),(2,'Comercializadora Andina del Oriente','Luis Cardenas','ventas@andinaoriente.ec','1793192847001','098 615 2047','Av. Alejandro Labaka y Rio Napo, Puerto Francisco de Orellana','2026-09-25 04:45:29','2026-09-25 04:45:29'),(3,'Alimentos Orellana Cia. Ltda.','Mariela Zambrano','distribucion@alimentosorellana.ec','2200215638001','096 288 4175','Calle Amazonas y Eugenio Espejo, Puerto Francisco de Orellana','2026-09-25 04:45:29','2026-09-25 04:47:33');
+INSERT INTO `suppliers` VALUES (2,'Coca-Cola Company','Departamento de Ventas','contacto@coca-cola.com','1790016919001','(02) 397-2600','Quito, Pichincha, Ecuador','2026-06-24 05:21:31','2026-06-24 05:21:31'),(3,'Pronaca','Departamento de venta','pronaca@gmail.com','4566123756','0988776655','Av. 9 de octubre y Miguel Gamboa','2026-06-24 22:00:52','2026-06-24 22:01:17'),(4,'Distribuidora Amazonica Paredes','Andrea Paredes','pedidos@distribuidoraparedes.ec','2200158479001','099 482 7316','Av. 9 de Octubre y Quito, Puerto Francisco de Orellana','2026-10-06 00:17:33','2026-10-06 00:17:33'),(5,'Comercializadora Andina del Oriente','Luis Cardenas','ventas@andinaoriente.ec','1793192847001','098 615 2047','Av. Alejandro Labaka y Rio Napo, Puerto Francisco de Orellana','2026-10-06 00:17:33','2026-10-06 00:17:33'),(6,'Alimentos Orellana Cia. Ltda.','Mariela Zambrano','distribucion@alimentosorellana.ec','2200215638001','06 288 4175','Calle Amazonas y Eugenio Espejo, Puerto Francisco de Orellana','2026-10-06 00:17:33','2026-10-06 00:17:33');
 /*!40000 ALTER TABLE `suppliers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -492,6 +492,10 @@ INSERT INTO `users` VALUES (5,'Cristhian@gmail.com','$2y$10$FODnFmAjmjeI6fR63Pvt
 UNLOCK TABLES;
 
 --
+-- Dumping events for database 'tienda'
+--
+
+--
 -- Dumping routines for database 'tienda'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -504,4 +508,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-09-25  1:01:01
+-- Dump completed on 2026-10-05 19:33:33

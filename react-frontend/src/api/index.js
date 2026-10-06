@@ -60,7 +60,12 @@ export const checkoutApi = {
 };
 
 export const dashboardApi = {
-  getStats: (year, month, isAnnual) => api.get('/dashboard.php', { params: { year, month, is_annual: isAnnual } }),
+  getStats: (year, month, isAnnual) => {
+    const params = { is_annual: isAnnual };
+    if (year) params.year = year;
+    if (month) params.month = month;
+    return api.get('/dashboard.php', { params });
+  },
   getPublicStats: () => api.get('/public_stats.php'),
 };
 

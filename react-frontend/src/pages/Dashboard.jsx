@@ -12,8 +12,8 @@ const Dashboard = () => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [details, setDetails] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
   const [isAnnual, setIsAnnual] = useState(false);
 
   const months = [
@@ -21,10 +21,15 @@ const Dashboard = () => {
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
   ];
 
-  const years = [];
-  for (let y = new Date().getFullYear(); y >= 2020; y--) {
-    years.push(y);
-  }
+  const years = data?.availableYears?.length
+    ? data.availableYears
+    : Array.from({ length: new Date().getFullYear() - 2019 }, (_, i) => new Date().getFullYear() - i);
+
+  const periodLabel = data
+    ? (data.monthlyStats.isAnnual ? `${data.monthlyStats.year}` : `${months[data.monthlyStats.month - 1]} ${data.monthlyStats.year}`)
+    : '';
+
+  const formatMoney = (value) => `$${parseFloat(value || 0).toFixed(2)}`;
 
   useEffect(() => {
     fetchStats();
@@ -34,6 +39,8 @@ const Dashboard = () => {
     try {
       const res = await dashboardApi.getStats(selectedYear, selectedMonth, isAnnual);
       if (res.data.status === "success") {
+        if (!selectedYear) setSelectedYear(res.data.monthlyStats.year);
+        if (!selectedMonth) setSelectedMonth(res.data.monthlyStats.month);
         setData(res.data);
       }
     } catch (err) {
@@ -173,7 +180,7 @@ const Dashboard = () => {
           </div>
           <div className="relative z-10">
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Ventas Hoy</p>
-            <p className="text-xl font-black text-gray-900 tracking-tight">${parseFloat(data.stats.salesToday).toFixed(2)}</p>
+            <p className="text-xl font-black text-gray-900 tracking-tight">{formatMoney(data.stats.salesToday)}</p>
           </div>
         </motion.div>
 
@@ -187,7 +194,7 @@ const Dashboard = () => {
           </div>
           <Link to="/inventory?history=1" className="relative z-10 hover:opacity-80 transition-opacity text-left">
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Gastos de hoy</p>
-            <p className="text-xl font-black text-gray-900 tracking-tight">${parseFloat(data.stats.expensesToday || 0).toFixed(2)}</p>
+            <p className="text-xl font-black text-gray-900 tracking-tight">{formatMoney(data.stats.expensesToday)}</p>
             <p className="text-[9px] font-bold text-orange-600 mt-1">Ver abastecimientos</p>
           </Link>
         </motion.div>
@@ -253,7 +260,7 @@ const Dashboard = () => {
             {!isAnnual ? (
               <div className="flex flex-col gap-2">
                 <select
-                  value={selectedMonth}
+                  value={selectedMonth || data.monthlyStats.month}
                   onChange={(e) => setSelectedMonth(parseInt(e.target.value))}
                   className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
                 >
@@ -262,7 +269,7 @@ const Dashboard = () => {
                   ))}
                 </select>
                 <select
-                  value={selectedYear}
+                  value={selectedYear || data.monthlyStats.year}
                   onChange={(e) => setSelectedYear(parseInt(e.target.value))}
                   className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
                 >
@@ -274,7 +281,7 @@ const Dashboard = () => {
             ) : (
               <div className="flex gap-2">
                 <select
-                  value={selectedYear}
+                  value={selectedYear || data.monthlyStats.year}
                   onChange={(e) => setSelectedYear(parseInt(e.target.value))}
                   className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
                 >
@@ -286,16 +293,34 @@ const Dashboard = () => {
             )}
           </div>
           <div className="p-4 space-y-3 flex-1">
+            <div className={`p-3 rounded-xl border ${data.monthlyStats.hasActivity ? 'bg-blue-50 border-blue-100 text-blue-700' : 'bg-amber-50 border-amber-100 text-amber-700'}`}>
+              <p className="text-[9px] font-black uppercase tracking-widest">
+                Periodo analizado
+              </p>
+              <p className="text-sm font-black mt-0.5">{periodLabel}</p>
+              <p className="text-[10px] font-bold mt-1 opacity-80">
+                {data.monthlyStats.salesCount} ventas · {data.monthlyStats.paidSupplyCount} gastos de proveedor
+              </p>
+              {!data.monthlyStats.hasActivity && (
+                <p className="text-[10px] font-bold mt-1">
+                  No hay movimientos en este periodo. Usa el selector para revisar meses anteriores.
+                </p>
+              )}
+            </div>
+
             {/* Revenue */}
             <div className="p-3 bg-green-50 rounded-xl border border-green-100">
               <div className="flex items-center gap-2 text-green-600 mb-1">
                 <TrendingUp className="h-3 w-3" />
                 <span className="text-[9px] font-bold uppercase tracking-widest">
-                  {isAnnual ? `Ventas ${selectedYear}` : "Ingresos por ventas"}
+                  Ventas netas
                 </span>
               </div>
               <p className="text-lg font-black text-green-700">
-                ${parseFloat(data.monthlyStats.revenue).toFixed(2)}
+                {formatMoney(data.monthlyStats.revenue)}
+              </p>
+              <p className="text-[10px] font-bold text-green-700/70 mt-1">
+                Bruto {formatMoney(data.monthlyStats.grossRevenue)} · Devoluciones {formatMoney(data.monthlyStats.returns)}
               </p>
             </div>
 
@@ -304,12 +329,25 @@ const Dashboard = () => {
               <div className="flex items-center gap-2 text-orange-600 mb-1">
                 <TrendingDown className="h-3 w-3" />
                 <span className="text-[9px] font-bold uppercase tracking-widest">
-                  {isAnnual ? `Abastecimiento ${selectedYear}` : "Gastos de abastecimiento"}
+                  Gastos a proveedores
                 </span>
               </div>
               <p className="text-lg font-black text-orange-700">
-                ${parseFloat(data.monthlyStats.expenses).toFixed(2)}
+                {formatMoney(data.monthlyStats.expenses)}
               </p>
+              <p className="text-[10px] font-bold text-orange-700/70 mt-1">
+                Pagados/recibidos · Pendiente {formatMoney(data.monthlyStats.pendingSupplyTotal)}
+              </p>
+              {data.supplierExpenses?.length > 0 && (
+                <div className="mt-2 space-y-1">
+                  {data.supplierExpenses.map((supplier) => (
+                    <div key={supplier.supplier_name} className="flex justify-between gap-2 text-[10px] font-bold text-orange-900/70">
+                      <span className="truncate">{supplier.supplier_name}</span>
+                      <span>{formatMoney(supplier.total)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Net Profit */}
@@ -317,11 +355,29 @@ const Dashboard = () => {
               <div className="flex items-center gap-2 text-primary-600 mb-1">
                 <ArrowUpRight className="h-3 w-3" />
                 <span className="text-[9px] font-bold uppercase tracking-widest">
-                  {isAnnual ? `Ganancia estimada ${selectedYear}` : "Ganancia estimada"}
+                  Ganancia por ventas
                 </span>
               </div>
               <p className="text-lg font-black text-primary-700">
-                ${parseFloat(data.monthlyStats.netProfit).toFixed(2)}
+                {formatMoney(data.monthlyStats.netProfit)}
+              </p>
+              <p className="text-[10px] font-bold text-primary-700/70 mt-1">
+                Ventas netas - costo vendido {formatMoney(data.monthlyStats.costOfGoodsSold)}
+              </p>
+            </div>
+
+            <div className="p-3 bg-gray-50 rounded-xl border border-gray-100">
+              <div className="flex items-center gap-2 text-gray-600 mb-1">
+                <DollarSign className="h-3 w-3" />
+                <span className="text-[9px] font-bold uppercase tracking-widest">
+                  Flujo del periodo
+                </span>
+              </div>
+              <p className="text-lg font-black text-gray-900">
+                {formatMoney(data.monthlyStats.cashBalance)}
+              </p>
+              <p className="text-[10px] font-bold text-gray-500 mt-1">
+                Ventas netas - gastos a proveedores
               </p>
             </div>
           </div>
@@ -334,6 +390,7 @@ const Dashboard = () => {
               <Trophy className="h-4 w-4 text-yellow-500" />
               Top 5 Más Vendidos
             </h2>
+            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{periodLabel}</span>
           </div>
           <div className="p-3 overflow-y-auto flex-1">
             {data.topProducts.length === 0 ? (
@@ -371,7 +428,7 @@ const Dashboard = () => {
                     {/* Revenue */}
                     <div className="text-right flex-shrink-0">
                       <p className={`font-black text-xs ${index === 0 ? 'text-amber-950 drop-shadow-[0_1px_0_rgba(255,255,255,0.65)]' : 'text-primary-600'}`}>
-                        ${parseFloat(product.total_revenue).toFixed(0)}
+                        {formatMoney(product.total_revenue)}
                       </p>
                     </div>
                   </div>
