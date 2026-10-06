@@ -6,6 +6,234 @@ import { motion, AnimatePresence } from 'framer-motion';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
+const chartMetrics = [
+  { key: 'revenue', label: 'Ingresos', color: '#16a34a' },
+  { key: 'expenses', label: 'Gastos', color: '#f97316' },
+  { key: 'profit', label: 'Ganancia', color: '#2563eb' },
+];
+
+const FinancialLineChart = ({
+  data = [],
+  visibleMetrics,
+  onToggleMetric,
+  formatMoney,
+  periodLabel,
+  months,
+  years,
+  selectedMonth,
+  selectedYear,
+  isAnnual,
+  onMonthChange,
+  onYearChange,
+  onAnnualChange,
+}) => {
+  const [hoveredPoint, setHoveredPoint] = useState(null);
+  const [windowStart, setWindowStart] = useState(0);
+  const [windowSize, setWindowSize] = useState(Math.min(12, Math.max(1, data.length)));
+  const activeMetrics = chartMetrics.filter((metric) => visibleMetrics[metric.key]);
+  const fullData = data.length ? data : [{ label: 'Sin datos', revenue: 0, expenses: 0, profit: 0 }];
+  const safeWindowSize = Math.min(Math.max(2, windowSize), fullData.length);
+  const safeWindowStart = Math.min(windowStart, Math.max(0, fullData.length - safeWindowSize));
+  const chartData = fullData.slice(safeWindowStart, safeWindowStart + safeWindowSize);
+  const values = chartData.flatMap((point) => activeMetrics.map((metric) => Number(point[metric.key] || 0)));
+  const maxValue = Math.max(1, ...values);
+  const minValue = Math.min(0, ...values);
+  const range = maxValue - minValue || 1;
+  const width = 760;
+  const height = 300;
+  const padding = { top: 24, right: 28, bottom: 46, left: 64 };
+  const plotWidth = width - padding.left - padding.right;
+  const plotHeight = height - padding.top - padding.bottom;
+  const xFor = (index) => padding.left + (chartData.length === 1 ? plotWidth / 2 : (index / (chartData.length - 1)) * plotWidth);
+  const yFor = (value) => padding.top + ((maxValue - value) / range) * plotHeight;
+  const yTicks = Array.from({ length: 5 }, (_, index) => minValue + (range / 4) * index).reverse();
+  const xStep = Math.max(1, Math.ceil(chartData.length / 7));
+
+  useEffect(() => {
+    setWindowStart(0);
+    setWindowSize(Math.min(12, Math.max(1, data.length)));
+  }, [data]);
+
+  const handleWheel = (event) => {
+    event.preventDefault();
+    if (!fullData.length) return;
+
+    if (event.shiftKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+      const direction = (event.deltaX || event.deltaY) > 0 ? 1 : -1;
+      setWindowStart((current) => Math.min(Math.max(0, current + direction), Math.max(0, fullData.length - safeWindowSize)));
+      return;
+    }
+
+    if (event.ctrlKey || Math.abs(event.deltaY) >= Math.abs(event.deltaX)) {
+      const direction = event.deltaY > 0 ? 1 : -1;
+      setWindowSize((current) => {
+        const next = Math.min(fullData.length, Math.max(5, current + direction * 2));
+        setWindowStart((start) => Math.min(start, Math.max(0, fullData.length - next)));
+        return next;
+      });
+    }
+  };
+
+  const showAll = () => {
+    setWindowStart(0);
+    setWindowSize(fullData.length);
+  };
+
+  const pathFor = (metricKey) => chartData
+    .map((point, index) => `${index === 0 ? 'M' : 'L'} ${xFor(index).toFixed(2)} ${yFor(Number(point[metricKey] || 0)).toFixed(2)}`)
+    .join(' ');
+
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
+      <div className="p-5 border-b border-gray-50 bg-gray-50/50 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <h2 className="text-lg font-black text-gray-900 tracking-tight">Grafica financiera</h2>
+          <p className="text-xs font-bold text-gray-400 mt-1">Evolucion de ingresos, gastos y ganancia en {periodLabel}</p>
+        </div>
+        <button
+          onClick={showAll}
+          className="w-fit px-3 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition-all bg-white text-gray-500 border-gray-200 hover:border-gray-300"
+        >
+          Ver todo
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-[260px_1fr]">
+        <aside className="border-b xl:border-b-0 xl:border-r border-gray-100 bg-gray-50/60 p-4 space-y-4">
+          <div>
+            <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Vista</p>
+            <div className="flex gap-1 bg-gray-200 p-0.5 rounded-lg">
+              <button
+                onClick={() => onAnnualChange(false)}
+                className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${!isAnnual ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
+              >
+                Mensual
+              </button>
+              <button
+                onClick={() => onAnnualChange(true)}
+                className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${isAnnual ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
+              >
+                Anual
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            {!isAnnual && (
+              <select
+                value={selectedMonth}
+                onChange={(e) => onMonthChange(parseInt(e.target.value))}
+                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
+              >
+                {months.map((month, index) => (
+                  <option key={month} value={index + 1}>{month}</option>
+                ))}
+              </select>
+            )}
+            <select
+              value={selectedYear}
+              onChange={(e) => onYearChange(parseInt(e.target.value))}
+              className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
+            >
+              {years.map((year) => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Mostrar</p>
+            <div className="space-y-2">
+              {chartMetrics.map((metric) => (
+                <button
+                  key={metric.key}
+                  onClick={() => onToggleMetric(metric.key)}
+                  className={`w-full px-3 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition-all text-left ${
+                    visibleMetrics[metric.key]
+                      ? 'bg-gray-900 text-white border-gray-900 shadow-sm'
+                      : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <span className="inline-block w-2 h-2 rounded-full mr-1.5 align-middle" style={{ backgroundColor: metric.color }}></span>
+                  {metric.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <div className="p-4 lg:p-6 relative min-w-0">
+          {hoveredPoint && (
+            <div className="absolute right-6 top-6 z-10 bg-gray-950 text-white rounded-xl shadow-xl px-4 py-3 min-w-44">
+              <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">{hoveredPoint.label}</p>
+              <div className="space-y-1">
+                {activeMetrics.map((metric) => (
+                  <div key={metric.key} className="flex items-center justify-between gap-4 text-xs font-bold">
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: metric.color }}></span>
+                      {metric.label}
+                    </span>
+                    <span>{formatMoney(hoveredPoint[metric.key])}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="w-full overflow-hidden" onWheel={handleWheel}>
+            <svg viewBox={`0 0 ${width} ${height}`} className="min-w-[720px] w-full h-[320px]" role="img" aria-label="Grafica financiera del periodo">
+              <rect x="0" y="0" width={width} height={height} fill="#ffffff" />
+              {yTicks.map((tick) => (
+                <g key={tick}>
+                  <line x1={padding.left} x2={width - padding.right} y1={yFor(tick)} y2={yFor(tick)} stroke="#e5e7eb" strokeDasharray="4 4" />
+                  <text x={padding.left - 10} y={yFor(tick) + 4} textAnchor="end" className="fill-gray-400 text-[10px] font-bold">
+                    ${Math.round(tick)}
+                  </text>
+                </g>
+              ))}
+
+              {chartData.map((point, index) => (
+                index % xStep === 0 || index === chartData.length - 1 ? (
+                  <g key={point.key || index}>
+                    <text x={xFor(index)} y={height - 16} textAnchor="middle" className="fill-gray-400 text-[10px] font-bold">
+                      {point.label}
+                    </text>
+                  </g>
+                ) : null
+              ))}
+
+              {activeMetrics.map((metric) => (
+                <g key={metric.key}>
+                  <path d={pathFor(metric.key)} fill="none" stroke={metric.color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  {chartData.map((point, index) => (
+                    <circle
+                      key={`${metric.key}-${point.key || index}`}
+                      cx={xFor(index)}
+                      cy={yFor(Number(point[metric.key] || 0))}
+                      r="4.5"
+                      fill="#ffffff"
+                      stroke={metric.color}
+                      strokeWidth="3"
+                      className="cursor-pointer"
+                      onMouseEnter={() => setHoveredPoint(point)}
+                      onMouseLeave={() => setHoveredPoint(null)}
+                    />
+                  ))}
+                </g>
+              ))}
+            </svg>
+          </div>
+          <div className="mt-3 flex items-center justify-between gap-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+            <span>Rueda: acercar/alejar</span>
+            <span>{chartData[0]?.label} - {chartData[chartData.length - 1]?.label}</span>
+            <span>Shift + rueda: desplazar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Dashboard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,6 +243,11 @@ const Dashboard = () => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [isAnnual, setIsAnnual] = useState(false);
+  const [visibleMetrics, setVisibleMetrics] = useState({
+    revenue: true,
+    expenses: true,
+    profit: true,
+  });
 
   const months = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -30,6 +263,14 @@ const Dashboard = () => {
     : '';
 
   const formatMoney = (value) => `$${parseFloat(value || 0).toFixed(2)}`;
+
+  const toggleMetric = (metricKey) => {
+    setVisibleMetrics((current) => {
+      const enabledCount = Object.values(current).filter(Boolean).length;
+      if (current[metricKey] && enabledCount === 1) return current;
+      return { ...current, [metricKey]: !current[metricKey] };
+    });
+  };
 
   useEffect(() => {
     fetchStats();
@@ -237,60 +478,9 @@ const Dashboard = () => {
               <TrendingUp className="h-4 w-4 text-primary-600" />
               Estadísticas
             </h2>
-            {/* Toggle between Monthly/Annual */}
-            <div className="flex gap-1 mb-3 bg-gray-200 p-0.5 rounded-lg">
-              <button
-                onClick={() => setIsAnnual(false)}
-                className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${
-                  !isAnnual ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-gray-700"
-                }`}
-              >
-                Mensual
-              </button>
-              <button
-                onClick={() => setIsAnnual(true)}
-                className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${
-                  isAnnual ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-gray-700"
-                }`}
-              >
-                Anual
-              </button>
-            </div>
-            {/* Date Filters */}
-            {!isAnnual ? (
-              <div className="flex flex-col gap-2">
-                <select
-                  value={selectedMonth || data.monthlyStats.month}
-                  onChange={(e) => setSelectedMonth(parseInt(e.target.value))}
-                  className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
-                >
-                  {months.map((m, i) => (
-                    <option key={i + 1} value={i + 1}>{m}</option>
-                  ))}
-                </select>
-                <select
-                  value={selectedYear || data.monthlyStats.year}
-                  onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-                  className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
-                >
-                  {years.map(y => (
-                    <option key={y} value={y}>{y}</option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <div className="flex gap-2">
-                <select
-                  value={selectedYear || data.monthlyStats.year}
-                  onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-                  className="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
-                >
-                  {years.map(y => (
-                    <option key={y} value={y}>{y}</option>
-                  ))}
-                </select>
-              </div>
-            )}
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+              El periodo se cambia desde la grafica financiera.
+            </p>
           </div>
           <div className="p-4 space-y-3 flex-1">
             <div className={`p-3 rounded-xl border ${data.monthlyStats.hasActivity ? 'bg-blue-50 border-blue-100 text-blue-700' : 'bg-amber-50 border-amber-100 text-amber-700'}`}>
@@ -362,22 +552,7 @@ const Dashboard = () => {
                 {formatMoney(data.monthlyStats.netProfit)}
               </p>
               <p className="text-[10px] font-bold text-primary-700/70 mt-1">
-                Ventas netas - costo vendido {formatMoney(data.monthlyStats.costOfGoodsSold)}
-              </p>
-            </div>
-
-            <div className="p-3 bg-gray-50 rounded-xl border border-gray-100">
-              <div className="flex items-center gap-2 text-gray-600 mb-1">
-                <DollarSign className="h-3 w-3" />
-                <span className="text-[9px] font-bold uppercase tracking-widest">
-                  Flujo del periodo
-                </span>
-              </div>
-              <p className="text-lg font-black text-gray-900">
-                {formatMoney(data.monthlyStats.cashBalance)}
-              </p>
-              <p className="text-[10px] font-bold text-gray-500 mt-1">
-                Ventas netas - gastos a proveedores
+                Resultado estimado del periodo
               </p>
             </div>
           </div>
@@ -519,6 +694,22 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      <FinancialLineChart
+        data={data.financialSeries}
+        visibleMetrics={visibleMetrics}
+        onToggleMetric={toggleMetric}
+        formatMoney={formatMoney}
+        periodLabel={periodLabel}
+        months={months}
+        years={years}
+        selectedMonth={selectedMonth || data.monthlyStats.month}
+        selectedYear={selectedYear || data.monthlyStats.year}
+        isAnnual={isAnnual}
+        onMonthChange={setSelectedMonth}
+        onYearChange={setSelectedYear}
+        onAnnualChange={setIsAnnual}
+      />
 
       {/* Bottom Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

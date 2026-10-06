@@ -24,7 +24,11 @@ if ($action === 'list') {
     $transactions = [];
     $salesResult = $conn->query("
         SELECT p.id, p.purchase_type, p.customer_name, p.customer_idnumber, p.customer_phone,
-               p.total, p.created_at, COALESCE(c.name, p.customer_name) AS display_customer_name
+               p.total, p.created_at,
+               CASE
+                   WHEN p.purchase_type = 'FACTURA' THEN COALESCE(c.name, p.customer_name)
+                   ELSE NULL
+               END AS display_customer_name
         FROM purchases p
         LEFT JOIN customers c ON c.id = p.customer_id
     ");

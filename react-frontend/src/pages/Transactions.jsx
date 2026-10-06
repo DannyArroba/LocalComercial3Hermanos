@@ -251,7 +251,7 @@ const Transactions = () => {
                     <td className="px-4 py-3">
                       <p className={`truncate font-black text-xs ${t.record_type === 'DEVOLUCION' ? 'text-red-700' : 'text-gray-800'}`}>{t.return_code || `Venta #${t.id}`}</p>
                       <span className={`mt-1 inline-flex px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-wider ${t.record_type === 'DEVOLUCION' ? 'bg-red-100 text-red-700' : t.purchase_type === 'FACTURA' ? 'bg-blue-50 text-blue-600' : 'bg-gray-100 text-gray-500'}`}>
-                        {t.record_type === 'DEVOLUCION' ? 'Devolución' : t.purchase_type === 'FACTURA' ? 'Con datos' : 'Sin datos'}
+                        {t.record_type === 'DEVOLUCION' ? 'Devolución' : t.purchase_type === 'FACTURA' ? 'Con datos' : 'Consumidor final'}
                       </span>
                     </td>
                     <td className="px-4 py-3">

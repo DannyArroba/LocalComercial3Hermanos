@@ -326,6 +326,102 @@ while ($row = $supplierResult->fetch_assoc()) {
     $supplierExpenses[] = $row;
 }
 
+$seriesFormat = $isAnnual ? '%Y-%m' : '%Y-%m-%d';
+$seriesPoints = [];
+$cursor = new DateTime($startDate);
+$limit = new DateTime($endDate);
+$interval = $isAnnual ? new DateInterval('P1M') : new DateInterval('P1D');
+$monthShortNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+while ($cursor <= $limit) {
+    $key = $isAnnual ? $cursor->format('Y-m') : $cursor->format('Y-m-d');
+    $seriesPoints[$key] = [
+        "key" => $key,
+        "label" => $isAnnual ? $monthShortNames[((int)$cursor->format('n')) - 1] : $cursor->format('d/m'),
+        "revenue" => 0,
+        "expenses" => 0,
+        "profit" => 0,
+        "costOfGoodsSold" => 0,
+        "grossRevenue" => 0,
+        "returns" => 0,
+    ];
+    $cursor->add($interval);
+}
+
+$salesSeries = queryOrFail($conn, "
+    SELECT DATE_FORMAT(created_at, '$seriesFormat') AS period_key,
+           COALESCE(SUM(total), 0) AS gross_revenue,
+           COUNT(*) AS sales_count
+    FROM purchases
+    WHERE created_at BETWEEN '$startDate' AND '$endDate'
+    GROUP BY DATE_FORMAT(created_at, '$seriesFormat')
+");
+while ($row = $salesSeries->fetch_assoc()) {
+    if (isset($seriesPoints[$row["period_key"]])) {
+        $seriesPoints[$row["period_key"]]["grossRevenue"] = money($row["gross_revenue"]);
+    }
+}
+
+$returnsSeries = queryOrFail($conn, "
+    SELECT DATE_FORMAT(created_at, '$seriesFormat') AS period_key,
+           COALESCE(SUM(total_refund), 0) AS returns_total
+    FROM sales_returns
+    WHERE created_at BETWEEN '$startDate' AND '$endDate'
+    GROUP BY DATE_FORMAT(created_at, '$seriesFormat')
+");
+while ($row = $returnsSeries->fetch_assoc()) {
+    if (isset($seriesPoints[$row["period_key"]])) {
+        $seriesPoints[$row["period_key"]]["returns"] = money($row["returns_total"]);
+    }
+}
+
+$expensesSeries = queryOrFail($conn, "
+    SELECT DATE_FORMAT($supplyDateExpr, '$seriesFormat') AS period_key,
+           COALESCE(SUM(total), 0) AS expenses_total
+    FROM stock_purchases
+    WHERE $supplyDateExpr BETWEEN '$startDate' AND '$endDate'
+      AND status IN ('PAGADO', 'RECIBIDO')
+    GROUP BY DATE_FORMAT($supplyDateExpr, '$seriesFormat')
+");
+while ($row = $expensesSeries->fetch_assoc()) {
+    if (isset($seriesPoints[$row["period_key"]])) {
+        $seriesPoints[$row["period_key"]]["expenses"] = money($row["expenses_total"]);
+    }
+}
+
+$costSeries = queryOrFail($conn, "
+    SELECT DATE_FORMAT(pur.created_at, '$seriesFormat') AS period_key,
+           COALESCE(SUM(pi.unit_cost * pi.quantity), 0) AS cogs_total
+    FROM purchase_items pi
+    JOIN purchases pur ON pi.purchase_id = pur.id
+    WHERE pur.created_at BETWEEN '$startDate' AND '$endDate'
+    GROUP BY DATE_FORMAT(pur.created_at, '$seriesFormat')
+");
+while ($row = $costSeries->fetch_assoc()) {
+    if (isset($seriesPoints[$row["period_key"]])) {
+        $seriesPoints[$row["period_key"]]["costOfGoodsSold"] = money($row["cogs_total"]);
+    }
+}
+
+$returnedCostSeries = queryOrFail($conn, "
+    SELECT DATE_FORMAT(sr.created_at, '$seriesFormat') AS period_key,
+           COALESCE(SUM(sri.unit_cost * sri.quantity), 0) AS returned_cost
+    FROM sales_return_items sri
+    JOIN sales_returns sr ON sr.id = sri.return_id
+    WHERE sr.created_at BETWEEN '$startDate' AND '$endDate'
+    GROUP BY DATE_FORMAT(sr.created_at, '$seriesFormat')
+");
+while ($row = $returnedCostSeries->fetch_assoc()) {
+    if (isset($seriesPoints[$row["period_key"]])) {
+        $seriesPoints[$row["period_key"]]["costOfGoodsSold"] = money($seriesPoints[$row["period_key"]]["costOfGoodsSold"] - $row["returned_cost"]);
+    }
+}
+
+foreach ($seriesPoints as $key => $point) {
+    $seriesPoints[$key]["revenue"] = money($point["grossRevenue"] - $point["returns"]);
+    $seriesPoints[$key]["profit"] = money($seriesPoints[$key]["revenue"] - $point["costOfGoodsSold"]);
+}
+
 $availableYears = [];
 foreach ($activityPeriods as $period) {
     if (!in_array($period["year"], $availableYears, true)) {
@@ -357,6 +453,7 @@ respond([
         "period" => $latestPeriod["period"],
     ],
     "supplierExpenses" => $supplierExpenses,
+    "financialSeries" => array_values($seriesPoints),
     "monthlyStats" => [
         "year" => (int)$year,
         "month" => (int)$month,
