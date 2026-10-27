@@ -1,9 +1,7 @@
 <?php
-session_start();
+require_once __DIR__ . '/../api-bootstrap.php';
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-$origin = $_SERVER['HTTP_ORIGIN'] ?? 'http://localhost:5173';
-header("Access-Control-Allow-Origin: $origin");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
@@ -13,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-include('../db.php');
+require_once __DIR__ . '/../db.php';
 
 function respond($status, $message, $extra = []) {
     echo json_encode(array_merge([

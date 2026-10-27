@@ -60,10 +60,11 @@ export const checkoutApi = {
 };
 
 export const dashboardApi = {
-  getStats: (year, month, isAnnual) => {
+  getStats: (year, month, isAnnual, lowStockThreshold) => {
     const params = { is_annual: isAnnual };
     if (year) params.year = year;
     if (month) params.month = month;
+    if (lowStockThreshold) params.low_stock_threshold = lowStockThreshold;
     return api.get('/dashboard.php', { params });
   },
   getPublicStats: () => api.get('/public_stats.php'),

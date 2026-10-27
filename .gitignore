@@ -1,0 +1,8 @@
+**/node_modules/
+*.log
+.env
+.env.*
+!.env.example
+backend/config.php
+entrega-hostinger/site-*/
+entrega-hostinger/*.previous

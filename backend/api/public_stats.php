@@ -1,7 +1,5 @@
 <?php
-session_start();
-$origin = $_SERVER['HTTP_ORIGIN'] ?? 'http://localhost:5173';
-header("Access-Control-Allow-Origin: $origin");
+require_once __DIR__ . '/../api-bootstrap.php';
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
@@ -11,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-include('../db.php');
+require_once __DIR__ . '/../db.php';
 
 // Estadísticas para la Home (Públicas o no requieren login estricto para mostrar impacto)
 

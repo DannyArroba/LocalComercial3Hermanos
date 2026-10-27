@@ -1,7 +1,5 @@
 <?php
-session_start();
-$origin = $_SERVER['HTTP_ORIGIN'] ?? 'http://localhost:5173';
-header("Access-Control-Allow-Origin: $origin");
+require_once __DIR__ . '/../api-bootstrap.php';
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
@@ -11,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-include('../db.php');
+require_once __DIR__ . '/../db.php';
 
 function ensureBarcodeColumn($conn) {
     $result = $conn->query("SHOW COLUMNS FROM products LIKE 'barcode'");
@@ -44,7 +42,7 @@ if ($method === 'GET') {
         $result = $conn->query($sql);
         $products = [];
         while ($row = $result->fetch_assoc()) {
-            $row['image_url'] = "http://localhost/TienditaNexar/frontend/uploads/" . $row['image'];
+            $row['image_url'] = "/api/frontend/uploads/" . $row['image'];
             $products[] = $row;
         }
         echo json_encode($products);

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { dashboardApi, transactionsApi } from '../api';
-import { TrendingUp, Package, AlertTriangle, Clock, DollarSign, ArrowRight, Users as UsersIcon, Receipt, X, Calendar, CreditCard, ShoppingBag, Download, Trophy, TrendingDown, ArrowUpRight } from 'lucide-react';
+import { TrendingUp, Package, AlertTriangle, Clock, DollarSign, ArrowRight, Users as UsersIcon, Receipt, X, Calendar, CreditCard, ShoppingBag, Download, Trophy, TrendingDown, ArrowUpRight, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import Swal from 'sweetalert2';
 
 const chartMetrics = [
   { key: 'revenue', label: 'Ingresos', color: '#16a34a' },
@@ -243,6 +244,10 @@ const Dashboard = () => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [isAnnual, setIsAnnual] = useState(false);
+  const [lowStockThreshold, setLowStockThreshold] = useState(() => {
+    const saved = Number(localStorage.getItem('lowStockThreshold'));
+    return Number.isFinite(saved) && saved > 0 ? saved : 10;
+  });
   const [visibleMetrics, setVisibleMetrics] = useState({
     revenue: true,
     expenses: true,
@@ -274,11 +279,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchStats();
-  }, [selectedYear, selectedMonth, isAnnual]);
+  }, [selectedYear, selectedMonth, isAnnual, lowStockThreshold]);
 
   const fetchStats = async () => {
     try {
-      const res = await dashboardApi.getStats(selectedYear, selectedMonth, isAnnual);
+      const res = await dashboardApi.getStats(selectedYear, selectedMonth, isAnnual, lowStockThreshold);
       if (res.data.status === "success") {
         if (!selectedYear) setSelectedYear(res.data.monthlyStats.year);
         if (!selectedMonth) setSelectedMonth(res.data.monthlyStats.month);
@@ -289,6 +294,35 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const updateLowStockThreshold = async () => {
+    const result = await Swal.fire({
+      title: 'Alerta de bajo stock',
+      text: 'Se avisara cuando un producto tenga esta cantidad o menos.',
+      input: 'number',
+      inputValue: lowStockThreshold,
+      inputAttributes: {
+        min: '1',
+        max: '999',
+        step: '1'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      cancelButtonText: 'Cancelar',
+      inputValidator: (value) => {
+        const numberValue = Number(value);
+        if (!Number.isInteger(numberValue) || numberValue < 1 || numberValue > 999) {
+          return 'Ingresa un numero entre 1 y 999';
+        }
+        return undefined;
+      }
+    });
+
+    if (!result.isConfirmed) return;
+    const nextThreshold = Number(result.value);
+    localStorage.setItem('lowStockThreshold', String(nextThreshold));
+    setLowStockThreshold(nextThreshold);
   };
 
   const fetchDetails = async (id) => {
@@ -624,6 +658,14 @@ const Dashboard = () => {
                 <AlertTriangle className="h-4 w-4 text-red-500" />
                 Productos Sin Stock
               </h2>
+              <button
+                type="button"
+                onClick={updateLowStockThreshold}
+                title="Configurar alerta de bajo stock"
+                className="h-8 w-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-primary-700 hover:bg-primary-50 transition-colors"
+              >
+                <Settings className="h-4 w-4" />
+              </button>
             </div>
             <div className="p-3 overflow-y-auto flex-1 max-h-[300px]">
               {data.lowStockProducts && data.lowStockProducts.length === 0 ? (
@@ -662,6 +704,17 @@ const Dashboard = () => {
                 <AlertTriangle className="h-4 w-4 text-yellow-500" />
                 Próximos a Acabarse
               </h2>
+              <button
+                type="button"
+                onClick={updateLowStockThreshold}
+                title="Configurar alerta de bajo stock"
+                className="h-8 w-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-primary-700 hover:bg-primary-50 transition-colors"
+              >
+                <Settings className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="px-4 pt-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+              Aviso desde {data.stockSettings?.lowStockThreshold || lowStockThreshold} unidades
             </div>
             <div className="p-3 overflow-y-auto flex-1 max-h-[300px]">
               {data.criticalStockProducts && data.criticalStockProducts.length === 0 ? (

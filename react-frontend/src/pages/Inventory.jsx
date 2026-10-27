@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { productsApi, suppliersApi, stockPurchasesApi } from '../api';
 import { Plus, Edit2, Trash2, X, Upload, Loader2, Package, TrendingUp, ChevronDown, Barcode, Building2, ClipboardList, CreditCard, Truck, AlertTriangle, Ban, RotateCcw } from 'lucide-react';
 import Swal from 'sweetalert2';
@@ -27,6 +27,10 @@ const Inventory = () => {
   const [purchaseCost, setPurchaseCost] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productAppliesIva, setProductAppliesIva] = useState('1');
+  const [productName, setProductName] = useState('');
+  const [productBarcode, setProductBarcode] = useState('');
+
+  const normalizeProductText = (value) => String(value || '').trim().replace(/\s+/g, ' ').toLowerCase();
 
   useEffect(() => {
     fetchProducts();
@@ -77,15 +81,32 @@ const Inventory = () => {
       setSelectedSupplierId(editingProduct.supplier_id || '');
       setProductPrice(editingProduct.price || '');
       setProductAppliesIva(String(editingProduct.applies_iva ?? 1));
+      setProductName(editingProduct.name || '');
+      setProductBarcode(editingProduct.barcode || '');
     } else {
       setSelectedCategory('');
       setSelectedSupplierId('');
       setProductPrice('');
       setProductAppliesIva('1');
+      setProductName('');
+      setProductBarcode('');
     }
     setCategoryOpen(false);
     setSelectedImageName('');
   }, [editingProduct, isModalOpen]);
+
+  const duplicateProduct = useMemo(() => {
+    const normalizedName = normalizeProductText(productName);
+    const normalizedBarcode = String(productBarcode || '').trim();
+    if (!normalizedName && !normalizedBarcode) return null;
+
+    return products.find((product) => {
+      if (editingProduct && Number(product.id) === Number(editingProduct.id)) return false;
+      const sameName = normalizedName && normalizeProductText(product.name) === normalizedName;
+      const sameBarcode = normalizedBarcode && String(product.barcode || '').trim() === normalizedBarcode;
+      return sameName || sameBarcode;
+    }) || null;
+  }, [products, productName, productBarcode, editingProduct]);
 
   const handlePurchase = async (e) => {
     e.preventDefault();
@@ -241,6 +262,14 @@ const Inventory = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    if (duplicateProduct) {
+      Swal.fire(
+        'Producto duplicado',
+        `Ya existe "${duplicateProduct.name}". Edita ese producto o usa abastecer stock para ingresar mas unidades.`,
+        'warning'
+      );
+      return;
+    }
     setSaving(true);
     const formData = new FormData(e.target);
     formData.append('supplier_id', selectedSupplierId);
@@ -601,7 +630,8 @@ const Inventory = () => {
                 <input
                   name="name"
                   required
-                  defaultValue={editingProduct?.name}
+                  value={productName}
+                  onChange={(event) => setProductName(event.target.value)}
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all"
                 />
               </div>
@@ -612,12 +642,25 @@ const Inventory = () => {
                   <Barcode className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <input
                     name="barcode"
-                    defaultValue={editingProduct?.barcode || ''}
+                    value={productBarcode}
+                    onChange={(event) => setProductBarcode(event.target.value)}
                     placeholder="Escanea o escribe el codigo..."
                     className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all font-mono"
                   />
                 </div>
               </div>
+
+              {duplicateProduct && (
+                <div className="md:col-span-2 p-4 rounded-2xl border border-amber-200 bg-amber-50 text-amber-800 flex items-start gap-3">
+                  <AlertTriangle className="h-5 w-5 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-black">Producto duplicado detectado</p>
+                    <p className="text-xs font-semibold mt-1">
+                      Ya existe "{duplicateProduct.name}" con codigo {duplicateProduct.barcode || 'sin codigo'}. Edita ese producto o usa abastecer stock.
+                    </p>
+                  </div>
+                </div>
+              )}
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Precio base sin IVA</label>

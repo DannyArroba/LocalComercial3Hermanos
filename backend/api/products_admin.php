@@ -1,7 +1,5 @@
 <?php
-session_start();
-$origin = $_SERVER['HTTP_ORIGIN'] ?? 'http://localhost:5173';
-header("Access-Control-Allow-Origin: $origin");
+require_once __DIR__ . '/../api-bootstrap.php';
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
@@ -11,11 +9,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-include('../db.php');
+require_once __DIR__ . '/../db.php';
 
 function respond($status, $message) {
     echo json_encode(["status" => $status, "message" => $message]);
     exit();
+}
+
+function normalizeProductName($name) {
+    $name = trim(preg_replace('/\s+/', ' ', $name));
+    return function_exists('mb_strtolower') ? mb_strtolower($name, 'UTF-8') : strtolower($name);
+}
+
+function findDuplicateProduct($conn, $name, $barcode = '', $excludeId = 0) {
+    $normalizedName = normalizeProductName($name);
+    $normalizedBarcode = trim($barcode);
+
+    if ($normalizedName === '') {
+        respond("error", "El nombre del producto es obligatorio");
+    }
+
+    $sql = "SELECT id, name, barcode FROM products WHERE id <> ?";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        respond("error", "No se pudo validar duplicados: " . $conn->error);
+    }
+
+    $stmt->bind_param("i", $excludeId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($product = $result->fetch_assoc()) {
+        $existingName = normalizeProductName($product['name'] ?? '');
+        $existingBarcode = trim($product['barcode'] ?? '');
+
+        if ($existingName === $normalizedName) {
+            return [
+                "type" => "name",
+                "product" => $product
+            ];
+        }
+
+        if ($normalizedBarcode !== '' && $existingBarcode !== '' && $existingBarcode === $normalizedBarcode) {
+            return [
+                "type" => "barcode",
+                "product" => $product
+            ];
+        }
+    }
+
+    return null;
 }
 
 function ensureBarcodeColumn($conn) {
@@ -80,8 +123,17 @@ ensureBarcodeColumn($conn);
 $action = $_POST['action'] ?? '';
 
 if ($action === 'add') {
-        $name = $conn->real_escape_string($_POST['name'] ?? '');
-        $barcode = $conn->real_escape_string($_POST['barcode'] ?? '');
+        $rawName = trim(preg_replace('/\s+/', ' ', $_POST['name'] ?? ''));
+        $rawBarcode = trim($_POST['barcode'] ?? '');
+        $duplicate = findDuplicateProduct($conn, $rawName, $rawBarcode);
+        if ($duplicate) {
+            $product = $duplicate['product'];
+            $reason = $duplicate['type'] === 'barcode' ? "codigo de barras" : "nombre";
+            respond("error", "Producto duplicado por $reason: ya existe '{$product['name']}' (ID {$product['id']}). Usa editar o abastecer stock.");
+        }
+
+        $name = $conn->real_escape_string($rawName);
+        $barcode = $conn->real_escape_string($rawBarcode);
         $price = (float)($_POST['price'] ?? 0);
         $applies_iva = (int)($_POST['applies_iva'] ?? 0) === 1 ? 1 : 0;
         $cost_price = (float)($_POST['cost_price'] ?? 0);
@@ -103,8 +155,17 @@ if ($action === 'add') {
 
     if ($action === 'update') {
         $id = (int)($_POST['id'] ?? 0);
-        $name = $conn->real_escape_string($_POST['name'] ?? '');
-        $barcode = $conn->real_escape_string($_POST['barcode'] ?? '');
+        $rawName = trim(preg_replace('/\s+/', ' ', $_POST['name'] ?? ''));
+        $rawBarcode = trim($_POST['barcode'] ?? '');
+        $duplicate = findDuplicateProduct($conn, $rawName, $rawBarcode, $id);
+        if ($duplicate) {
+            $product = $duplicate['product'];
+            $reason = $duplicate['type'] === 'barcode' ? "codigo de barras" : "nombre";
+            respond("error", "Producto duplicado por $reason: ya existe '{$product['name']}' (ID {$product['id']}). No se guardo para evitar inconsistencias.");
+        }
+
+        $name = $conn->real_escape_string($rawName);
+        $barcode = $conn->real_escape_string($rawBarcode);
         $price = (float)($_POST['price'] ?? 0);
         $applies_iva = (int)($_POST['applies_iva'] ?? 0) === 1 ? 1 : 0;
         $cost_price = (float)($_POST['cost_price'] ?? 0);

@@ -1,0 +1,16 @@
+Options -Indexes
+DirectoryIndex index.html
+RewriteEngine On
+
+# API y fotos: conserva las mismas rutas del entorno local.
+RewriteRule ^api/(.*)$ $1 [L]
+
+# React Router: permite actualizar /dashboard, /inventory, etc.
+RewriteCond %{REQUEST_URI} !^/(backend|frontend|assets|api)(/|$)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
+
+<FilesMatch "(?i)(^\.|\.(sql|log|ini|env|zip|bak)$)">
+    Require all denied
+</FilesMatch>

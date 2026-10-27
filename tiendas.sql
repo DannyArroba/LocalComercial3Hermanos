@@ -19,8 +19,6 @@
 -- Current Database: `tienda`
 --
 
-/*!40000 DROP DATABASE IF EXISTS `tienda`*/;
-
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `tienda` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 USE `tienda`;
@@ -137,7 +135,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `idx_products_supplier_id` (`supplier_id`),
   CONSTRAINT `fk_products_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -492,14 +490,6 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (5,'Cristhian@gmail.com','$2y$10$FODnFmAjmjeI6fR63Pvtf.nPQFqgs5.ErQhAI.5jkmLa./lAbc4mW','admin','2026-05-07 05:02:50'),(6,'Nexar@gmail.com','$2y$10$FODnFmAjmjeI6fR63Pvtf.nPQFqgs5.ErQhAI.5jkmLa./lAbc4mW','','2026-05-07 05:50:49');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'tienda'
---
-
---
--- Dumping routines for database 'tienda'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -510,4 +500,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-05 20:14:22
+-- Dump completed on 2026-10-05 21:01:44

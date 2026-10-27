@@ -1,7 +1,5 @@
 <?php
-session_start();
-$origin = $_SERVER['HTTP_ORIGIN'] ?? 'http://localhost:5173';
-header("Access-Control-Allow-Origin: $origin");
+require_once __DIR__ . '/../api-bootstrap.php';
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
@@ -11,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-include('../db.php');
+require_once __DIR__ . '/../db.php';
 date_default_timezone_set('America/Bogota');
 
 function respond($payload) {
@@ -44,7 +42,7 @@ function imageUrl($image) {
     if (!$image) {
         return "";
     }
-    return "http://127.0.0.1:8000/frontend/uploads/" . $image;
+    return "/api/frontend/uploads/" . $image;
 }
 
 if (!isset($_SESSION['user_id'])) {
@@ -115,6 +113,11 @@ if (!$month) {
     $month = (int)$latestPeriod["month"];
 }
 $month = max(1, min(12, $month));
+$lowStockThreshold = filter_input(INPUT_GET, 'low_stock_threshold', FILTER_VALIDATE_INT);
+if (!$lowStockThreshold) {
+    $lowStockThreshold = 10;
+}
+$lowStockThreshold = max(1, min(999, $lowStockThreshold));
 
 if ($isAnnual) {
     $startDate = sprintf('%04d-01-01 00:00:00', $year);
@@ -153,7 +156,7 @@ $expensesToday = money(fetchScalar(
     "total"
 ));
 
-$lowStockCount = fetchScalar($conn, "SELECT COUNT(*) AS count FROM products WHERE stock < 10", "count");
+$lowStockCount = fetchScalar($conn, "SELECT COUNT(*) AS count FROM products WHERE stock <= $lowStockThreshold", "count");
 $totalProducts = fetchScalar($conn, "SELECT COUNT(*) AS count FROM products", "count");
 
 $recentSales = [];
@@ -193,7 +196,7 @@ $lowStockProducts = [];
 $resLowStockProducts = queryOrFail($conn, "
     SELECT id, name, image, price, stock
     FROM products
-    WHERE stock < 10
+    WHERE stock <= 0
     ORDER BY stock ASC, name ASC
 ");
 while ($row = $resLowStockProducts->fetch_assoc()) {
@@ -205,7 +208,7 @@ $criticalStockProducts = [];
 $resCriticalStockProducts = queryOrFail($conn, "
     SELECT id, name, image, price, stock
     FROM products
-    WHERE stock >= 10 AND stock <= 20
+    WHERE stock > 0 AND stock <= $lowStockThreshold
     ORDER BY stock ASC, name ASC
 ");
 while ($row = $resCriticalStockProducts->fetch_assoc()) {
@@ -445,6 +448,9 @@ respond([
     "topProducts" => $topProducts,
     "lowStockProducts" => $lowStockProducts,
     "criticalStockProducts" => $criticalStockProducts,
+    "stockSettings" => [
+        "lowStockThreshold" => $lowStockThreshold,
+    ],
     "availablePeriods" => $activityPeriods,
     "availableYears" => $availableYears,
     "suggestedPeriod" => [

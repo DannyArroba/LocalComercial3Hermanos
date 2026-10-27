@@ -1,0 +1,60 @@
+INSTALACION DE lc3brothers.com EN HOSTINGER
+
+Este paquete incluye la app actual compilada, las APIs PHP, las imagenes y
+una copia de la base local tienda con sus datos y usuarios actuales.
+No necesitas Node.js ni npm en el hosting. Usa hosting PHP con MySQL/MariaDB.
+
+1. En hPanel agrega/asigna lc3brothers.com como sitio PHP/HTML personalizado.
+   Selecciona PHP 8.2 o superior y habilita mysqli y fileinfo.
+
+2. En el Administrador de archivos abre public_html de lc3brothers.com.
+   Sube lc3brothers-hostinger.zip y extraelo DIRECTAMENTE en public_html.
+   Deben quedar public_html/index.html y public_html/backend/api/auth.php.
+   Si ya existe otra web, haz un respaldo antes de reemplazar sus archivos.
+   Comprueba que se extrajo .htaccess. Elimina el ZIP del servidor al terminar.
+
+3. En Bases de datos MySQL crea una base NUEVA y un usuario con contrasena.
+   Copia los nombres completos, incluido el prefijo que asigna Hostinger.
+   Abre phpMyAdmin de ESA base, pulsa Importar y selecciona el archivo
+   lc3brothers-database.sql entregado junto al ZIP (tambien esta dentro del ZIP
+   en _database). El SQL no crea ni selecciona una base llamada tienda:
+   se importa en la base seleccionada. Importa una sola vez en una base vacia.
+
+4. Edita public_html/backend/config.php y sustituye los tres marcadores:
+   database = nombre completo de la base;
+   user = nombre completo del usuario MySQL;
+   password = contrasena de ESE usuario MySQL.
+   host normalmente es localhost; usa el indicado por hPanel si es distinto.
+   Conserva las comillas de PHP. Si tu contrasena tiene una comilla simple
+   o barra invertida, escapala con una barra invertida.
+   No uses tu contrasena de acceso a Hostinger en este archivo.
+
+5. Conecta lc3brothers.com al sitio en hPanel. Usa EXACTAMENTE los DNS o
+   registros que muestre Hostinger para tu cuenta. Si administras DNS en
+   otro proveedor, cambia alli los registros indicados; conserva registros
+   de correo. Espera la propagacion y activa SSL y Forzar HTTPS en hPanel.
+   Configura tambien www si deseas usar www.lc3brothers.com.
+
+6. Prueba https://lc3brothers.com, /login y actualizar /dashboard.
+   /api/backend/api/products.php debe devolver JSON con productos.
+   Verifica inicio/cierre de sesion, fotos, inventario y reportes.
+   Accede con tu cuenta existente: las contrasenas conservan sus hashes.
+   Comprueba que el administrador tiene una contrasena privada y fuerte.
+   Las ventas/compras de prueba si se realizan modificaran los datos reales.
+
+7. Tras importar, elimina _database del servidor. Su .htaccess bloquea
+   descargas, pero ya no necesitas guardar el respaldo en public_html.
+   Conserva el SQL en tu computadora. No compartas este paquete publicamente:
+   contiene datos actuales de clientes, operaciones y hashes de usuarios.
+
+Si aparece error de base de datos: revisa backend/config.php y la importacion.
+Si actualizar /dashboard da 404: comprueba el .htaccess en public_html.
+Para subir imagenes, frontend/uploads debe ser escribible por PHP (755/775
+segun el hosting; no uses 777).
+
+El ZIP prepara la instalacion; subirlo no crea automaticamente la base MySQL
+ni configura los DNS. No se ha publicado ni verificado el dominio desde aqui.
+
+Guia oficial:
+https://www.hostinger.com/support/1583289-how-to-manually-transfer-a-website-to-hostinger/
+https://www.hostinger.com/support/1884149-how-to-import-a-database-with-phpmyadmin-in-hostinger/
