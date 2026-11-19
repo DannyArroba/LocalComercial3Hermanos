@@ -2,6 +2,18 @@
 
 Aplicación de tienda con React y una API PHP/MySQL: productos, ventas y comprobantes internos, inventario, abastecimientos, clientes, proveedores y permisos del personal. Incluye dashboard financiero, búsqueda de productos y tema claro/azul marino.
 
+## Restaurar la aplicación con todos los datos
+
+`database/tienda-completa.sql` es una exportación completa de la base local: estructura, clientes, usuarios con sus hashes de contraseña y permisos, productos, proveedores, ventas, comprobantes, abastecimientos, devoluciones, inventario y tablas de trazabilidad. Se publica por solicitud expresa del propietario del proyecto.
+
+Para usar esta copia, crea una base vacía y selecciona esa base en phpMyAdmin; importa **solamente `database/tienda-completa.sql`**. También puedes ejecutar desde la raíz del repositorio:
+
+```powershell
+mysql --user=root --password --database=tienda --execute="SOURCE database/tienda-completa.sql;"
+```
+
+Configura `backend/config.php` según el apartado siguiente y ejecuta PHP y Vite. Se conservan las cuentas y contraseñas existentes: **no ejecutes `create_admin.php` ni importes además `schema.sql` o `catalog.sql` sobre esta copia**. Para empezar sin datos de clientes ni operaciones, usa la instalación nueva descrita abajo. Importar la copia completa sobre una base existente reemplaza sus tablas; respalda primero cualquier trabajo que quieras conservar.
+
 ## Requisitos
 
 - PHP 8.2 o superior con `mysqli`, `mbstring` y `fileinfo`.
@@ -101,10 +113,10 @@ node --test src/utils/access.test.js src/utils/productSearch.test.js src/utils/f
 
 Desde la raíz, `php scripts/test_user_access.php`, `php scripts/test_dashboard_options.php` y `php scripts/test_contact_data.php` comprueban permisos, períodos y datos de prueba. Las comprobaciones de integración del dashboard requieren una base configurada y un administrador existente; los casos con tablas temporales no modifican las operaciones reales.
 
-## Datos privados y despliegue
+## Datos incluidos y despliegue
 
-Este repositorio publica el código, la estructura de la base y el catálogo de referencia. **No publica la base local de clientes y ventas, hashes de cuentas, respaldos privados, credenciales ni paquetes de hosting que contengan esos datos.** Los datos que ya tienes en tu computadora no se transfieren a otra instalación por subir código a GitHub.
+Este repositorio incluye el código, las imágenes, las migraciones, el catálogo de referencia y la exportación completa `database/tienda-completa.sql`, incluidos sus clientes, ventas y cuentas. Las contraseñas de los usuarios están almacenadas como hashes. Las credenciales del servidor MySQL y los archivos de configuración locales se configuran en cada instalación.
 
 Los scripts de generación y corrección de datos son herramientas administrativas de CLI para entornos de prueba. No se ejecutan automáticamente ni convierten datos ficticios en operaciones reales. Los comprobantes de la aplicación son para control interno y no tienen validez tributaria ante el SRI.
 
-Subir cambios a GitHub tampoco los despliega por sí solo en un dominio. Para un hosting PHP/MySQL, revisa `deployment/LEEME-HOSTINGER.txt`, configura credenciales privadas y prepara un paquete nuevo con tu base mediante un canal privado. No publiques ese paquete ni el SQL de operaciones en GitHub.
+Subir cambios a GitHub no los despliega por sí solo en un dominio. Para un hosting PHP/MySQL, revisa `deployment/LEEME-HOSTINGER.txt`, configura las credenciales del hosting y prepara un paquete nuevo con la aplicación compilada y su base de datos.

@@ -1,0 +1,30 @@
+{
+    "exported_at": "2026-11-18T23:45:52-05:00",
+    "file": "tienda-completa.sql",
+    "sha256": "bb3ebcc264411af140d0cf7da8c5f25621ce3812e316090a60cba42636a69cda",
+    "tables": {
+        "customers": 225,
+        "demo_data_batches": 1,
+        "demo_data_records": 112421,
+        "demo_stock_ledger": 51957,
+        "inventory_logs": 51649,
+        "invoices": 0,
+        "local_history_archive_rows": 377,
+        "local_history_archives": 1,
+        "local_history_id_changes": 1,
+        "product_barcodes": 274,
+        "products": 306,
+        "purchase_items": 48783,
+        "purchases": 5732,
+        "sale_items": 0,
+        "sales": 0,
+        "sales_return_items": 2,
+        "sales_returns": 2,
+        "stock_purchase_items": 2867,
+        "stock_purchases": 2867,
+        "suppliers": 3,
+        "users": 2
+    },
+    "restore_verified": true,
+    "row_contents_verified": true
+}
