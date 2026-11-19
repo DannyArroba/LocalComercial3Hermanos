@@ -1,5 +1,8 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 include('../backend/db.php');
+require_once __DIR__ . '/lib/access.php';
+appRequirePermission($conn, 'inventory');
 
 // Crear producto
 if (isset($_POST['add_product'])) {

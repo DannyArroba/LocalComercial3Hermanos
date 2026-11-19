@@ -1,6 +1,8 @@
 <?php
-session_start();
-include('../backend/db.php');
+require_once __DIR__ . '/../backend/api-bootstrap.php';
+require_once __DIR__ . '/../backend/db.php';
+require_once __DIR__ . '/../backend/lib/access.php';
+$actor = appRequirePermission($conn, ['sales', 'transactions', 'dashboard']);
 
 if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");
@@ -12,8 +14,10 @@ $purchase_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($purchase_id <= 0) die("ID inválido.");
 
-// Verificar compra del usuario
-$q = $conn->query("SELECT * FROM purchases WHERE id = $purchase_id AND user_id = $user_id LIMIT 1");
+// Historial/dashboard pueden consultar todos; un vendedor solo sus comprobantes.
+$canSeeAll = $actor['role'] === 'admin' || in_array('dashboard', $actor['permissions'], true) || in_array('transactions', $actor['permissions'], true);
+$ownership = $canSeeAll ? '' : " AND pur.user_id = $user_id";
+$q = $conn->query("SELECT pur.*, COALESCE(NULLIF(pur.served_by_name, ''), NULLIF(u.name, ''), NULLIF(SUBSTRING_INDEX(u.email, '@', 1), ''), 'Usuario no disponible') AS served_by_name FROM purchases pur LEFT JOIN users u ON u.id = pur.user_id WHERE pur.id = $purchase_id $ownership LIMIT 1");
 if (!$q || $q->num_rows === 0) die("Compra no encontrada o no autorizada.");
 
 $p = $q->fetch_assoc();
@@ -90,6 +94,7 @@ $typeLabel = ($p['purchase_type'] === 'FACTURA') ? 'Factura / Comprobante' : 'Co
           <div class="text-sm text-gray-500">Comprobante</div>
           <div class="text-2xl font-extrabold text-gray-900">#<?php echo $purchase_id; ?></div>
           <div class="text-sm text-gray-600">Fecha: <?php echo h($p['created_at']); ?></div>
+          <div class="text-sm text-gray-600">Atendido por: <?php echo h($p['served_by_name']); ?></div>
           <div class="inline-flex mt-2 text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700 font-semibold">
             <?php echo h($typeLabel); ?>
           </div>

@@ -3,6 +3,7 @@ import { X, ShoppingBag, Trash2, Plus, Minus, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { priceLine } from '../utils/pricing';
 
 const CartDrawer = () => {
   const { cart, cartTotal, ivaTotal, totalWithIva, removeFromCart, updateQuantity, isOpen, setIsOpen } = useCart();
@@ -83,7 +84,7 @@ const CartDrawer = () => {
                           </button>
                         </div>
                         <p className="text-sm text-gray-500 font-medium mt-1">
-                          ${(Number(item.price) * (Number(item.applies_iva) === 1 ? 1.15 : 1)).toFixed(2)}
+                          ${priceLine(item).total.toFixed(2)}
                           <span className="ml-2 text-[10px] text-gray-400">{Number(item.applies_iva) === 1 ? 'IVA incluido' : 'Tarifa 0%'}</span>
                         </p>
                       </div>
@@ -107,7 +108,7 @@ const CartDrawer = () => {
                           </button>
                         </div>
                         <p className="font-bold text-gray-900">
-                          ${(Number(item.price) * (Number(item.applies_iva) === 1 ? 1.15 : 1) * item.quantity).toFixed(2)}
+                          ${priceLine(item, item.quantity).total.toFixed(2)}
                         </p>
                       </div>
                     </div>

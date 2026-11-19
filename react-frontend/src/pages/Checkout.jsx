@@ -7,6 +7,7 @@ import { ArrowLeft, Banknote, CheckCircle2, CreditCard, Loader2, Search, ShieldC
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { priceLine } from '../utils/pricing';
 
 const Checkout = () => {
   const { cart, cartTotal, ivaTotal, totalWithIva, clearCart } = useCart();
@@ -75,7 +76,8 @@ const Checkout = () => {
     setStep(2);
   };
 
-  const generatePDF = (purchaseId) => {
+  const generatePDF = (receipt) => {
+    const purchaseId = receipt.purchase_id;
     const doc = new jsPDF();
     doc.setFontSize(20);
     doc.setTextColor(22, 163, 74);
@@ -87,8 +89,8 @@ const Checkout = () => {
     doc.line(18, 32, 192, 32);
     doc.setTextColor(20);
     doc.text(`Nro. #${String(purchaseId).padStart(6, '0')}`, 18, 41);
-    doc.text(`Fecha: ${new Date().toLocaleString()}`, 18, 47);
-    doc.text(`Vendedor: ${user.email}`, 18, 53);
+    doc.text(`Fecha: ${new Date(receipt.created_at || Date.now()).toLocaleString()}`, 18, 47);
+    doc.text(doc.splitTextToSize(`Atendido por: ${receipt.served_by_name || user.name || user.email}`, 174), 18, 53);
 
     let startY = 65;
     if (formData.purchase_type === 'FACTURA') {
@@ -106,8 +108,7 @@ const Checkout = () => {
     }
 
     const rows = cart.map((item) => {
-      const base = Number(item.price) * item.quantity;
-      const tax = Number(item.applies_iva) === 1 ? Math.round(base * 0.15 * 100) / 100 : 0;
+      const { base, tax } = priceLine(item, item.quantity);
       return [item.name, item.quantity, `$${Number(item.price).toFixed(2)}`, Number(item.applies_iva) === 1 ? '15%' : '0%', `$${(base + tax).toFixed(2)}`];
     });
     autoTable(doc, {
@@ -162,7 +163,7 @@ const Checkout = () => {
         Swal.fire('Error', response.data.message, 'error');
         return;
       }
-      generatePDF(response.data.purchase_id);
+      generatePDF(response.data);
       await Swal.fire('Cobro completado', `Total cobrado: $${Number(response.data.total).toFixed(2)}`, 'success');
       await clearCart();
       navigate('/sales');
@@ -181,6 +182,7 @@ const Checkout = () => {
     <div className="bg-gray-50 min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4">
         <button onClick={() => step === 2 ? setStep(1) : navigate(-1)} className="flex items-center gap-2 text-gray-600 hover:text-primary-600 mb-6 font-medium"><ArrowLeft className="h-4 w-4" />Volver</button>
+        <p className="mb-4 text-xs text-gray-600">Atiende: <span className="font-bold text-gray-900">{user?.name || user?.email || 'Usuario no disponible'}</span></p>
         <div className="flex items-center gap-3 mb-8">
           {[['1', 'Datos y resumen'], ['2', 'Forma de pago']].map(([number, label]) => (
             <div key={number} className={`flex items-center gap-2 ${step >= Number(number) ? 'text-primary-700' : 'text-gray-400'}`}>
@@ -233,8 +235,7 @@ const Checkout = () => {
             <h2 className="text-xl font-black mb-6">Resumen de la venta</h2>
             <div className="space-y-4 max-h-72 overflow-y-auto pr-2">
               {cart.map((item) => {
-                const base = Number(item.price) * item.quantity;
-                const tax = Number(item.applies_iva) === 1 ? Math.round(base * 0.15 * 100) / 100 : 0;
+                const { base, tax } = priceLine(item, item.quantity);
                 return <div key={item.id} className="flex justify-between gap-4"><div><p className="font-bold text-sm">{item.name} x {item.quantity}</p><p className="text-xs text-gray-400">Base ${base.toFixed(2)} · IVA {Number(item.applies_iva) === 1 ? '15%' : '0%'}</p></div><p className="font-black">${(base + tax).toFixed(2)}</p></div>;
               })}
             </div>

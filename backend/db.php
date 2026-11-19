@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Guayaquil');
 $configPath = __DIR__ . '/config.php';
 $config = is_file($configPath) ? require $configPath : [];
 $host = $config['host'] ?? (getenv('DB_HOST') ?: 'localhost');
@@ -9,6 +10,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 try {
     $conn = new mysqli($host, $user, $password, $dbname);
     $conn->set_charset('utf8mb4');
+    $conn->query("SET time_zone = '-05:00'");
 } catch (mysqli_sql_exception $error) {
     error_log('Database connection failed: ' . $error->getMessage());
     http_response_code(503);

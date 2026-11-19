@@ -6,6 +6,7 @@ New-Item -ItemType Directory -Force $stageRoot | Out-Null
 Copy-Item (Join-Path $projectRoot 'react-frontend/dist/*') $stageRoot -Recurse
 New-Item -ItemType Directory -Force "$stageRoot/backend", "$stageRoot/frontend", "$stageRoot/_database" | Out-Null
 Copy-Item (Join-Path $projectRoot 'backend/api') "$stageRoot/backend" -Recurse
+Copy-Item (Join-Path $projectRoot 'backend/lib') "$stageRoot/backend" -Recurse
 Copy-Item (Join-Path $projectRoot 'backend/api-bootstrap.php') "$stageRoot/backend"
 Copy-Item (Join-Path $PSScriptRoot 'db-production.php') "$stageRoot/backend/db.php"
 Copy-Item (Join-Path $projectRoot 'backend/config.example.php') "$stageRoot/backend/config.php"

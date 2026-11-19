@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { productsApi } from '../api';
 import { Search, Filter, ShoppingCart, Loader2, Package, Check, Plus, Minus, ArrowRight, XCircle, Barcode } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { priceLine } from '../utils/pricing';
+import { normalizeSearch, searchProducts, visibleProducts } from '../utils/productSearch';
 
 const ProductCard = ({ product, addToCart, getItemCountInCart }) => {
   const [quantity, setQuantity] = useState(1);
@@ -18,7 +20,7 @@ const ProductCard = ({ product, addToCart, getItemCountInCart }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9 }}
       whileHover={{ y: -8 }}
-      className={`group bg-white rounded-[2rem] border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(22,163,74,0.15)] transition-all duration-500 overflow-hidden flex flex-col relative ${outOfStock ? 'opacity-75 grayscale' : ''}`}
+      className={`group h-full bg-white rounded-[2rem] border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(22,163,74,0.15)] transition-all duration-500 overflow-hidden flex flex-col relative ${outOfStock ? 'opacity-75 grayscale' : ''}`}
     >
       {/* Badge de Oferta o Nuevo (Simulado) */}
       {!outOfStock && (
@@ -68,7 +70,7 @@ const ProductCard = ({ product, addToCart, getItemCountInCart }) => {
             <div className="flex flex-col">
               <span className="text-[9px] font-bold text-gray-400 uppercase">Precio al cliente</span>
               <span className="text-xl font-black text-gray-900 tracking-tighter">
-                ${(Number(product.price) * (Number(product.applies_iva) === 1 ? 1.15 : 1)).toFixed(2)}
+                ${priceLine(product).total.toFixed(2)}
               </span>
               <span className="text-[9px] font-bold text-gray-400">
                 {Number(product.applies_iva) === 1 ? `Base $${Number(product.price).toFixed(2)} + IVA` : 'Tarifa IVA 0%'}
@@ -123,11 +125,102 @@ const ProductCard = ({ product, addToCart, getItemCountInCart }) => {
 
 const Sales = () => {
   const { addToCart, cart, cartCount, totalWithIva, clearCart } = useCart();
+  const searchInputRef = useRef(null);
+  const searchBoxRef = useRef(null);
+  const categoryStripRef = useRef(null);
+  const productNodesRef = useRef(new Map());
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('todas');
+  const [browsingCategory, setBrowsingCategory] = useState(false);
+  const [suggestionsOpen, setSuggestionsOpen] = useState(false);
+  const [activeSuggestion, setActiveSuggestion] = useState(-1);
+  const [locationRequest, setLocationRequest] = useState(null);
+  const [highlightedProductId, setHighlightedProductId] = useState(null);
+
+  const hasSearch = Boolean(normalizeSearch(search));
+  const searchingGlobally = hasSearch && !browsingCategory;
+  const matches = useMemo(() => searchProducts(products, search), [products, search]);
+  const suggestions = matches.slice(0, 8);
+  const showSuggestions = hasSearch && suggestionsOpen;
+  const filteredProducts = useMemo(
+    () => visibleProducts(products, search, selectedCategory, { browseCategory: browsingCategory }),
+    [products, search, selectedCategory, browsingCategory]
+  );
+
+  const locateProduct = (product) => {
+    setBrowsingCategory(true);
+    setSuggestionsOpen(false);
+    setActiveSuggestion(-1);
+    setSelectedCategory(product.category || 'todas');
+    setLocationRequest({ id: String(product.id), name: product.name, category: product.category });
+  };
+
+  useEffect(() => {
+    if (!locationRequest) return;
+    let timer;
+    const frame = window.requestAnimationFrame(() => {
+      const node = productNodesRef.current.get(locationRequest.id);
+      if (!node) return;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const strip = categoryStripRef.current;
+      const categoryButton = strip && [...strip.querySelectorAll('[data-category]')]
+        .find((button) => button.dataset.category === locationRequest.category);
+      if (categoryButton) {
+        const stripRect = strip.getBoundingClientRect();
+        const buttonRect = categoryButton.getBoundingClientRect();
+        strip.scrollBy({ left: buttonRect.left - stripRect.left - (stripRect.width - buttonRect.width) / 2, behavior: reducedMotion ? 'auto' : 'smooth' });
+      }
+      setHighlightedProductId(locationRequest.id);
+      node.focus({ preventScroll: true });
+      node.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+      timer = window.setTimeout(() => setHighlightedProductId(null), 3200);
+    });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+    };
+  }, [locationRequest]);
+
+  const changeSearch = (value) => {
+    setSearch(value);
+    setBrowsingCategory(false);
+    const isSearching = Boolean(normalizeSearch(value));
+    setSuggestionsOpen(isSearching);
+    if (!isSearching) setSelectedCategory('todas');
+    setActiveSuggestion(-1);
+    setLocationRequest(null);
+    setHighlightedProductId(null);
+  };
+
+  const handleSearchKeys = (event) => {
+    if (event.nativeEvent.isComposing) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setSuggestionsOpen(false);
+      setActiveSuggestion(-1);
+    } else if (event.key === 'ArrowDown' && hasSearch && suggestions.length) {
+      event.preventDefault();
+      setSuggestionsOpen(true);
+      setActiveSuggestion((index) => Math.min(index + 1, suggestions.length - 1));
+    } else if (event.key === 'ArrowUp' && hasSearch && suggestions.length) {
+      event.preventDefault();
+      setSuggestionsOpen(true);
+      setActiveSuggestion((index) => Math.max(0, index - 1));
+    } else if (event.key === 'Enter' && showSuggestions && activeSuggestion >= 0) {
+      event.preventDefault();
+      locateProduct(suggestions[activeSuggestion]);
+    }
+  };
+
+  useEffect(() => {
+    if (showSuggestions && activeSuggestion >= 0) {
+      searchBoxRef.current?.querySelector(`#product-suggestion-${activeSuggestion}`)
+        ?.scrollIntoView({ block: 'nearest' });
+    }
+  }, [activeSuggestion, showSuggestions]);
 
   useEffect(() => {
     let barcodeBuffer = '';
@@ -135,7 +228,10 @@ const Sales = () => {
 
     const processBarcode = async (code) => {
       const normalizedCode = code.trim();
-      const product = products.find((item) => String(item.barcode || '').trim() === normalizedCode);
+      const product = products.find((item) =>
+        String(item.barcode || '').trim() === normalizedCode ||
+        (item.scan_codes || []).some((barcode) => String(barcode).trim() === normalizedCode)
+      );
 
       if (!product) {
         Swal.fire({
@@ -242,12 +338,6 @@ const Sales = () => {
     }
   };
 
-  const filteredProducts = products.filter(p => {
-    const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = selectedCategory === 'todas' || p.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
   const getItemCountInCart = (id) => {
     const item = cart.find(i => i.id === id);
     return item ? item.quantity : 0;
@@ -256,41 +346,136 @@ const Sales = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 pb-24">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-        <div>
+        <div className="w-full min-w-0">
           <h1 className="text-2xl font-black text-gray-900 tracking-tighter">Productos</h1>
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-1">
             <p className="text-sm text-gray-500 font-medium">Selecciona los productos que comprará el cliente</p>
-            <div className="flex items-center gap-1.5 px-2 py-0.5 bg-green-50 text-green-600 rounded-full border border-green-100">
+            <div className="flex items-center gap-1.5 w-fit shrink-0 px-2 py-0.5 bg-green-50 text-green-600 rounded-full border border-green-100">
               <Barcode className="h-3 w-3" />
               <span className="text-[9px] font-black uppercase tracking-widest">Escaner activo</span>
             </div>
           </div>
+          <div
+            ref={searchBoxRef}
+            className="relative mt-4"
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setSuggestionsOpen(false);
+                setActiveSuggestion(-1);
+              }
+            }}
+          >
+          <form
+            role="search"
+            className="flex w-full gap-2 rounded-2xl border border-gray-200 bg-white p-2 shadow-sm"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setBrowsingCategory(false);
+              setLocationRequest(null);
+              setHighlightedProductId(null);
+              setSuggestionsOpen(false);
+              setActiveSuggestion(-1);
+            }}
+          >
+            <label htmlFor="product-search" className="sr-only">Buscar productos por nombre</label>
+            <input
+              ref={searchInputRef}
+              id="product-search"
+              type="search"
+              role="combobox"
+              autoComplete="off"
+              aria-autocomplete="list"
+              aria-expanded={showSuggestions}
+              aria-controls="product-suggestions"
+              aria-activedescendant={showSuggestions && activeSuggestion >= 0 ? `product-suggestion-${activeSuggestion}` : undefined}
+              aria-describedby="product-search-hint"
+              placeholder="Escribe el nombre del producto..."
+              className="min-w-0 flex-1 rounded-xl border border-gray-300 bg-white px-4 py-3 text-base font-medium text-gray-900 placeholder:text-gray-500 outline-none transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+              value={search}
+              onChange={(event) => changeSearch(event.target.value)}
+              onFocus={() => setSuggestionsOpen(true)}
+              onKeyDown={handleSearchKeys}
+            />
+            <button
+              type="submit"
+              className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-primary-600 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+              aria-label="Buscar productos"
+            >
+              <Search className="h-5 w-5 shrink-0" aria-hidden="true" />
+              Buscar
+            </button>
+          </form>
+          {showSuggestions && (
+            <div className="absolute inset-x-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl">
+              <div className="border-b border-gray-100 px-4 py-2 text-xs font-medium text-gray-500">
+                Coincidencias en toda la tienda · elige un producto para ubicarlo
+              </div>
+              <div id="product-suggestions" role="listbox" aria-label="Productos encontrados" className="max-h-80 overflow-y-auto overscroll-contain">
+                {suggestions.map((product, index) => (
+                  <button
+                    key={product.id}
+                    id={`product-suggestion-${index}`}
+                    type="button"
+                    role="option"
+                    aria-selected={activeSuggestion === index}
+                    tabIndex={-1}
+                    className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-primary-50 ${activeSuggestion === index ? 'bg-primary-50' : 'bg-white'}`}
+                    onMouseDown={(event) => event.preventDefault()}
+                    onClick={() => locateProduct(product)}
+                  >
+                    <img src={product.image_url} alt="" className="h-11 w-11 shrink-0 rounded-lg border border-gray-100 bg-white object-contain" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold text-gray-900">{product.name}</span>
+                      <span className="block text-xs text-gray-500">{product.category}{Number(product.stock) <= 0 ? ' · Agotado' : ''}</span>
+                    </span>
+                    <span className="shrink-0 text-sm font-bold text-primary-700">${priceLine(product).total.toFixed(2)}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-gray-400" aria-hidden="true" />
+                  </button>
+                ))}
+                {suggestions.length === 0 && (
+                  <p className="px-4 py-5 text-sm text-gray-500">No encontramos coincidencias. Prueba con otra palabra o revisa la escritura.</p>
+                )}
+              </div>
+              {matches.length > suggestions.length && (
+                <button type="button" onMouseDown={(event) => event.preventDefault()} onClick={() => { setSuggestionsOpen(false); setActiveSuggestion(-1); }} className="w-full border-t border-gray-100 px-4 py-3 text-left text-sm font-semibold text-primary-700 hover:bg-primary-50">
+                  Ver los {matches.length} resultados en la lista de productos
+                </button>
+              )}
+            </div>
+          )}
+          </div>
+          <p id="product-search-hint" className="mt-2 text-xs text-gray-500">
+            {browsingCategory
+              ? (selectedCategory === 'todas' ? 'Mostrando todos los productos.' : `Mostrando ${selectedCategory}. Borra la búsqueda para volver a Todas.`)
+              : hasSearch ? `${matches.length} coincidencias en todas las categorías` : 'Busca en toda la tienda, aunque tengas una categoría seleccionada.'}
+          </p>
+          <p role="status" aria-live="polite" className="sr-only">
+            {locationRequest ? `Producto ubicado: ${locationRequest.name}, categoría ${locationRequest.category}.` : ''}
+          </p>
         </div>
       </div>
 
       {/* Filters Bar */}
       <div className="bg-white p-3 rounded-2xl border border-gray-100 shadow-sm mb-6 flex flex-col md:flex-row gap-3 sticky top-16 z-30">
-        <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Buscar por nombre de producto..."
-            className="w-full pl-10 pr-4 py-2.5 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-primary-500 transition-all font-medium text-sm"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
+        <div ref={categoryStripRef} className="flex min-w-0 w-full items-center gap-2 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
           <div className="p-2 bg-gray-50 rounded-lg text-gray-400">
             <Filter className="h-4 w-4" />
           </div>
           {['todas', ...categories].map(cat => (
             <button
               key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              data-category={cat}
+              aria-pressed={selectedCategory === cat && !searchingGlobally}
+              onClick={() => {
+                setSelectedCategory((current) => !searchingGlobally && current === cat ? 'todas' : cat);
+                setBrowsingCategory(true);
+                setSuggestionsOpen(false);
+                setActiveSuggestion(-1);
+                setLocationRequest(null);
+                setHighlightedProductId(null);
+              }}
               className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all ${
-                selectedCategory === cat 
+                !searchingGlobally && selectedCategory === cat
                   ? 'bg-primary-600 text-white shadow-lg shadow-primary-200' 
                   : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
               }`}
@@ -309,12 +494,19 @@ const Sales = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           <AnimatePresence>
             {filteredProducts.map((product) => (
-              <ProductCard 
+              <div
                 key={product.id} 
-                product={product} 
-                addToCart={addToCart} 
-                getItemCountInCart={getItemCountInCart} 
-              />
+                ref={(node) => {
+                  if (node) productNodesRef.current.set(String(product.id), node);
+                  else productNodesRef.current.delete(String(product.id));
+                }}
+                tabIndex={-1}
+                role="group"
+                aria-label={product.name}
+                className={`h-full scroll-mt-40 rounded-[2rem] focus:outline-none ${highlightedProductId === String(product.id) ? 'product-location-highlight' : ''}`}
+              >
+                <ProductCard product={product} addToCart={addToCart} getItemCountInCart={getItemCountInCart} />
+              </div>
             ))}
           </AnimatePresence>
         </div>

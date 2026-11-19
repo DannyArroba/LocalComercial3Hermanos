@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { usersApi } from '../api';
 import { UserPlus, Edit2, Trash2, X, Shield, User, Loader2, Key } from 'lucide-react';
 import Swal from 'sweetalert2';
+import { useAuth } from '../context/AuthContext';
+import { defaultWorkerPermissions, storeSections, userDisplayName, userPermissions } from '../utils/access';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -9,6 +11,20 @@ const Users = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const [saving, setSaving] = useState(false);
+  const { user: currentUser, refreshUser } = useAuth();
+  const [formRole, setFormRole] = useState('cashier');
+  const [permissions, setPermissions] = useState([...defaultWorkerPermissions]);
+  const editingSelf = editingUser && Number(editingUser.id) === Number(currentUser?.id);
+
+  const openEditor = (user = null) => {
+    setEditingUser(user);
+    setFormRole(user?.role === 'admin' ? 'admin' : 'cashier');
+    setPermissions(user?.role === 'admin' ? [...defaultWorkerPermissions] : userPermissions(user || { role: 'cashier' }));
+    setIsModalOpen(true);
+  };
+
+  const togglePermission = (key) => setPermissions((current) => current.includes(key)
+    ? current.filter((value) => value !== key) : [...current, key]);
 
   useEffect(() => {
     fetchUsers();
@@ -18,7 +34,8 @@ const Users = () => {
     setLoading(true);
     try {
       const res = await usersApi.getAll();
-      setUsers(res.data);
+      if (Array.isArray(res.data)) setUsers(res.data);
+      else Swal.fire('Error', res.data.message || 'No se pudieron cargar los usuarios', 'error');
     } catch (err) {
       console.error(err);
     } finally {
@@ -47,7 +64,7 @@ const Users = () => {
           Swal.fire('Error', res.data.message, 'error');
         }
       } catch (err) {
-        Swal.fire('Error', 'No se pudo eliminar el usuario', 'error');
+        Swal.fire('Error', err.response?.data?.message || 'No se pudo eliminar el usuario', 'error');
       }
     }
   };
@@ -56,6 +73,14 @@ const Users = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    data.name = String(data.name || '').trim();
+    data.role = formRole;
+    data.permissions = formRole === 'admin' ? storeSections.map(({ key }) => key) : permissions;
+
+    if (!data.name) {
+      Swal.fire('Error', 'Ingresa el nombre del trabajador', 'error');
+      return;
+    }
 
     // VALIDACIONES FRONTEND
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -94,11 +119,12 @@ const Users = () => {
         setIsModalOpen(false);
         setEditingUser(null);
         fetchUsers();
+        await refreshUser();
       } else {
         Swal.fire('Error', res.data.message, 'error');
       }
     } catch (err) {
-      Swal.fire('Error', 'Ocurrió un error al guardar', 'error');
+      Swal.fire('Error', err.response?.data?.message || 'Ocurrió un error al guardar', 'error');
     } finally {
       setSaving(false);
     }
@@ -106,13 +132,13 @@ const Users = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-wrap gap-4 justify-between items-center mb-8">
         <div>
           <h1 className="text-2xl font-black text-gray-900 tracking-tighter">Gestión de Usuarios</h1>
           <p className="text-sm text-gray-500 font-medium mt-1">Administra los accesos de trabajadores y administradores</p>
         </div>
         <button
-          onClick={() => { setEditingUser(null); setIsModalOpen(true); }}
+          onClick={() => openEditor()}
           className="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-xl font-black text-xs uppercase tracking-widest flex items-center gap-2 transition-all shadow-lg shadow-primary-100"
         >
           <UserPlus className="h-4 w-4" />
@@ -125,7 +151,7 @@ const Users = () => {
           <Loader2 className="h-10 w-10 animate-spin text-primary-600" />
         </div>
       ) : (
-        <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-x-auto">
           <table className="w-full text-left">
             <thead className="bg-gray-50 border-b border-gray-100">
               <tr>
@@ -141,10 +167,11 @@ const Users = () => {
                   <td className="px-6 py-3">
                     <div className="flex items-center gap-3">
                       <div className={`h-9 w-9 rounded-lg flex items-center justify-center font-bold text-sm ${user.role === 'admin' ? 'bg-primary-100 text-primary-600' : 'bg-gray-100 text-gray-600'}`}>
-                        {user.email.charAt(0).toUpperCase()}
+                        {userDisplayName(user).charAt(0).toUpperCase()}
                       </div>
-                      <span className="font-bold text-gray-900 text-sm">{user.email}</span>
+                      <div><p className="font-bold text-gray-900 text-sm">{userDisplayName(user)}</p><p className="text-xs text-gray-500 mt-1">{user.email}</p></div>
                     </div>
+                    <p className="mt-1.5 text-[10px] text-gray-500 max-w-56">{user.role === 'admin' ? 'Todas las secciones' : storeSections.filter(({ key }) => userPermissions(user).includes(key)).map(({ label }) => label).join(' · ') || 'Sin accesos habilitados'}</p>
                   </td>
                   <td className="px-6 py-3">
                     <div className="flex items-center gap-2">
@@ -165,16 +192,19 @@ const Users = () => {
                     {new Date(user.created_at).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-3 text-right">
-                    <div className="flex justify-end gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex justify-end gap-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
                       <button
-                        onClick={() => { setEditingUser(user); setIsModalOpen(true); }}
+                        onClick={() => openEditor(user)}
+                        title={`Editar ${userDisplayName(user)}`}
                         className="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"
                       >
                         <Edit2 className="h-5 w-5" />
                       </button>
                       <button
                         onClick={() => handleDelete(user.id)}
-                        className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                        title={`Eliminar ${userDisplayName(user)}`}
+                        disabled={Number(user.id) === Number(currentUser?.id)}
+                        className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                       >
                         <Trash2 className="h-5 w-5" />
                       </button>
@@ -190,37 +220,56 @@ const Users = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-6 border-b flex justify-between items-center bg-gray-50">
-              <h2 className="text-xl font-bold text-gray-900">
+          <div role="dialog" aria-modal="true" aria-labelledby="user-editor-title" className="bg-white rounded-3xl shadow-2xl w-full max-w-xl max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-6 border-b flex justify-between items-center bg-gray-50 shrink-0">
+              <h2 id="user-editor-title" className="text-xl font-bold text-gray-900">
                 {editingUser ? 'Editar Usuario' : 'Nuevo Usuario'}
               </h2>
-              <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-gray-200 rounded-full transition-colors">
+              <button aria-label="Cerrar edición de usuario" onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-gray-200 rounded-full transition-colors">
                 <X className="h-6 w-6" />
               </button>
             </div>
             
-            <form onSubmit={handleSave} className="p-8 space-y-4">
+            <form onSubmit={handleSave} className="p-5 sm:p-8 space-y-4 overflow-y-auto">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Email de Usuario</label>
-                <input name="email" type="email" required defaultValue={editingUser?.email} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all" placeholder="ejemplo@3hermanos.com" />
+                <label htmlFor="user-name" className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Nombre del trabajador</label>
+                <input id="user-name" name="name" type="text" required maxLength={120} defaultValue={editingUser ? userDisplayName(editingUser) : ''} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all" placeholder="Nombre y apellido" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="user-email" className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Email de Usuario</label>
+                <input id="user-email" name="email" type="email" required defaultValue={editingUser?.email} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all" placeholder="ejemplo@3hermanos.com" />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Contraseña {editingUser && '(Dejar vacío para no cambiar)'}</label>
+                <label htmlFor="user-password" className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Contraseña {editingUser && '(Dejar vacío para no cambiar)'}</label>
                 <div className="relative">
                   <Key className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <input name="password" type="password" required={!editingUser} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all" placeholder="••••••••" />
+                  <input id="user-password" name="password" type="password" required={!editingUser} autoComplete="new-password" className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all" placeholder="••••••••" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Rol en el Sistema</label>
-                <select name="role" defaultValue={editingUser?.role || 'trabajador'} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all appearance-none cursor-pointer">
-                  <option value="trabajador">Trabajador (Productos e Inventario)</option>
+                <label htmlFor="user-role" className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Rol en el Sistema</label>
+                <select id="user-role" name="role" value={formRole} onChange={(event) => setFormRole(event.target.value)} disabled={Boolean(editingSelf)} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all appearance-none cursor-pointer disabled:opacity-60">
+                  <option value="cashier">Trabajador (accesos personalizables)</option>
                   <option value="admin">Administrador (Control Total)</option>
                 </select>
+                {editingSelf && <p className="text-xs text-gray-500">Tu cuenta conserva el rol de administrador.</p>}
               </div>
+
+              <fieldset className="pt-2">
+                <legend className="text-xs font-bold text-gray-600 uppercase tracking-wider">Secciones habilitadas</legend>
+                <p className="text-xs text-gray-500 mt-2 mb-3">{formRole === 'admin' ? 'Los administradores tienen acceso completo. Para personalizarlo, elige Trabajador.' : 'Activa las secciones que este trabajador puede ver y utilizar.'}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {storeSections.map(({ key, label, description }) => {
+                    const checked = formRole === 'admin' || permissions.includes(key);
+                    return <button key={key} type="button" role="switch" aria-checked={checked} aria-label={`Acceso a ${label}`} disabled={formRole === 'admin'} onClick={() => togglePermission(key)} className={`flex items-center justify-between gap-3 rounded-xl border px-3 py-3 text-left outline-none focus-visible:ring-2 focus-visible:ring-primary-500 ${checked ? 'bg-primary-50 border-primary-200' : 'bg-white border-gray-200'} disabled:cursor-default`}>
+                      <span className="min-w-0"><span className="block text-xs font-bold text-gray-800">{label}</span><span className="block text-[10px] text-gray-500 mt-1">{description}</span></span>
+                      <span aria-hidden="true" className={`relative inline-flex h-6 w-10 shrink-0 rounded-full transition-colors ${checked ? 'bg-primary-600' : 'bg-gray-300'}`}><span className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${checked ? 'translate-x-5' : 'translate-x-1'}`} /></span>
+                    </button>;
+                  })}
+                </div>
+              </fieldset>
 
               <div className="flex gap-4 mt-8">
                 <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-2xl transition-all">Cancelar</button>

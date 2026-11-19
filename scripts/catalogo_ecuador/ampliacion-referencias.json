@@ -1,0 +1,4067 @@
+[
+  {
+    "key": "chocapic30",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal En Hojuelas Sabor A Chocolate CHOCAPIC 30 G",
+      "description": "Cereal En Hojuelas Sabor A Chocolate CHOCAPIC 30 G. Precio $0.47 en Supermaxi. Chocapic, cód. 8445290170019.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445290170019-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445290170019-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445290170019-3.png"
+      ],
+      "sku": "8445290170019",
+      "gtin": "8445290170019",
+      "brand": {
+        "@type": "Brand",
+        "name": "Chocapic"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-sabor-a-chocolate-chocapic-30-g-1873062",
+        "price": "0.47",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-sabor-a-chocolate-chocapic-30-g-1873062"
+    }
+  },
+  {
+    "key": "chocapic90",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal En Hojuelas De Chocolate CHOCAPIC 90 G",
+      "description": "Cereal En Hojuelas De Chocolate CHOCAPIC 90 G. Precio $1.13 en Supermaxi. Chocapic, cód. 7861001239515.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001239515-1.png"
+      ],
+      "sku": "7861001239515",
+      "gtin": "7861001239515",
+      "brand": {
+        "@type": "Brand",
+        "name": "Chocapic"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-chocolate-chocapic-90-g-1256724",
+        "price": "1.13",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-chocolate-chocapic-90-g-1256724"
+    }
+  },
+  {
+    "key": "chocapic260",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal En Hojuelas De Chocolate CHOCAPIC 260 G",
+      "description": "Cereal En Hojuelas De Chocolate CHOCAPIC 260 G. Precio $2.69 en Supermaxi. Chocapic, cód. 8445291853980.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445291853980-1.png"
+      ],
+      "sku": "8445291853980",
+      "gtin": "8445291853980",
+      "brand": {
+        "@type": "Brand",
+        "name": "Chocapic"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-chocolate-chocapic-260-g-1967627",
+        "price": "2.69",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-chocolate-chocapic-260-g-1967627"
+    }
+  },
+  {
+    "key": "chocapic540",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal En Hojuelas De Chocolate CHOCAPIC 540 G",
+      "description": "Cereal En Hojuelas De Chocolate CHOCAPIC 540 G. Precio $6.71 en Supermaxi. Chocapic, cód. 7613287784186.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7613287784186-1.png"
+      ],
+      "sku": "7613287784186",
+      "gtin": "7613287784186",
+      "brand": {
+        "@type": "Brand",
+        "name": "Chocapic"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-chocolate-chocapic-540-g-1525860",
+        "price": "6.71",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-chocolate-chocapic-540-g-1525860"
+    }
+  },
+  {
+    "key": "trix30",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal De Maíz Sabor A Frutas TRIX 30 G",
+      "description": "Cereal De Maíz Sabor A Frutas TRIX 30 G. Precio $0.47 en Supermaxi. Trix, cód. 8445291792319.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445291792319-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445291792319-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445291792319-3.png"
+      ],
+      "sku": "8445291792319",
+      "gtin": "8445291792319",
+      "brand": {
+        "@type": "Brand",
+        "name": "Trix"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-de-maiz-sabor-a-frutas-trix-30-g-1873064",
+        "price": "0.47",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-de-maiz-sabor-a-frutas-trix-30-g-1873064"
+    }
+  },
+  {
+    "key": "trix90",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal De Maíz Sabor A Frutas TRIX 90 G",
+      "description": "Cereal De Maíz Sabor A Frutas TRIX 90 G. Precio $1.13 en Supermaxi. Trix, cód. 7861001239508.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001239508-1.png"
+      ],
+      "sku": "7861001239508",
+      "gtin": "7861001239508",
+      "brand": {
+        "@type": "Brand",
+        "name": "Trix"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-de-maiz-sabor-a-frutas-trix-90-g-1256721",
+        "price": "1.13",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-de-maiz-sabor-a-frutas-trix-90-g-1256721"
+    }
+  },
+  {
+    "key": "trix230",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal De Maíz Sabor A Frutas TRIX 230 G",
+      "description": "Cereal De Maíz Sabor A Frutas TRIX 230 G. Precio $4.01 en Supermaxi. Trix, cód. 7613030979715.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7613030979715-1.png"
+      ],
+      "sku": "7613030979715",
+      "gtin": "7613030979715",
+      "brand": {
+        "@type": "Brand",
+        "name": "Trix"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-de-maiz-sabor-a-frutas-trix-230-g-261168",
+        "price": "4.01",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-de-maiz-sabor-a-frutas-trix-230-g-261168"
+    }
+  },
+  {
+    "key": "zucosos350",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal En Hojuelas De Maíz ZUCOSOS 350 G",
+      "description": "Cereal En Hojuelas De Maíz ZUCOSOS 350 G. Precio $3.52 en Supermaxi. Zucosos, cód. 7613035120297.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7613035120297-1.png"
+      ],
+      "sku": "7613035120297",
+      "gtin": "7613035120297",
+      "brand": {
+        "@type": "Brand",
+        "name": "Zucosos"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-maiz-zucosos-350-g-1097212",
+        "price": "3.52",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-maiz-zucosos-350-g-1097212"
+    }
+  },
+  {
+    "key": "fitness285",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal En Hojuelas Sabor Original FITNESS 285 g",
+      "description": "Cereal En Hojuelas Sabor Original FITNESS 285 g. Precio $4.00 en Supermaxi. Fitness, cód. 7501058614032.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7501058614032-1.png"
+      ],
+      "sku": "7501058614032",
+      "gtin": "7501058614032",
+      "brand": {
+        "@type": "Brand",
+        "name": "Fitness"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-sabor-original-fitness-285-g-1451573",
+        "price": "4.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-sabor-original-fitness-285-g-1451573"
+    }
+  },
+  {
+    "key": "cornnestle500",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal En Hojuelas De Maíz NESTLÉ CORN FLAKES 500 G",
+      "description": "Cereal En Hojuelas De Maíz NESTLÉ CORN FLAKES 500 G. Precio $4.50 en Supermaxi. Nestlé Corn Flakes, cód. 8445292035842.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445292035842-1.png"
+      ],
+      "sku": "8445292035842",
+      "gtin": "8445292035842",
+      "brand": {
+        "@type": "Brand",
+        "name": "Nestlé Corn Flakes"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-maiz-nestle-corn-flakes-500-g-1927839",
+        "price": "4.50",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-en-hojuelas-de-maiz-nestle-corn-flakes-500-g-1927839"
+    }
+  },
+  {
+    "key": "milocereal250",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal En Bolitas De Chocolate MILO 250 G",
+      "description": "Cereal En Bolitas De Chocolate MILO 250 G. Precio $2.67 en Supermaxi. Milo, cód. 7613036428255.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7613036428255-1.png"
+      ],
+      "sku": "7613036428255",
+      "gtin": "7613036428255",
+      "brand": {
+        "@type": "Brand",
+        "name": "Milo"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-en-bolitas-de-chocolate-milo-250-g-1444866",
+        "price": "2.67",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-en-bolitas-de-chocolate-milo-250-g-1444866"
+    }
+  },
+  {
+    "key": "crunchcereal230",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cereal Matinal Nestlé CRUNCH 230 G",
+      "description": "Cereal Matinal Nestlé CRUNCH 230 G. Precio $1.79 en Supermaxi. Crunch, cód. 7891000356791.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7891000356791-1.png"
+      ],
+      "sku": "7891000356791",
+      "gtin": "7891000356791",
+      "brand": {
+        "@type": "Brand",
+        "name": "Crunch"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cereal-matinal-nestle-crunch-230-g-1962682",
+        "price": "1.79",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cereal-matinal-nestle-crunch-230-g-1962682"
+    }
+  },
+  {
+    "key": "milo200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chocolate En Polvo Instantáneo MILO 200 G",
+      "description": "Chocolate En Polvo Instantáneo MILO 200 G. Precio $2.90 en Supermaxi. Milo, cód. 7861091131492.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091131492-1.png"
+      ],
+      "sku": "7861091131492",
+      "gtin": "7861091131492",
+      "brand": {
+        "@type": "Brand",
+        "name": "Milo"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chocolate-en-polvo-instantaneo-milo-200-g-973280",
+        "price": "2.90",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chocolate-en-polvo-instantaneo-milo-200-g-973280"
+    }
+  },
+  {
+    "key": "milo400",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chocolate En Polvo Activ-Go MILO 400 G",
+      "description": "Chocolate En Polvo Activ-Go MILO 400 G. Precio $5.42 en Supermaxi. Milo, cód. 7861091131508.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091131508-1.png"
+      ],
+      "sku": "7861091131508",
+      "gtin": "7861091131508",
+      "brand": {
+        "@type": "Brand",
+        "name": "Milo"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chocolate-en-polvo-activ-go-milo-400-g-973281",
+        "price": "5.42",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chocolate-en-polvo-activ-go-milo-400-g-973281"
+    }
+  },
+  {
+    "key": "ricacao150",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cacao En Polvo RICACAO 150 G",
+      "description": "Cacao En Polvo RICACAO 150 G. Precio $1.05 en Supermaxi. Ricacao, cód. 7861001253559.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001253559-1.png"
+      ],
+      "sku": "7861001253559",
+      "gtin": "7861001253559",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ricacao"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cacao-en-polvo-ricacao-150-g-1995479",
+        "price": "1.05",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-23",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cacao-en-polvo-ricacao-150-g-1995479"
+    }
+  },
+  {
+    "key": "ricacao400",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Cacao En Polvo 100% Ecuatoriano RICACAO 400 G",
+      "description": "Cacao En Polvo 100% Ecuatoriano RICACAO 400 G. Precio $3.16 en Supermaxi. Ricacao, cód. 7861001250855.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001250855-1.png"
+      ],
+      "sku": "7861001250855",
+      "gtin": "7861001250855",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ricacao"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/cacao-en-polvo-100-ecuatoriano-ricacao-400-g-1852936",
+        "price": "3.16",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/cacao-en-polvo-100-ecuatoriano-ricacao-400-g-1852936"
+    }
+  },
+  {
+    "key": "amor100vainilla",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Waffer Vainilla AMOR 100 G",
+      "description": "Galletas Dulces Waffer Vainilla AMOR 100 G. Precio $0.80 en Supermaxi. Amor, cód. 7861091158345.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091158345-1.png"
+      ],
+      "sku": "7861091158345",
+      "gtin": "7861091158345",
+      "brand": {
+        "@type": "Brand",
+        "name": "Amor"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-vainilla-amor-100-g-367116",
+        "price": "0.80",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-vainilla-amor-100-g-367116"
+    }
+  },
+  {
+    "key": "amor100fresa",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Waffer Fresa AMOR 100 G",
+      "description": "Galletas Dulces Waffer Fresa AMOR 100 G. Precio $0.90 en Supermaxi. Amor, cód. 7861091158338.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091158338-1.png"
+      ],
+      "sku": "7861091158338",
+      "gtin": "7861091158338",
+      "brand": {
+        "@type": "Brand",
+        "name": "Amor"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-fresa-amor-100-g-367115",
+        "price": "0.90",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-fresa-amor-100-g-367115"
+    }
+  },
+  {
+    "key": "amor166vainilla",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Waffer Vainilla AMOR 166 G",
+      "description": "Galletas Dulces Waffer Vainilla AMOR 166 G. Precio $1.01 en Supermaxi. Amor, cód. 7861091153715.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091153715-1.png"
+      ],
+      "sku": "7861091153715",
+      "gtin": "7861091153715",
+      "brand": {
+        "@type": "Brand",
+        "name": "Amor"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-vainilla-amor-166-g-1993257",
+        "price": "1.01",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-vainilla-amor-166-g-1993257"
+    }
+  },
+  {
+    "key": "amor166fresa",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Waffer Sabor A Fresa AMOR 166 G",
+      "description": "Galletas Dulces Waffer Sabor A Fresa AMOR 166 G. Precio $1.19 en Supermaxi. Amor, cód. 7861091153654.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091153654-1.png"
+      ],
+      "sku": "7861091153654",
+      "gtin": "7861091153654",
+      "brand": {
+        "@type": "Brand",
+        "name": "Amor"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-sabor-a-fresa-amor-166-g-1993448",
+        "price": "1.19",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-sabor-a-fresa-amor-166-g-1993448"
+    }
+  },
+  {
+    "key": "amor166chocolate",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Waffer Sabor A Chocolate AMOR 166 G",
+      "description": "Galletas Dulces Waffer Sabor A Chocolate AMOR 166 G. Precio $1.19 en Supermaxi. Amor, cód. 7861091153616.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091153616-1.png"
+      ],
+      "sku": "7861091153616",
+      "gtin": "7861091153616",
+      "brand": {
+        "@type": "Brand",
+        "name": "Amor"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-sabor-a-chocolate-amor-166-g-1993451",
+        "price": "1.19",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-sabor-a-chocolate-amor-166-g-1993451"
+    }
+  },
+  {
+    "key": "amor166limon",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Waffer Limón AMOR 166 G",
+      "description": "Galletas Dulces Waffer Limón AMOR 166 G. Precio $1.35 en Supermaxi. Amor, cód. 7861091153678.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091153678-1.png"
+      ],
+      "sku": "7861091153678",
+      "gtin": "7861091153678",
+      "brand": {
+        "@type": "Brand",
+        "name": "Amor"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-limon-amor-166-g-1993342",
+        "price": "1.35",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-limon-amor-166-g-1993342"
+    }
+  },
+  {
+    "key": "amor130doble",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Waffer Doble Crema De Fresa AMOR 130 G",
+      "description": "Galletas Dulces Waffer Doble Crema De Fresa AMOR 130 G. Precio $0.73 en Supermaxi. Amor, cód. 7861091146069.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091146069-1.png"
+      ],
+      "sku": "7861091146069",
+      "gtin": "7861091146069",
+      "brand": {
+        "@type": "Brand",
+        "name": "Amor"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-doble-crema-de-fresa-amor-130-g-1559559",
+        "price": "0.73",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-18",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-waffer-doble-crema-de-fresa-amor-130-g-1559559"
+    }
+  },
+  {
+    "key": "nestlesal188",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas De Sal Clásicas NESTLÉ 188 G",
+      "description": "Galletas De Sal Clásicas NESTLÉ 188 G. Precio $0.74 en Supermaxi. Nestlé, cód. 7861091153913.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091153913-1.png"
+      ],
+      "sku": "7861091153913",
+      "gtin": "7861091153913",
+      "brand": {
+        "@type": "Brand",
+        "name": "Nestlé"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-de-sal-clasicas-nestle-188-g-1993255",
+        "price": "0.74",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-de-sal-clasicas-nestle-188-g-1993255"
+    }
+  },
+  {
+    "key": "nestlevainilla135",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Sabor Vainilla NESTLÉ 135 G",
+      "description": "Galletas Dulces Sabor Vainilla NESTLÉ 135 G. Precio $0.59 en Supermaxi. Nestlé, cód. 7861091155740.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091155740-1.png"
+      ],
+      "sku": "7861091155740",
+      "gtin": "7861091155740",
+      "brand": {
+        "@type": "Brand",
+        "name": "Nestlé"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-sabor-vainilla-nestle-135-g-367082",
+        "price": "0.59",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-sabor-vainilla-nestle-135-g-367082"
+    }
+  },
+  {
+    "key": "nestlecoco225",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Sabor A Coco NESTLÉ 225 G",
+      "description": "Galletas Dulces Sabor A Coco NESTLÉ 225 G. Precio $1.10 en Supermaxi. Nestlé, cód. 7861091148698.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091148698-1.png"
+      ],
+      "sku": "7861091148698",
+      "gtin": "7861091148698",
+      "brand": {
+        "@type": "Brand",
+        "name": "Nestlé"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-sabor-a-coco-nestle-225-g-1716612",
+        "price": "1.10",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-sabor-a-coco-nestle-225-g-1716612"
+    }
+  },
+  {
+    "key": "zoologia350",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Sabor A Vainilla ZOOLOGÍA 350 G",
+      "description": "Galletas Dulces Sabor A Vainilla ZOOLOGÍA 350 G. Precio $2.00 en Supermaxi. Zoología, cód. 7861091151513.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091151513-1.png"
+      ],
+      "sku": "7861091151513",
+      "gtin": "7861091151513",
+      "brand": {
+        "@type": "Brand",
+        "name": "Zoología"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-sabor-a-vainilla-zoologia-350-g-1873059",
+        "price": "2.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-sabor-a-vainilla-zoologia-350-g-1873059"
+    }
+  },
+  {
+    "key": "ricas58",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas De Sal Sin Colorantes Artificiales RICAS 58 G",
+      "description": "Galletas De Sal Sin Colorantes Artificiales RICAS 58 G. Precio $0.38 en Supermaxi. Ricas, cód. 7861091146366.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091146366-1.png"
+      ],
+      "sku": "7861091146366",
+      "gtin": "7861091146366",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ricas"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-de-sal-sin-colorantes-artificiales-ricas-58-g-1573809",
+        "price": "0.38",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-de-sal-sin-colorantes-artificiales-ricas-58-g-1573809"
+    }
+  },
+  {
+    "key": "ricas232",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas De Sal Sin Colorantes RICAS 232 G",
+      "description": "Galletas De Sal Sin Colorantes RICAS 232 G. Precio $1.97 en Supermaxi. Ricas, cód. 7861091146496.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091146496-1.png"
+      ],
+      "sku": "7861091146496",
+      "gtin": "7861091146496",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ricas"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-de-sal-sin-colorantes-ricas-232-g-1580737",
+        "price": "1.97",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-de-sal-sin-colorantes-ricas-232-g-1580737"
+    }
+  },
+  {
+    "key": "tango25",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Sanduche Recubierta De Chocolate TANGO 25G",
+      "description": "Galletas Dulces Sanduche Recubierta De Chocolate TANGO 25G. Precio $0.32 en Supermaxi. Tango, cód. 7861091131713.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091131713-1.png"
+      ],
+      "sku": "7861091131713",
+      "gtin": "7861091131713",
+      "brand": {
+        "@type": "Brand",
+        "name": "Tango"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-sanduche-recubierta-de-chocolate-tango-25g-1001098",
+        "price": "0.32",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-sanduche-recubierta-de-chocolate-tango-25g-1001098"
+    }
+  },
+  {
+    "key": "tangomini52",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Recubierta De Chocolate Negro Mini Taco TANGO 52 G",
+      "description": "Galletas Dulces Recubierta De Chocolate Negro Mini Taco TANGO 52 G. Precio $0.89 en Supermaxi. Tango, cód. 7861091154453.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091154453-1.png"
+      ],
+      "sku": "7861091154453",
+      "gtin": "7861091154453",
+      "brand": {
+        "@type": "Brand",
+        "name": "Tango"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-recubierta-de-chocolate-negro-mini-taco-tango-52-g-2009287",
+        "price": "0.89",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-recubierta-de-chocolate-negro-mini-taco-tango-52-g-2009287"
+    }
+  },
+  {
+    "key": "galakgalleta",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Sanduche Sabor A Leche GALAK 87,5 G",
+      "description": "Galletas Dulces Sanduche Sabor A Leche GALAK 87,5 G. Precio $0.70 en Supermaxi. Galak, cód. 7861091199539.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091199539-1.png"
+      ],
+      "sku": "7861091199539",
+      "gtin": "7861091199539",
+      "brand": {
+        "@type": "Brand",
+        "name": "Galak"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-sanduche-sabor-a-leche-galak-87-5-g-623846",
+        "price": "0.70",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-sanduche-sabor-a-leche-galak-87-5-g-623846"
+    }
+  },
+  {
+    "key": "oreo108",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Sabor Original OREO 108 G",
+      "description": "Galletas Dulces Sabor Original OREO 108 G. Precio $0.91 en Supermaxi. Oreo, cód. 7622201693176.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7622201693176-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7622201693176-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7622201693176-3.png"
+      ],
+      "sku": "7622201693176",
+      "gtin": "7622201693176",
+      "brand": {
+        "@type": "Brand",
+        "name": "Oreo"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-sabor-original-oreo-108-g-1596469",
+        "price": "0.91",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-sabor-original-oreo-108-g-1596469"
+    }
+  },
+  {
+    "key": "ritz50",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas De Sal Mini Sabor Original RITZ 50 G",
+      "description": "Galletas De Sal Mini Sabor Original RITZ 50 G. Precio $0.50 en Supermaxi. Ritz, cód. 7622210087607.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7622210087607-1.png"
+      ],
+      "sku": "7622210087607",
+      "gtin": "7622210087607",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ritz"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-de-sal-mini-sabor-original-ritz-50-g-588470",
+        "price": "0.50",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-de-sal-mini-sabor-original-ritz-50-g-588470"
+    }
+  },
+  {
+    "key": "caldogallina",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Caldo De Gallina En Cubo MAGGI 120 G",
+      "description": "Caldo De Gallina En Cubo MAGGI 120 G. Precio $2.22 en Supermaxi. Maggi, cód. 7861001299205.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001299205-1.png"
+      ],
+      "sku": "7861001299205",
+      "gtin": "7861001299205",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/caldo-de-gallina-en-cubo-maggi-120-g-640581",
+        "price": "2.22",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/caldo-de-gallina-en-cubo-maggi-120-g-640581"
+    }
+  },
+  {
+    "key": "caldocostilla",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Caldo De Costilla En Cubos MAGGI 84 G",
+      "description": "Caldo De Costilla En Cubos MAGGI 84 G. Precio $1.84 en Supermaxi. Maggi, cód. 7861001291902.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001291902-1.png"
+      ],
+      "sku": "7861001291902",
+      "gtin": "7861001291902",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/caldo-de-costilla-en-cubos-maggi-84-g-345182",
+        "price": "1.84",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/caldo-de-costilla-en-cubos-maggi-84-g-345182"
+    }
+  },
+  {
+    "key": "caldopolvo",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Caldo De Gallina En Polvo MAGGI 104,40 G",
+      "description": "Caldo De Gallina En Polvo MAGGI 104,40 G. Precio $2.20 en Supermaxi. Maggi, cód. 7861001250312.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001250312-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001250312-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001250312-3.png"
+      ],
+      "sku": "7861001250312",
+      "gtin": "7861001250312",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/caldo-de-gallina-en-polvo-maggi-104-40-g-1822498",
+        "price": "2.20",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/caldo-de-gallina-en-polvo-maggi-104-40-g-1822498"
+    }
+  },
+  {
+    "key": "cremachoclo",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Crema Instantánea De Choclo MAGGI 64 G",
+      "description": "Crema Instantánea De Choclo MAGGI 64 G. Precio $1.13 en Supermaxi. Maggi, cód. 7861001244885.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001244885-1.png"
+      ],
+      "sku": "7861001244885",
+      "gtin": "7861001244885",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/crema-instantanea-de-choclo-maggi-64-g-1481970",
+        "price": "1.13",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/crema-instantanea-de-choclo-maggi-64-g-1481970"
+    }
+  },
+  {
+    "key": "cremachamp",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Crema Instantánea De Champiñones MAGGI 63 G",
+      "description": "Crema Instantánea De Champiñones MAGGI 63 G. Precio $0.88 en Supermaxi. Maggi, cód. 7861001251111.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001251111-1.png"
+      ],
+      "sku": "7861001251111",
+      "gtin": "7861001251111",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/crema-instantanea-de-champinones-maggi-63-g-1856670",
+        "price": "0.88",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/crema-instantanea-de-champinones-maggi-63-g-1856670"
+    }
+  },
+  {
+    "key": "sopaletras",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Sopa Instantánea Letras De Fideo MAGGI 54 G",
+      "description": "Sopa Instantánea Letras De Fideo MAGGI 54 G. Precio $0.92 en Supermaxi. Maggi, cód. 7861001251036.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001251036-1.png"
+      ],
+      "sku": "7861001251036",
+      "gtin": "7861001251036",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/sopa-instantanea-letras-de-fideo-maggi-54-g-1856648",
+        "price": "0.92",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/sopa-instantanea-letras-de-fideo-maggi-54-g-1856648"
+    }
+  },
+  {
+    "key": "sopacostilla",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Sopa Instantánea De Costilla Con Fideos MAGGI 54 G",
+      "description": "Sopa Instantánea De Costilla Con Fideos MAGGI 54 G. Precio $0.92 en Supermaxi. Maggi, cód. 7861001250978.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001250978-1.png"
+      ],
+      "sku": "7861001250978",
+      "gtin": "7861001250978",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/sopa-instantanea-de-costilla-con-fideos-maggi-54-g-1873061",
+        "price": "0.92",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/sopa-instantanea-de-costilla-con-fideos-maggi-54-g-1873061"
+    }
+  },
+  {
+    "key": "mayomaggi",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Mayonesa Sanduchera MAGGI 170 G",
+      "description": "Mayonesa Sanduchera MAGGI 170 G. Precio $0.82 en Supermaxi. Maggi, cód. 7861001251463.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001251463-1.png"
+      ],
+      "sku": "7861001251463",
+      "gtin": "7861001251463",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/mayonesa-sanduchera-maggi-170-g-1859839",
+        "price": "0.82",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/mayonesa-sanduchera-maggi-170-g-1859839"
+    }
+  },
+  {
+    "key": "salsamaggi",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Salsa De Tomate Básica MAGGI 1000 G",
+      "description": "Salsa De Tomate Básica MAGGI 1000 G. Precio $1.92 en Supermaxi. Maggi, cód. 7861001238556.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001238556-1.png"
+      ],
+      "sku": "7861001238556",
+      "gtin": "7861001238556",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/salsa-de-tomate-basica-maggi-1000-g-1262185",
+        "price": "1.92",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-25",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/salsa-de-tomate-basica-maggi-1000-g-1262185"
+    }
+  },
+  {
+    "key": "mostazamaggi",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Mostaza Básica MAGGI 500 G",
+      "description": "Mostaza Básica MAGGI 500 G. Precio $2.17 en Supermaxi. Maggi, cód. 7861001248883.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001248883-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001248883-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001248883-3.png"
+      ],
+      "sku": "7861001248883",
+      "gtin": "7861001248883",
+      "brand": {
+        "@type": "Brand",
+        "name": "Maggi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/mostaza-basica-maggi-500-g-1703579",
+        "price": "2.17",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/mostaza-basica-maggi-500-g-1703579"
+    }
+  },
+  {
+    "key": "rapidito65",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Fideo Instantáneo Rapidito Sabor A Pollo ORIENTAL 65 G",
+      "description": "Fideo Instantáneo Rapidito Sabor A Pollo ORIENTAL 65 G. Precio $0.94 en Supermaxi. Oriental, cód. 7861007915048.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007915048-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007915048-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007915048-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007915048-3.png"
+      ],
+      "sku": "7861007915048",
+      "gtin": "7861007915048",
+      "brand": {
+        "@type": "Brand",
+        "name": "Oriental"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/fideo-instantaneo-rapidito-sabor-a-pollo-oriental-65-g-1480894",
+        "price": "0.94",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/fideo-instantaneo-rapidito-sabor-a-pollo-oriental-65-g-1480894"
+    }
+  },
+  {
+    "key": "rapidito100",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Fideo Instantáneo Rapidito Sabor A Pollo ORIENTAL 100 G",
+      "description": "Fideo Instantáneo Rapidito Sabor A Pollo ORIENTAL 100 G. Precio $0.93 en Supermaxi. Oriental, cód. 7861007905155.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007905155-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007905155-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007905155-3.png"
+      ],
+      "sku": "7861007905155",
+      "gtin": "7861007905155",
+      "brand": {
+        "@type": "Brand",
+        "name": "Oriental"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/fideo-instantaneo-rapidito-sabor-a-pollo-oriental-100-g-348175",
+        "price": "0.93",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/fideo-instantaneo-rapidito-sabor-a-pollo-oriental-100-g-348175"
+    }
+  },
+  {
+    "key": "rapiditovaso",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Fideo Instantáneo Rapidito Pollo Vaso con Atún ORIENTAL 145 G",
+      "description": "Fideo Instantáneo Rapidito Pollo Vaso con Atún ORIENTAL 145 G. Precio $1.71 en Supermaxi. Oriental, cód. 7861007913846.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007913846-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007913846-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007913846-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007913846-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861007913846-3.png"
+      ],
+      "sku": "7861007913846",
+      "gtin": "7861007913846",
+      "brand": {
+        "@type": "Brand",
+        "name": "Oriental"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/fideo-instantaneo-rapidito-pollo-vaso-con-atun-oriental-145-g-1093049",
+        "price": "1.71",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-22",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/fideo-instantaneo-rapidito-pollo-vaso-con-atun-oriental-145-g-1093049"
+    }
+  },
+  {
+    "key": "tallarincayambe",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Tallarín De Trigo CAYAMBE Funda 400 G",
+      "description": "Tallarín De Trigo CAYAMBE Funda 400 G. Precio $0.89 en Supermaxi. Cayambe, cód. 7862112900189.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900189-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900189-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900189-3.png"
+      ],
+      "sku": "7862112900189",
+      "gtin": "7862112900189",
+      "brand": {
+        "@type": "Brand",
+        "name": "Cayambe"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/tallarin-de-trigo-cayambe-funda-400-g-514515",
+        "price": "0.89",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/tallarin-de-trigo-cayambe-funda-400-g-514515"
+    }
+  },
+  {
+    "key": "cabelloangel",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Fideo Cabello De Angel CAYAMBE Funda 400 G",
+      "description": "Fideo Cabello De Angel CAYAMBE Funda 400 G. Precio $0.89 en Supermaxi. Cayambe, cód. 7862112900202.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900202-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900202-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900202-3.png"
+      ],
+      "sku": "7862112900202",
+      "gtin": "7862112900202",
+      "brand": {
+        "@type": "Brand",
+        "name": "Cayambe"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/fideo-cabello-de-angel-cayambe-funda-400-g-514516",
+        "price": "0.89",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/fideo-cabello-de-angel-cayambe-funda-400-g-514516"
+    }
+  },
+  {
+    "key": "macarron",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Fideos Macarrón Chico CAYAMBE 400 G",
+      "description": "Fideos Macarrón Chico CAYAMBE 400 G. Precio $1.08 en Supermaxi. Cayambe, cód. 7862112900042.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900042-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900042-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862112900042-3.png"
+      ],
+      "sku": "7862112900042",
+      "gtin": "7862112900042",
+      "brand": {
+        "@type": "Brand",
+        "name": "Cayambe"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/fideos-macarron-chico-cayambe-400-g-514510",
+        "price": "1.08",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/fideos-macarron-chico-cayambe-400-g-514510"
+    }
+  },
+  {
+    "key": "corbata",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Fideo Corbata pequeño DON VITTORIO 400 g",
+      "description": "Fideo Corbata pequeño DON VITTORIO 400 g. Precio $1.22 en Supermaxi. Don Vittorio, cód. 7750243286176.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7750243286176-1.png"
+      ],
+      "sku": "7750243286176",
+      "gtin": "7750243286176",
+      "brand": {
+        "@type": "Brand",
+        "name": "Don Vittorio"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/fideo-corbata-pequeno-don-vittorio-400-g-333773",
+        "price": "1.22",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/fideo-corbata-pequeno-don-vittorio-400-g-333773"
+    }
+  },
+  {
+    "key": "atunreal140",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Atún Lomitos En Aceite De Girasol REAL 140 G",
+      "description": "Atún Lomitos En Aceite De Girasol REAL 140 G. Precio $1.38 en Supermaxi. Real, cód. 7862100604112.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604112-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604112-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604112-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604112-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604112-3.png"
+      ],
+      "sku": "7862100604112",
+      "gtin": "7862100604112",
+      "brand": {
+        "@type": "Brand",
+        "name": "Real"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-real-140-g-1443270",
+        "price": "1.38",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-real-140-g-1443270"
+    }
+  },
+  {
+    "key": "atunreal180",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Atún Lomitos En Agua REAL 180 G",
+      "description": "Atún Lomitos En Agua REAL 180 G. Precio $1.52 en Supermaxi. Real, cód. 90388000808.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388000808-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388000808-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388000808-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388000808-6.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388000808-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388000808-3.png"
+      ],
+      "sku": "90388000808",
+      "gtin": "90388000808",
+      "brand": {
+        "@type": "Brand",
+        "name": "Real"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/atun-lomitos-en-agua-real-180-g-178775",
+        "price": "1.52",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/atun-lomitos-en-agua-real-180-g-178775"
+    }
+  },
+  {
+    "key": "atunreal240",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Atún En Aceite De Girasol REAL 240 G",
+      "description": "Atún En Aceite De Girasol REAL 240 G. Precio $2.65 en Supermaxi. Real, cód. 90388001416.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388001416-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388001416-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388001416-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388001416-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/90388001416-3.png"
+      ],
+      "sku": "90388001416",
+      "gtin": "90388001416",
+      "brand": {
+        "@type": "Brand",
+        "name": "Real"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/atun-en-aceite-de-girasol-real-240-g-178781",
+        "price": "2.65",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/atun-en-aceite-de-girasol-real-240-g-178781"
+    }
+  },
+  {
+    "key": "atunreal350",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Atún Lomitos En Aceite De Girasol REAL 350 G",
+      "description": "Atún Lomitos En Aceite De Girasol REAL 350 G. Precio $2.96 en Supermaxi. Real, cód. 7862100604105.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604105-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604105-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604105-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604105-6.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604105-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862100604105-3.png"
+      ],
+      "sku": "7862100604105",
+      "gtin": "7862100604105",
+      "brand": {
+        "@type": "Brand",
+        "name": "Real"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-real-350-g-1443267",
+        "price": "2.96",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-real-350-g-1443267"
+    }
+  },
+  {
+    "key": "atunvc140",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Atún Lomitos En Aceite De Girasol Con Abre Fácil VAN CAMP´S 140 G",
+      "description": "Atún Lomitos En Aceite De Girasol Con Abre Fácil VAN CAMP´S 140 G. Precio $1.14 en Supermaxi. Van Camp´s, cód. 722008000218.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008000218-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008000218-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008000218-3.png"
+      ],
+      "sku": "722008000218",
+      "gtin": "722008000218",
+      "brand": {
+        "@type": "Brand",
+        "name": "Van Camp´s"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-con-abre-facil-van-camp-s-140-g-210380",
+        "price": "1.14",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-con-abre-facil-van-camp-s-140-g-210380"
+    }
+  },
+  {
+    "key": "atunvc354",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Atún Lomitos En Aceite De Girasol Con Abre Fácil VAN CAMP´S 354 G",
+      "description": "Atún Lomitos En Aceite De Girasol Con Abre Fácil VAN CAMP´S 354 G. Precio $2.84 en Supermaxi. Van Camp´s, cód. 722008000249.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008000249-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008000249-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008000249-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008000249-3.png"
+      ],
+      "sku": "722008000249",
+      "gtin": "722008000249",
+      "brand": {
+        "@type": "Brand",
+        "name": "Van Camp´s"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-con-abre-facil-van-camp-s-354-g-210381",
+        "price": "2.84",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-con-abre-facil-van-camp-s-354-g-210381"
+    }
+  },
+  {
+    "key": "atunvc160",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Atún Lomitos En Aceite De Girasol Etiqueta Dorada VAN CAMP´S 160 G",
+      "description": "Atún Lomitos En Aceite De Girasol Etiqueta Dorada VAN CAMP´S 160 G. Precio $1.69 en Supermaxi. Van Camp´s, cód. 722008312311.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008312311-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008312311-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008312311-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008312311-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/722008312311-3.png"
+      ],
+      "sku": "722008312311",
+      "gtin": "722008312311",
+      "brand": {
+        "@type": "Brand",
+        "name": "Van Camp´s"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-etiqueta-dorada-van-camp-s-160-g-210394",
+        "price": "1.69",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/atun-lomitos-en-aceite-de-girasol-etiqueta-dorada-van-camp-s-160-g-210394"
+    }
+  },
+  {
+    "key": "condensada",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Condensada Con Abre Fácil LA LECHERA 393 G",
+      "description": "Leche Condensada Con Abre Fácil LA LECHERA 393 G. Precio $1.81 en Supermaxi. La Lechera, cód. 8445291182745.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445291182745-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8445291182745-2.png"
+      ],
+      "sku": "8445291182745",
+      "gtin": "8445291182745",
+      "brand": {
+        "@type": "Brand",
+        "name": "La Lechera"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-condensada-con-abre-facil-la-lechera-393-g-1761351",
+        "price": "1.81",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-condensada-con-abre-facil-la-lechera-393-g-1761351"
+    }
+  },
+  {
+    "key": "condvaquita",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Condensada Semidescremada LA VAQUITA 393 G",
+      "description": "Leche Condensada Semidescremada LA VAQUITA 393 G. Precio $1.91 en Supermaxi. La Vaquita, cód. 7751271038874.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7751271038874-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7751271038874-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7751271038874-3.png"
+      ],
+      "sku": "7751271038874",
+      "gtin": "7751271038874",
+      "brand": {
+        "@type": "Brand",
+        "name": "La Vaquita"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-condensada-semidescremada-la-vaquita-393-g-1960046",
+        "price": "1.91",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-condensada-semidescremada-la-vaquita-393-g-1960046"
+    }
+  },
+  {
+    "key": "vaquitapolvo190",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche En Polvo Entera LA VAQUITA 190 G",
+      "description": "Leche En Polvo Entera LA VAQUITA 190 G. Precio $1.89 en Supermaxi. La Vaquita, cód. 7861226400066.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861226400066-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861226400066-2.png"
+      ],
+      "sku": "7861226400066",
+      "gtin": "7861226400066",
+      "brand": {
+        "@type": "Brand",
+        "name": "La Vaquita"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-en-polvo-entera-la-vaquita-190-g-1918903",
+        "price": "1.89",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-en-polvo-entera-la-vaquita-190-g-1918903"
+    }
+  },
+  {
+    "key": "vaquitapolvo400",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche En Polvo Entera LA VAQUITA 400 G",
+      "description": "Leche En Polvo Entera LA VAQUITA 400 G. Precio $3.96 en Supermaxi. La Vaquita, cód. 7861226401001.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861226401001-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861226401001-2.png"
+      ],
+      "sku": "7861226401001",
+      "gtin": "7861226401001",
+      "brand": {
+        "@type": "Brand",
+        "name": "La Vaquita"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-en-polvo-entera-la-vaquita-400-g-1918902",
+        "price": "3.96",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-en-polvo-entera-la-vaquita-400-g-1918902"
+    }
+  },
+  {
+    "key": "vaquitasabor200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Saborizada Fresa LA VAQUITA 200 Ml",
+      "description": "Leche Saborizada Fresa LA VAQUITA 200 Ml. Precio $0.73 en Supermaxi. La Vaquita, cód. 7861226400257.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861226400257-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861226400257-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861226400257-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861226400257-3.png"
+      ],
+      "sku": "7861226400257",
+      "gtin": "7861226400257",
+      "brand": {
+        "@type": "Brand",
+        "name": "La Vaquita"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-saborizada-fresa-la-vaquita-200-ml-1949102",
+        "price": "0.73",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-saborizada-fresa-la-vaquita-200-ml-1949102"
+    }
+  },
+  {
+    "key": "tonichoco200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Saborizada Chocolate TONI 200 Ml",
+      "description": "Leche Saborizada Chocolate TONI 200 Ml. Precio $0.72 en Supermaxi. Toni, cód. 7861012500406.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012500406-1.png"
+      ],
+      "sku": "7861012500406",
+      "gtin": "7861012500406",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-saborizada-chocolate-toni-200-ml-349617",
+        "price": "0.72",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-saborizada-chocolate-toni-200-ml-349617"
+    }
+  },
+  {
+    "key": "tonifresa200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Saborizada De Frutilla TONI 200 Ml",
+      "description": "Leche Saborizada De Frutilla TONI 200 Ml. Precio $0.72 en Supermaxi. Toni, cód. 7861012500956.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012500956-1.png"
+      ],
+      "sku": "7861012500956",
+      "gtin": "7861012500956",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-saborizada-de-frutilla-toni-200-ml-349625",
+        "price": "0.72",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-saborizada-de-frutilla-toni-200-ml-349625"
+    }
+  },
+  {
+    "key": "tonichiqui135",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Saborizada Chocolate Chiqui TONI 135 Ml",
+      "description": "Leche Saborizada Chocolate Chiqui TONI 135 Ml. Precio $0.50 en Supermaxi. Toni, cód. 7861012510238.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012510238-1.png"
+      ],
+      "sku": "7861012510238",
+      "gtin": "7861012510238",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-saborizada-chocolate-chiqui-toni-135-ml-1035449",
+        "price": "0.50",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-saborizada-chocolate-chiqui-toni-135-ml-1035449"
+    }
+  },
+  {
+    "key": "tonideslactosada",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Deslactosada Fortificada TONI Tetrapak",
+      "description": "Leche Deslactosada Fortificada TONI Tetrapak. Precio $1.82 en Supermaxi. Toni, cód. 7861012510542.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012510542-1.png"
+      ],
+      "sku": "7861012510542",
+      "gtin": "7861012510542",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-deslactosada-fortificada-toni-tetrapak-1005585",
+        "price": "1.82",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-deslactosada-fortificada-toni-tetrapak-1005585"
+    }
+  },
+  {
+    "key": "tonidescremada",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Descremada Larga Vida TONI Tetrapak",
+      "description": "Leche Descremada Larga Vida TONI Tetrapak. Precio $1.22 en Supermaxi. Toni, cód. 7861012510528.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012510528-1.png"
+      ],
+      "sku": "7861012510528",
+      "gtin": "7861012510528",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-descremada-larga-vida-toni-tetrapak-1005583",
+        "price": "1.22",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-descremada-larga-vida-toni-tetrapak-1005583"
+    }
+  },
+  {
+    "key": "vitadeslactosada",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Deslactosada Larga Vida VITA 1000 ml",
+      "description": "Leche Deslactosada Larga Vida VITA 1000 ml. Precio $1.71 en Supermaxi. Vita, cód. 7861029404841.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029404841-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029404841-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029404841-3.png"
+      ],
+      "sku": "7861029404841",
+      "gtin": "7861029404841",
+      "brand": {
+        "@type": "Brand",
+        "name": "Vita"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-deslactosada-larga-vida-vita-1000-ml-1023147",
+        "price": "1.71",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-deslactosada-larga-vida-vita-1000-ml-1023147"
+    }
+  },
+  {
+    "key": "vitasemi",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Leche Semidescremada Ultrapasteurizada VITA 1000 ML",
+      "description": "Leche Semidescremada Ultrapasteurizada VITA 1000 ML. Precio $1.35 en Supermaxi. Vita, cód. 7861029404803.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029404803-1.png"
+      ],
+      "sku": "7861029404803",
+      "gtin": "7861029404803",
+      "brand": {
+        "@type": "Brand",
+        "name": "Vita"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/leche-semidescremada-ultrapasteurizada-vita-1000-ml-1023144",
+        "price": "1.35",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/leche-semidescremada-ultrapasteurizada-vita-1000-ml-1023144"
+    }
+  },
+  {
+    "key": "vitalecheavena",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebida De Avena Con Leche Y Canela VITA 1000 Ml",
+      "description": "Bebida De Avena Con Leche Y Canela VITA 1000 Ml. Precio $2.25 en Supermaxi. Vita, cód. 7861029405015.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029405015-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029405015-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029405015-3.png"
+      ],
+      "sku": "7861029405015",
+      "gtin": "7861029405015",
+      "brand": {
+        "@type": "Brand",
+        "name": "Vita"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/bebida-de-avena-con-leche-y-canela-vita-1000-ml-1184219",
+        "price": "2.25",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/bebida-de-avena-con-leche-y-canela-vita-1000-ml-1184219"
+    }
+  },
+  {
+    "key": "vitacrema",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Crema De Leche Uht VITA 1000 ml",
+      "description": "Crema De Leche Uht VITA 1000 ml. Precio $4.50 en Supermaxi. Vita, cód. 7861029405107.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029405107-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861029405107-2.png"
+      ],
+      "sku": "7861029405107",
+      "gtin": "7861029405107",
+      "brand": {
+        "@type": "Brand",
+        "name": "Vita"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/crema-de-leche-uht-vita-1000-ml-1365825",
+        "price": "4.50",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/crema-de-leche-uht-vita-1000-ml-1365825"
+    }
+  },
+  {
+    "key": "toninatural",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Yogurt Natural TONI 950 G",
+      "description": "Yogurt Natural TONI 950 G. Precio $3.60 en Supermaxi. Toni, cód. 7861012511266.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012511266-1.png"
+      ],
+      "sku": "7861012511266",
+      "gtin": "7861012511266",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/yogurt-natural-toni-950-g-1064161",
+        "price": "3.60",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/yogurt-natural-toni-950-g-1064161"
+    }
+  },
+  {
+    "key": "tonifresa950",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Yogurt Semidescremado Deslactosado Clásico Sabor A Frutilla TONI 950 G",
+      "description": "Yogurt Semidescremado Deslactosado Clásico Sabor A Frutilla TONI 950 G. Precio $2.77 en Supermaxi. Toni, cód. 7861012515257.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012515257-1.png"
+      ],
+      "sku": "7861012515257",
+      "gtin": "7861012515257",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/yogurt-semidescremado-deslactosado-clasico-sabor-a-frutilla-toni-950-g-1788834",
+        "price": "2.77",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/yogurt-semidescremado-deslactosado-clasico-sabor-a-frutilla-toni-950-g-1788834"
+    }
+  },
+  {
+    "key": "tonimora1700",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Yogurt Semidescremado Deslactosado Clásico Sabor A Mora TONI 1700 G",
+      "description": "Yogurt Semidescremado Deslactosado Clásico Sabor A Mora TONI 1700 G. Precio $5.13 en Supermaxi. Toni, cód. 7861012515196.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012515196-1.png"
+      ],
+      "sku": "7861012515196",
+      "gtin": "7861012515196",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/yogurt-semidescremado-deslactosado-clasico-sabor-a-mora-toni-1700-g-1788041",
+        "price": "5.13",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/yogurt-semidescremado-deslactosado-clasico-sabor-a-mora-toni-1700-g-1788041"
+    }
+  },
+  {
+    "key": "tonimixvainilla",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Yogurt Mix Sabor Vainilla TONI 180 G",
+      "description": "Yogurt Mix Sabor Vainilla TONI 180 G. Precio $0.90 en Supermaxi. Toni, cód. 7861012514052.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012514052-1.png"
+      ],
+      "sku": "7861012514052",
+      "gtin": "7861012514052",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/yogurt-mix-sabor-vainilla-toni-180-g-1555052",
+        "price": "0.90",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/yogurt-mix-sabor-vainilla-toni-180-g-1555052"
+    }
+  },
+  {
+    "key": "tonimixgalleta",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Yogurt Mix Frutilla Con Galletas TONI 175 G",
+      "description": "Yogurt Mix Frutilla Con Galletas TONI 175 G. Precio $0.90 en Supermaxi. Toni, cód. 7861012514045.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012514045-1.png"
+      ],
+      "sku": "7861012514045",
+      "gtin": "7861012514045",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/yogurt-mix-frutilla-con-galletas-toni-175-g-1555056",
+        "price": "0.90",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/yogurt-mix-frutilla-con-galletas-toni-175-g-1555056"
+    }
+  },
+  {
+    "key": "tonimixchoco",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Yogurt Mix Frutilla Con Bolitas Chocolate TONI 180 G",
+      "description": "Yogurt Mix Frutilla Con Bolitas Chocolate TONI 180 G. Precio $0.90 en Supermaxi. Toni, cód. 7861012514083.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861012514083-1.png"
+      ],
+      "sku": "7861012514083",
+      "gtin": "7861012514083",
+      "brand": {
+        "@type": "Brand",
+        "name": "Toni"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/yogurt-mix-frutilla-con-bolitas-chocolate-toni-180-g-1555060",
+        "price": "0.90",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/yogurt-mix-frutilla-con-bolitas-chocolate-toni-180-g-1555060"
+    }
+  },
+  {
+    "key": "quesotajadas",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Queso Sanduchero Rebanado FLORALP 150 G",
+      "description": "Queso Sanduchero Rebanado FLORALP 150 G. Precio $2.53 en Supermaxi. Floralp, cód. 7861033691657.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861033691657-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861033691657-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861033691657-3.png"
+      ],
+      "sku": "7861033691657",
+      "gtin": "7861033691657",
+      "brand": {
+        "@type": "Brand",
+        "name": "Floralp"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/queso-sanduchero-rebanado-floralp-150-g-1592439",
+        "price": "2.53",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/queso-sanduchero-rebanado-floralp-150-g-1592439"
+    }
+  },
+  {
+    "key": "mortadela100",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Mortadela Especial EL ARTESANAL 100 G",
+      "description": "Mortadela Especial EL ARTESANAL 100 G. Precio $0.38 en Supermaxi. El Artesanal, cód. 7861223821222.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861223821222-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861223821222-2.png"
+      ],
+      "sku": "7861223821222",
+      "gtin": "7861223821222",
+      "brand": {
+        "@type": "Brand",
+        "name": "El Artesanal"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/mortadela-especial-el-artesanal-100-g-1857210",
+        "price": "0.38",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/mortadela-especial-el-artesanal-100-g-1857210"
+    }
+  },
+  {
+    "key": "mortadela200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Mortadela Tradicional JURIS 200 G",
+      "description": "Mortadela Tradicional JURIS 200 G. Precio $1.73 en Supermaxi. Juris, cód. 7861018630169.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018630169-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018630169-2.png"
+      ],
+      "sku": "7861018630169",
+      "gtin": "7861018630169",
+      "brand": {
+        "@type": "Brand",
+        "name": "Juris"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/mortadela-tradicional-juris-200-g-350960",
+        "price": "1.73",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/mortadela-tradicional-juris-200-g-350960"
+    }
+  },
+  {
+    "key": "salchipollo200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Salchichas De Pollo JURIS 200 G",
+      "description": "Salchichas De Pollo JURIS 200 G. Precio $1.57 en Supermaxi. Juris, cód. 7861018620504.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018620504-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018620504-2.png"
+      ],
+      "sku": "7861018620504",
+      "gtin": "7861018620504",
+      "brand": {
+        "@type": "Brand",
+        "name": "Juris"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/salchichas-de-pollo-juris-200-g-350945",
+        "price": "1.57",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/salchichas-de-pollo-juris-200-g-350945"
+    }
+  },
+  {
+    "key": "salchipollo300",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Salchichas De Pollo JURIS 300 G",
+      "description": "Salchichas De Pollo JURIS 300 G. Precio $2.39 en Supermaxi. Juris, cód. 7861018620511.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018620511-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018620511-2.png"
+      ],
+      "sku": "7861018620511",
+      "gtin": "7861018620511",
+      "brand": {
+        "@type": "Brand",
+        "name": "Juris"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/salchichas-de-pollo-juris-300-g-350946",
+        "price": "2.39",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/salchichas-de-pollo-juris-300-g-350946"
+    }
+  },
+  {
+    "key": "chorizo200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chorizo Criollo Tipo 1 MACAFRI 200 G",
+      "description": "Chorizo Criollo Tipo 1 MACAFRI 200 G. Precio $2.40 en Supermaxi. Macafri, cód. 7862115570778.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862115570778-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862115570778-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862115570778-3.png"
+      ],
+      "sku": "7862115570778",
+      "gtin": "7862115570778",
+      "brand": {
+        "@type": "Brand",
+        "name": "Macafri"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chorizo-criollo-tipo-1-macafri-200-g-1421339",
+        "price": "2.40",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chorizo-criollo-tipo-1-macafri-200-g-1421339"
+    }
+  },
+  {
+    "key": "chorizo300",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chorizo Español Tipo I JURIS 6 Uds 300 G",
+      "description": "Chorizo Español Tipo I JURIS 6 Uds 300 G. Precio $2.75 en Supermaxi. Juris, cód. 7861018620269.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018620269-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018620269-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018620269-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861018620269-3.png"
+      ],
+      "sku": "7861018620269",
+      "gtin": "7861018620269",
+      "brand": {
+        "@type": "Brand",
+        "name": "Juris"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chorizo-espanol-tipo-i-juris-6-uds-300-g-350940",
+        "price": "2.75",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chorizo-espanol-tipo-i-juris-6-uds-300-g-350940"
+    }
+  },
+  {
+    "key": "protexfresh",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Jabón En Barra Fresh PROTEX 3 X 110 G",
+      "description": "Jabón En Barra Fresh PROTEX 3 X 110 G. Precio $1.97 en Supermaxi. Protex, cód. 7702010920622.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010920622-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010920622-2.png"
+      ],
+      "sku": "7702010920622",
+      "gtin": "7702010920622",
+      "brand": {
+        "@type": "Brand",
+        "name": "Protex"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/jabon-en-barra-fresh-protex-3-x-110-g-279822",
+        "price": "1.97",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-26",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/jabon-en-barra-fresh-protex-3-x-110-g-279822"
+    }
+  },
+  {
+    "key": "protexavena",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Jabón En Barra De Avena PROTEX 3 X 110 G",
+      "description": "Jabón En Barra De Avena PROTEX 3 X 110 G. Precio $1.97 en Supermaxi. Protex, cód. 7702010920615.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010920615-1.png"
+      ],
+      "sku": "7702010920615",
+      "gtin": "7702010920615",
+      "brand": {
+        "@type": "Brand",
+        "name": "Protex"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/jabon-en-barra-de-avena-protex-3-x-110-g-279821",
+        "price": "1.97",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-26",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/jabon-en-barra-de-avena-protex-3-x-110-g-279821"
+    }
+  },
+  {
+    "key": "protexmacadamia",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Jabón En Barra Protección Hidratante Macadamia PROTEX 3 X 110 G",
+      "description": "Jabón En Barra Protección Hidratante Macadamia PROTEX 3 X 110 G. Precio $2.97 en Supermaxi. Protex, cód. 7702010921391.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010921391-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010921391-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010921391-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010921391-6.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010921391-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010921391-3.png"
+      ],
+      "sku": "7702010921391",
+      "gtin": "7702010921391",
+      "brand": {
+        "@type": "Brand",
+        "name": "Protex"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/jabon-en-barra-proteccion-hidratante-macadamia-protex-3-x-110-g-1030507",
+        "price": "2.97",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/jabon-en-barra-proteccion-hidratante-macadamia-protex-3-x-110-g-1030507"
+    }
+  },
+  {
+    "key": "fabuloso500",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Limpiador Líquido Antibacterial Desinfectante Lavanda FABULOSO 500 Ml",
+      "description": "Limpiador Líquido Antibacterial Desinfectante Lavanda FABULOSO 500 Ml. Precio $1.20 en Supermaxi. Fabuloso, cód. 7702010225147.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225147-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225147-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225147-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225147-6.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225147-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225147-3.png"
+      ],
+      "sku": "7702010225147",
+      "gtin": "7702010225147",
+      "brand": {
+        "@type": "Brand",
+        "name": "Fabuloso"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/limpiador-liquido-antibacterial-desinfectante-lavanda-fabuloso-500-ml-818021",
+        "price": "1.20",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/limpiador-liquido-antibacterial-desinfectante-lavanda-fabuloso-500-ml-818021"
+    }
+  },
+  {
+    "key": "fabuloso1000",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Limpiador Líquido Antibacterial Desinfectante Lavanda FABULOSO 1000 Ml",
+      "description": "Limpiador Líquido Antibacterial Desinfectante Lavanda FABULOSO 1000 Ml. Precio $2.31 en Supermaxi. Fabuloso, cód. 7702010225123.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225123-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225123-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225123-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225123-6.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225123-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225123-3.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225123-7.png"
+      ],
+      "sku": "7702010225123",
+      "gtin": "7702010225123",
+      "brand": {
+        "@type": "Brand",
+        "name": "Fabuloso"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/limpiador-liquido-antibacterial-desinfectante-lavanda-fabuloso-1000-ml-818020",
+        "price": "2.31",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/limpiador-liquido-antibacterial-desinfectante-lavanda-fabuloso-1000-ml-818020"
+    }
+  },
+  {
+    "key": "fabuloso2000",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Limpiador Líquido Antibacterial Desinfectante Lavanda FABULOSO 2000 Ml",
+      "description": "Limpiador Líquido Antibacterial Desinfectante Lavanda FABULOSO 2000 Ml. Precio $4.05 en Supermaxi. Fabuloso, cód. 7702010225109.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225109-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225109-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225109-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225109-6.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225109-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225109-3.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702010225109-7.png"
+      ],
+      "sku": "7702010225109",
+      "gtin": "7702010225109",
+      "brand": {
+        "@type": "Brand",
+        "name": "Fabuloso"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/limpiador-liquido-antibacterial-desinfectante-lavanda-fabuloso-2000-ml-818019",
+        "price": "4.05",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/limpiador-liquido-antibacterial-desinfectante-lavanda-fabuloso-2000-ml-818019"
+    }
+  },
+  {
+    "key": "fabulosonaranja",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Limpiador Líquido Antibacterial Desinfectante Energía Naranja FABULOSO 1 L",
+      "description": "Limpiador Líquido Antibacterial Desinfectante Energía Naranja FABULOSO 1 L. Precio $2.31 en Supermaxi. Fabuloso, cód. 7509546688770.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7509546688770-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7509546688770-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7509546688770-5.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7509546688770-6.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7509546688770-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7509546688770-3.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7509546688770-7.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7509546688770-8.png"
+      ],
+      "sku": "7509546688770",
+      "gtin": "7509546688770",
+      "brand": {
+        "@type": "Brand",
+        "name": "Fabuloso"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/limpiador-liquido-antibacterial-desinfectante-energia-naranja-fabuloso-1-l-1702577",
+        "price": "2.31",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/limpiador-liquido-antibacterial-desinfectante-energia-naranja-fabuloso-1-l-1702577"
+    }
+  },
+  {
+    "key": "guitig330",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Mineral Con Gas GÜITIG 330 Ml",
+      "description": "Agua Mineral Con Gas GÜITIG 330 Ml. Precio $0.69 en Supermaxi. Güitig, cód. 759494006516.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/759494006516-1.png"
+      ],
+      "sku": "759494006516",
+      "gtin": "759494006516",
+      "brand": {
+        "@type": "Brand",
+        "name": "Güitig"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-mineral-con-gas-guitig-330-ml-615140",
+        "price": "0.69",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-mineral-con-gas-guitig-330-ml-615140"
+    }
+  },
+  {
+    "key": "guitig1500",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Mineral Con Gas GÜITIG 1500 Ml",
+      "description": "Agua Mineral Con Gas GÜITIG 1500 Ml. Precio $0.85 en Supermaxi. Güitig, cód. 759494000323.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/759494000323-1.png"
+      ],
+      "sku": "759494000323",
+      "gtin": "759494000323",
+      "brand": {
+        "@type": "Brand",
+        "name": "Güitig"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-mineral-con-gas-guitig-1500-ml-213010",
+        "price": "0.85",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-mineral-con-gas-guitig-1500-ml-213010"
+    }
+  },
+  {
+    "key": "guitig2000",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Mineral Con Gas GÜITIG 2000 Ml",
+      "description": "Agua Mineral Con Gas GÜITIG 2000 Ml. Precio $1.35 en Supermaxi. Güitig, cód. 759494000606.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/759494000606-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/759494000606-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/759494000606-3.png"
+      ],
+      "sku": "759494000606",
+      "gtin": "759494000606",
+      "brand": {
+        "@type": "Brand",
+        "name": "Güitig"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-mineral-con-gas-guitig-2-000-ml-1672460",
+        "price": "1.35",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-mineral-con-gas-guitig-2-000-ml-1672460"
+    }
+  },
+  {
+    "key": "dasani600",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Sin Gas DASANI 600 Ml",
+      "description": "Agua Sin Gas DASANI 600 Ml. Precio $0.39 en Supermaxi. Dasani, cód. 7861024621076.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024621076-1.png"
+      ],
+      "sku": "7861024621076",
+      "gtin": "7861024621076",
+      "brand": {
+        "@type": "Brand",
+        "name": "Dasani"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-sin-gas-dasani-600-ml-848436",
+        "price": "0.39",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-sin-gas-dasani-600-ml-848436"
+    }
+  },
+  {
+    "key": "dasani1200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Natural Sin Gas DASANI 1200 Ml",
+      "description": "Agua Natural Sin Gas DASANI 1200 Ml. Precio $0.69 en Supermaxi. Dasani, cód. 7861024624725.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024624725-1.png"
+      ],
+      "sku": "7861024624725",
+      "gtin": "7861024624725",
+      "brand": {
+        "@type": "Brand",
+        "name": "Dasani"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-natural-sin-gas-dasani-1200-ml-1039578",
+        "price": "0.69",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-natural-sin-gas-dasani-1200-ml-1039578"
+    }
+  },
+  {
+    "key": "dasani3800",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Natural Sin Gas DASANI 3800 Ml",
+      "description": "Agua Natural Sin Gas DASANI 3800 Ml. Precio $1.37 en Supermaxi. Dasani, cód. 7861024625623.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024625623-1.png"
+      ],
+      "sku": "7861024625623",
+      "gtin": "7861024625623",
+      "brand": {
+        "@type": "Brand",
+        "name": "Dasani"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-natural-sin-gas-dasani-3800-ml-1094926",
+        "price": "1.37",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-natural-sin-gas-dasani-3800-ml-1094926"
+    }
+  },
+  {
+    "key": "dasani6050",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Natural Sin Gas DASANI 6050 Ml",
+      "description": "Agua Natural Sin Gas DASANI 6050 Ml. Precio $1.63 en Supermaxi. Dasani, cód. 7861024625616.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024625616-1.png"
+      ],
+      "sku": "7861024625616",
+      "gtin": "7861024625616",
+      "brand": {
+        "@type": "Brand",
+        "name": "Dasani"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-natural-sin-gas-dasani-6050-ml-1094937",
+        "price": "1.63",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-natural-sin-gas-dasani-6050-ml-1094937"
+    }
+  },
+  {
+    "key": "dasanilimon",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Saborizada Sabor Limón DASANI 500Ml",
+      "description": "Agua Saborizada Sabor Limón DASANI 500Ml. Precio $0.47 en Supermaxi. Dasani, cód. 7861024632096.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024632096-1.png"
+      ],
+      "sku": "7861024632096",
+      "gtin": "7861024632096",
+      "brand": {
+        "@type": "Brand",
+        "name": "Dasani"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-saborizada-sabor-limon-dasani-500ml-1931091",
+        "price": "0.47",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-saborizada-sabor-limon-dasani-500ml-1931091"
+    }
+  },
+  {
+    "key": "tesalia625",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Sin Gas TESALIA 625 Ml",
+      "description": "Agua Sin Gas TESALIA 625 Ml. Precio $0.47 en Supermaxi. Tesalia, cód. 759494999702.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/759494999702-1.png"
+      ],
+      "sku": "759494999702",
+      "gtin": "759494999702",
+      "brand": {
+        "@type": "Brand",
+        "name": "Tesalia"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-sin-gas-tesalia-625-ml-992403",
+        "price": "0.47",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-sin-gas-tesalia-625-ml-992403"
+    }
+  },
+  {
+    "key": "tesalia1200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Mineral Natural Sin Gas TESALIA 1200Ml",
+      "description": "Agua Mineral Natural Sin Gas TESALIA 1200Ml. Precio $0.48 en Supermaxi. Tesalia, cód. 759494997838.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/759494997838-1.png"
+      ],
+      "sku": "759494997838",
+      "gtin": "759494997838",
+      "brand": {
+        "@type": "Brand",
+        "name": "Tesalia"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-mineral-natural-sin-gas-tesalia-1200ml-1525361",
+        "price": "0.48",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-mineral-natural-sin-gas-tesalia-1200ml-1525361"
+    }
+  },
+  {
+    "key": "tesalia6000",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Agua Mineral Natural Sin Gas TESALIA 6000 Ml",
+      "description": "Agua Mineral Natural Sin Gas TESALIA 6000 Ml. Precio $1.45 en Supermaxi. Tesalia, cód. 759494005021.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/759494005021-1.png"
+      ],
+      "sku": "759494005021",
+      "gtin": "759494005021",
+      "brand": {
+        "@type": "Brand",
+        "name": "Tesalia"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/agua-mineral-natural-sin-gas-tesalia-6000-ml-213078",
+        "price": "1.45",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/agua-mineral-natural-sin-gas-tesalia-6000-ml-213078"
+    }
+  },
+  {
+    "key": "pony200",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebida De Malta Energía Natural Mini PONY MALTA 200 Ml",
+      "description": "Bebida De Malta Energía Natural Mini PONY MALTA 200 Ml. Precio $0.29 en Supermaxi. Pony Malta, cód. 9497003006.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/9497003006-1.png"
+      ],
+      "sku": "9497003006",
+      "gtin": "9497003006",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pony Malta"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/bebida-de-malta-energia-natural-mini-pony-malta-200-ml-1000985",
+        "price": "0.29",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/bebida-de-malta-energia-natural-mini-pony-malta-200-ml-1000985"
+    }
+  },
+  {
+    "key": "pony330",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebida De Malta Energía Natural PONY 330 Ml",
+      "description": "Bebida De Malta Energía Natural PONY 330 Ml. Precio $0.41 en Supermaxi. Pony, cód. 9497002993.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/9497002993-1.png"
+      ],
+      "sku": "9497002993",
+      "gtin": "9497002993",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pony"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/bebida-de-malta-energia-natural-pony-330-ml-955429",
+        "price": "0.41",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/bebida-de-malta-energia-natural-pony-330-ml-955429"
+    }
+  },
+  {
+    "key": "coca300",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebida Gaseosa Sabor Original COCA-COLA 300 Ml",
+      "description": "Bebida Gaseosa Sabor Original COCA-COLA 300 Ml. Precio $0.39 en Supermaxi. Coca-Cola, cód. 7861024626255.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024626255-1.png"
+      ],
+      "sku": "7861024626255",
+      "gtin": "7861024626255",
+      "brand": {
+        "@type": "Brand",
+        "name": "Coca-Cola"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/bebida-gaseosa-sabor-original-coca-cola-300-ml-1326538",
+        "price": "0.39",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/bebida-gaseosa-sabor-original-coca-cola-300-ml-1326538"
+    }
+  },
+  {
+    "key": "coca1000",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebida Gaseosa Sabor Original COCA-COLA 1000 Ml",
+      "description": "Bebida Gaseosa Sabor Original COCA-COLA 1000 Ml. Precio $1.02 en Supermaxi. Coca-Cola, cód. 7861024607643.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024607643-1.png"
+      ],
+      "sku": "7861024607643",
+      "gtin": "7861024607643",
+      "brand": {
+        "@type": "Brand",
+        "name": "Coca-Cola"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/bebida-gaseosa-sabor-original-coca-cola-1000-ml-1511241",
+        "price": "1.02",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/bebida-gaseosa-sabor-original-coca-cola-1000-ml-1511241"
+    }
+  },
+  {
+    "key": "cocazero1000",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebida Gaseosa Sin Azúcar COCA-COLA 1000 Ml",
+      "description": "Bebida Gaseosa Sin Azúcar COCA-COLA 1000 Ml. Precio $0.70 en Supermaxi. Coca-Cola, cód. 7861024609876.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024609876-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024609876-2.png"
+      ],
+      "sku": "7861024609876",
+      "gtin": "7861024609876",
+      "brand": {
+        "@type": "Brand",
+        "name": "Coca-Cola"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/bebida-gaseosa-sin-azucar-coca-cola-1000-ml-352211",
+        "price": "0.70",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/bebida-gaseosa-sin-azucar-coca-cola-1000-ml-352211"
+    }
+  },
+  {
+    "key": "fanta500",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebida Gaseosa Sabor A Naranja FANTA 500 Ml",
+      "description": "Bebida Gaseosa Sabor A Naranja FANTA 500 Ml. Precio $0.47 en Supermaxi. Fanta, cód. 7861024600095.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024600095-1.png"
+      ],
+      "sku": "7861024600095",
+      "gtin": "7861024600095",
+      "brand": {
+        "@type": "Brand",
+        "name": "Fanta"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/bebida-gaseosa-sabor-a-naranja-fanta-500-ml-352024",
+        "price": "0.47",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/bebida-gaseosa-sabor-a-naranja-fanta-500-ml-352024"
+    }
+  },
+  {
+    "key": "sprite500",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebida Gaseosa Sabor a Lima Limón SPRITE 500 Ml",
+      "description": "Bebida Gaseosa Sabor a Lima Limón SPRITE 500 Ml. Precio $0.47 en Supermaxi. Sprite, cód. 7861024600125.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024600125-1.png"
+      ],
+      "sku": "7861024600125",
+      "gtin": "7861024600125",
+      "brand": {
+        "@type": "Brand",
+        "name": "Sprite"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/bebida-gaseosa-sabor-a-lima-limon-sprite-500-ml-352025",
+        "price": "0.47",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/bebida-gaseosa-sabor-a-lima-limon-sprite-500-ml-352025"
+    }
+  },
+  {
+    "key": "fiora3000",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Gaseosa De Fresa FIORAVANTI 3000 Ml",
+      "description": "Gaseosa De Fresa FIORAVANTI 3000 Ml. Precio $3.03 en Supermaxi. Fioravanti, cód. 7861024604277.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861024604277-1.png"
+      ],
+      "sku": "7861024604277",
+      "gtin": "7861024604277",
+      "brand": {
+        "@type": "Brand",
+        "name": "Fioravanti"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/gaseosa-de-fresa-fioravanti-3000-ml-352073",
+        "price": "3.03",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/gaseosa-de-fresa-fioravanti-3000-ml-352073"
+    }
+  },
+  {
+    "key": "heladocrema900",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Helado Cremossito Chocolate PINGÜINO 900 Ml",
+      "description": "Helado Cremossito Chocolate PINGÜINO 900 Ml. Precio $2.99 en Supermaxi. Pingüino, cód. 7861047722729.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047722729-1.png"
+      ],
+      "sku": "7861047722729",
+      "gtin": "7861047722729",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pingüino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/helado-cremossito-chocolate-pinguino-900-ml-1037391",
+        "price": "2.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-07",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/helado-cremossito-chocolate-pinguino-900-ml-1037391"
+    }
+  },
+  {
+    "key": "heladofresa900",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Helado Cremossito Frutilla PINGÜINO 900 Ml",
+      "description": "Helado Cremossito Frutilla PINGÜINO 900 Ml. Precio $2.99 en Supermaxi. Pingüino, cód. 7861047722743.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047722743-1.png"
+      ],
+      "sku": "7861047722743",
+      "gtin": "7861047722743",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pingüino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/helado-cremossito-frutilla-pinguino-900-ml-1037392",
+        "price": "2.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-07",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/helado-cremossito-frutilla-pinguino-900-ml-1037392"
+    }
+  },
+  {
+    "key": "heladonapolitano",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Helado Cremossito Napolitano PINGÜINO 900 Ml",
+      "description": "Helado Cremossito Napolitano PINGÜINO 900 Ml. Precio $2.99 en Supermaxi. Pingüino, cód. 7861047722705.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047722705-1.png"
+      ],
+      "sku": "7861047722705",
+      "gtin": "7861047722705",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pingüino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/helado-cremossito-napolitano-pinguino-900-ml-1037393",
+        "price": "2.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/helado-cremossito-napolitano-pinguino-900-ml-1037393"
+    }
+  },
+  {
+    "key": "heladocasero",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Helado Casero Paleta De Chocolate PINGÜINO 100 Ml",
+      "description": "Helado Casero Paleta De Chocolate PINGÜINO 100 Ml. Precio $0.70 en Supermaxi. Pingüino, cód. 7861047724068.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047724068-1.png"
+      ],
+      "sku": "7861047724068",
+      "gtin": "7861047724068",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pingüino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/helado-casero-paleta-de-chocolate-pinguino-100-ml-1886847",
+        "price": "0.70",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/helado-casero-paleta-de-chocolate-pinguino-100-ml-1886847"
+    }
+  },
+  {
+    "key": "heladomagnum90",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Helado Magnum Almendras PINGÜINO 90 Ml",
+      "description": "Helado Magnum Almendras PINGÜINO 90 Ml. Precio $1.21 en Supermaxi. Pingüino, cód. 7861047723429.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047723429-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047723429-3.png"
+      ],
+      "sku": "7861047723429",
+      "gtin": "7861047723429",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pingüino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/helado-magnum-almendras-pinguino-90-ml-1525844",
+        "price": "1.21",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/helado-magnum-almendras-pinguino-90-ml-1525844"
+    }
+  },
+  {
+    "key": "heladomagnumblanco",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Helado Magnum Blanco Almendras PINGÜINO 90 Ml",
+      "description": "Helado Magnum Blanco Almendras PINGÜINO 90 Ml. Precio $1.36 en Supermaxi. Pingüino, cód. 7861047723436.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047723436-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047723436-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047723436-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047723436-3.png"
+      ],
+      "sku": "7861047723436",
+      "gtin": "7861047723436",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pingüino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/helado-magnum-blanco-almendras-pinguino-90-ml-1525846",
+        "price": "1.36",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/helado-magnum-blanco-almendras-pinguino-90-ml-1525846"
+    }
+  },
+  {
+    "key": "heladomagnumpistacho",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Helado Magnum Pistacchio PINGÜINO 80 Ml",
+      "description": "Helado Magnum Pistacchio PINGÜINO 80 Ml. Precio $1.36 en Supermaxi. Pingüino, cód. 8721274712315.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/8721274712315-1.png"
+      ],
+      "sku": "8721274712315",
+      "gtin": "8721274712315",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pingüino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/helado-magnum-pistacchio-pinguino-80-ml-2009281",
+        "price": "1.36",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/helado-magnum-pistacchio-pinguino-80-ml-2009281"
+    }
+  },
+  {
+    "key": "heladosanduche",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Helado Sánduche Vainilla PINGÜINO 135 Ml",
+      "description": "Helado Sánduche Vainilla PINGÜINO 135 Ml. Precio $0.90 en Supermaxi. Pingüino, cód. 7861047721104.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047721104-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047721104-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047721104-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861047721104-3.png"
+      ],
+      "sku": "7861047721104",
+      "gtin": "7861047721104",
+      "brand": {
+        "@type": "Brand",
+        "name": "Pingüino"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/helado-sanduche-vainilla-pinguino-135-ml-1023967",
+        "price": "0.90",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/helado-sanduche-vainilla-pinguino-135-ml-1023967"
+    }
+  },
+  {
+    "key": "jet78",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chocolate Con Leche JET 78 G",
+      "description": "Chocolate Con Leche JET 78 G. Precio $2.02 en Supermaxi. Jet, cód. 7702007063226.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702007063226-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702007063226-4.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702007063226-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7702007063226-3.png"
+      ],
+      "sku": "7702007063226",
+      "gtin": "7702007063226",
+      "brand": {
+        "@type": "Brand",
+        "name": "Jet"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chocolate-con-leche-jet-78-g-1425310",
+        "price": "2.02",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chocolate-con-leche-jet-78-g-1425310"
+    }
+  },
+  {
+    "key": "galak60",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chocolate Blanco Con Leche GALAK 60 G",
+      "description": "Chocolate Blanco Con Leche GALAK 60 G. Precio $0.99 en Supermaxi. Galak, cód. 7861091150424.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091150424-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091150424-3.png"
+      ],
+      "sku": "7861091150424",
+      "gtin": "7861091150424",
+      "brand": {
+        "@type": "Brand",
+        "name": "Galak"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chocolate-blanco-con-leche-galak-60-g-1839152",
+        "price": "0.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chocolate-blanco-con-leche-galak-60-g-1839152"
+    }
+  },
+  {
+    "key": "galak90",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chocolate En Barra Blanco Con Leche Y Arroz Crocante GALAK 90 G",
+      "description": "Chocolate En Barra Blanco Con Leche Y Arroz Crocante GALAK 90 G. Precio $1.57 en Supermaxi. Galak, cód. 7861001237405.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861001237405-1.png"
+      ],
+      "sku": "7861001237405",
+      "gtin": "7861001237405",
+      "brand": {
+        "@type": "Brand",
+        "name": "Galak"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chocolate-en-barra-blanco-con-leche-y-arroz-crocante-galak-90-g-1149997",
+        "price": "1.57",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chocolate-en-barra-blanco-con-leche-y-arroz-crocante-galak-90-g-1149997"
+    }
+  },
+  {
+    "key": "galakcookies",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chocolate Cookies And Cream GALAK 100 G",
+      "description": "Chocolate Cookies And Cream GALAK 100 G. Precio $1.96 en Supermaxi. Galak, cód. 7861091150349.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091150349-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861091150349-3.png"
+      ],
+      "sku": "7861091150349",
+      "gtin": "7861091150349",
+      "brand": {
+        "@type": "Brand",
+        "name": "Galak"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chocolate-cookies-and-cream-galak-100-g-1839160",
+        "price": "1.96",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-02",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chocolate-cookies-and-cream-galak-100-g-1839160"
+    }
+  },
+  {
+    "key": "manicho25",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Chocolate Con Maní MANICHO 25 G",
+      "description": "Chocolate Con Maní MANICHO 25 G. Precio $0.42 en Supermaxi. Manicho, cód. 7862106459037.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862106459037-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862106459037-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7862106459037-3.png"
+      ],
+      "sku": "7862106459037",
+      "gtin": "7862106459037",
+      "brand": {
+        "@type": "Brand",
+        "name": "Manicho"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/chocolate-con-mani-manicho-25-g-1749122",
+        "price": "0.42",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/chocolate-con-mani-manicho-25-g-1749122"
+    }
+  },
+  {
+    "key": "kitkat41",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Galletas Dulces Wafer Recubiertas En Chocolate KIT KAT 41.50 G",
+      "description": "Galletas Dulces Wafer Recubiertas En Chocolate KIT KAT 41.50 G. Precio $0.84 en Supermaxi. Kit Kat, cód. 7891000248768.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7891000248768-1.png"
+      ],
+      "sku": "7891000248768",
+      "gtin": "7891000248768",
+      "brand": {
+        "@type": "Brand",
+        "name": "Kit Kat"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/galletas-dulces-wafer-recubiertas-en-chocolate-kit-kat-41-50-g-1130663",
+        "price": "0.84",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/galletas-dulces-wafer-recubiertas-en-chocolate-kit-kat-41-50-g-1130663"
+    }
+  },
+  {
+    "key": "tiburon71",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Gomitas Tiburón Sabor Arándano CRISMELOS 71 G",
+      "description": "Gomitas Tiburón Sabor Arándano CRISMELOS 71 G. Precio $0.55 en Supermaxi. Crismelos, cód. 760203016566.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/760203016566-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/760203016566-3.png"
+      ],
+      "sku": "760203016566",
+      "gtin": "760203016566",
+      "brand": {
+        "@type": "Brand",
+        "name": "Crismelos"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/gomitas-tiburon-sabor-arandano-crismelos-71-g-1954740",
+        "price": "0.55",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-11-30",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/gomitas-tiburon-sabor-arandano-crismelos-71-g-1954740"
+    }
+  },
+  {
+    "key": "ositos80",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Gomitas Ositos DELIGOMIS 80 G",
+      "description": "Gomitas Ositos DELIGOMIS 80 G. Precio $1.07 en Supermaxi. Deligomis, cód. 7861014902192.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861014902192-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861014902192-2.png"
+      ],
+      "sku": "7861014902192",
+      "gtin": "7861014902192",
+      "brand": {
+        "@type": "Brand",
+        "name": "Deligomis"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/gomitas-ositos-deligomis-80-g-1762482",
+        "price": "1.07",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/gomitas-ositos-deligomis-80-g-1762482"
+    }
+  },
+  {
+    "key": "gusanos80",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Gomitas Gusanos Ácidos DELIGOMIS 80 G",
+      "description": "Gomitas Gusanos Ácidos DELIGOMIS 80 G. Precio $1.07 en Supermaxi. Deligomis, cód. 7861014902178.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861014902178-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7861014902178-2.png"
+      ],
+      "sku": "7861014902178",
+      "gtin": "7861014902178",
+      "brand": {
+        "@type": "Brand",
+        "name": "Deligomis"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/gomitas-gusanos-acidos-deligomis-80-g-1762483",
+        "price": "1.07",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/gomitas-gusanos-acidos-deligomis-80-g-1762483"
+    }
+  },
+  {
+    "key": "mogul55",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Gomitas Ositos Acido Dulce MOGUL EXTREME 55 G",
+      "description": "Gomitas Ositos Acido Dulce MOGUL EXTREME 55 G. Precio $0.51 en Supermaxi. Mogul Extreme, cód. 7790580117030.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7790580117030-1.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7790580117030-2.png",
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7790580117030-3.png"
+      ],
+      "sku": "7790580117030",
+      "gtin": "7790580117030",
+      "brand": {
+        "@type": "Brand",
+        "name": "Mogul Extreme"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/gomitas-ositos-acido-dulce-mogul-extreme-55-g-1887388",
+        "price": "0.51",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/gomitas-ositos-acido-dulce-mogul-extreme-55-g-1887388"
+    }
+  },
+  {
+    "key": "halls25",
+    "ref": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Caramelos Duros Menta Extra Fuerte HALLS 24.75 G",
+      "description": "Caramelos Duros Menta Extra Fuerte HALLS 24.75 G. Precio $0.39 en Supermaxi. Halls, cód. 7622202015212.",
+      "image": [
+        "https://storage.googleapis.com/cf-max/items/igm/1500x1500/7622202015212-1.png"
+      ],
+      "sku": "7622202015212",
+      "gtin": "7622202015212",
+      "brand": {
+        "@type": "Brand",
+        "name": "Halls"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.supermaxi.com/producto/caramelos-duros-menta-extra-fuerte-halls-24-75-g-1731033",
+        "price": "0.39",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Supermaxi"
+        }
+      },
+      "source_url": "https://www.supermaxi.com/producto/caramelos-duros-menta-extra-fuerte-halls-24-75-g-1731033"
+    }
+  }
+]

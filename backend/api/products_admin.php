@@ -10,6 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../lib/access.php';
+appRequirePermission($conn, 'inventory');
 
 function respond($status, $message) {
     echo json_encode(["status" => $status, "message" => $message]);
@@ -56,6 +58,15 @@ function findDuplicateProduct($conn, $name, $barcode = '', $excludeId = 0) {
                 "product" => $product
             ];
         }
+    }
+
+    if ($normalizedBarcode !== '' && $conn->query("SHOW TABLES LIKE 'product_barcodes'")->num_rows > 0) {
+        $aliasStmt = $conn->prepare('SELECT p.id, p.name, p.barcode FROM products p JOIN product_barcodes b ON b.product_id = p.id WHERE b.barcode = ? AND p.id <> ? LIMIT 1');
+        $aliasStmt->bind_param('si', $normalizedBarcode, $excludeId);
+        $aliasStmt->execute();
+        $aliasProduct = $aliasStmt->get_result()->fetch_assoc();
+        $aliasStmt->close();
+        if ($aliasProduct) return ['type' => 'barcode', 'product' => $aliasProduct];
     }
 
     return null;

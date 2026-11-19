@@ -10,6 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../lib/access.php';
+appRequirePermission($conn, 'sales');
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
@@ -24,8 +26,12 @@ if ($method === 'GET') {
     $action = $data['action'] ?? '';
 
     if ($action === 'add') {
-        $id = $data['id'];
+        $id = (int)($data['id'] ?? 0);
         $quantity = (int)($data['quantity'] ?? 1);
+        if ($id <= 0 || $quantity < 1 || $quantity > 999) {
+            http_response_code(422);
+            exit(json_encode(['status'=>'error', 'message'=>'Producto o cantidad inválidos.']));
+        }
 
         $sql = "SELECT * FROM products WHERE id = $id";
         $res = $conn->query($sql);
@@ -56,15 +62,19 @@ if ($method === 'GET') {
             echo json_encode(["status" => "error", "message" => "Producto no encontrado"]);
         }
     } elseif ($action === 'remove') {
-        $id = $data['id'];
+        $id = (int)($data['id'] ?? 0);
         $_SESSION['cart'] = array_filter($_SESSION['cart'], function($item) use ($id) {
             return $item['id'] != $id;
         });
         $_SESSION['cart'] = array_values($_SESSION['cart']);
         echo json_encode(["status" => "success", "cart" => $_SESSION['cart']]);
     } elseif ($action === 'update') {
-        $id = $data['id'];
-        $quantity = (int)$data['quantity'];
+        $id = (int)($data['id'] ?? 0);
+        $quantity = (int)($data['quantity'] ?? 0);
+        if ($id <= 0 || $quantity < 1 || $quantity > 999) {
+            http_response_code(422);
+            exit(json_encode(['status'=>'error', 'message'=>'Producto o cantidad inválidos.']));
+        }
         foreach ($_SESSION['cart'] as &$item) {
             if ($item['id'] == $id) {
                 $item['quantity'] = $quantity;

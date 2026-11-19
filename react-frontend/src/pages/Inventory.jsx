@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { productsApi, suppliersApi, stockPurchasesApi } from '../api';
-import { Plus, Edit2, Trash2, X, Upload, Loader2, Package, TrendingUp, ChevronDown, Barcode, Building2, ClipboardList, CreditCard, Truck, AlertTriangle, Ban, RotateCcw } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Upload, Loader2, Package, TrendingUp, ChevronDown, Barcode, Building2, ClipboardList, CreditCard, Truck, AlertTriangle, Ban, RotateCcw, Search } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { useCart } from '../context/CartContext';
 import { useSearchParams } from 'react-router-dom';
+import { priceLine } from '../utils/pricing';
+import HistoryPagination from '../components/HistoryPagination';
+import { searchProducts } from '../utils/productSearch';
 
 const Inventory = () => {
   const [searchParams] = useSearchParams();
@@ -15,6 +18,7 @@ const Inventory = () => {
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
+  const [historyPage, setHistoryPage] = useState(1);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [purchaseProduct, setPurchaseProduct] = useState(null);
@@ -29,8 +33,25 @@ const Inventory = () => {
   const [productAppliesIva, setProductAppliesIva] = useState('1');
   const [productName, setProductName] = useState('');
   const [productBarcode, setProductBarcode] = useState('');
+  const [inventorySearch, setInventorySearch] = useState('');
+  const [inventoryCategory, setInventoryCategory] = useState('todas');
+
+  const inventoryCategories = useMemo(() => [...new Set(products.map((product) => product.category).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base', numeric: true })), [products]);
+  const filteredProducts = useMemo(() => searchProducts(
+    products.filter((product) => inventoryCategory === 'todas' || product.category === inventoryCategory),
+    inventorySearch,
+  ), [products, inventorySearch, inventoryCategory]);
+
+  useEffect(() => {
+    if (inventoryCategory !== 'todas' && !inventoryCategories.includes(inventoryCategory)) {
+      setInventoryCategory('todas');
+    }
+  }, [inventoryCategories, inventoryCategory]);
 
   const normalizeProductText = (value) => String(value || '').trim().replace(/\s+/g, ' ').toLowerCase();
+  const currentHistoryPage = Math.min(historyPage, Math.max(1, Math.ceil(purchaseHistory.length / 50)));
+  const historyRows = purchaseHistory.slice((currentHistoryPage - 1) * 50, currentHistoryPage * 50);
 
   useEffect(() => {
     fetchProducts();
@@ -103,7 +124,10 @@ const Inventory = () => {
     return products.find((product) => {
       if (editingProduct && Number(product.id) === Number(editingProduct.id)) return false;
       const sameName = normalizedName && normalizeProductText(product.name) === normalizedName;
-      const sameBarcode = normalizedBarcode && String(product.barcode || '').trim() === normalizedBarcode;
+      const sameBarcode = normalizedBarcode && (
+        String(product.barcode || '').trim() === normalizedBarcode ||
+        (product.scan_codes || []).some((barcode) => String(barcode).trim() === normalizedBarcode)
+      );
       return sameName || sameBarcode;
     }) || null;
   }, [products, productName, productBarcode, editingProduct]);
@@ -325,6 +349,27 @@ const Inventory = () => {
         </div>
       </div>
 
+      <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm mb-5">
+        <form role="search" aria-label="Filtros del inventario" onSubmit={(event) => event.preventDefault()} className="flex flex-col md:flex-row md:items-end gap-3">
+          <div className="flex-1 min-w-0">
+            <label htmlFor="inventory-search" className="block text-xs font-bold text-gray-600 mb-2">Buscar productos</label>
+            <div className="relative">
+              <Search aria-hidden="true" className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+              <input id="inventory-search" type="search" value={inventorySearch} onChange={(event) => setInventorySearch(event.target.value)} placeholder="Nombre o código de barras completo" className="w-full min-h-11 pl-10 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary-500" />
+            </div>
+          </div>
+          <div className="w-full md:w-64">
+            <label htmlFor="inventory-category" className="block text-xs font-bold text-gray-600 mb-2">Categoría</label>
+            <select id="inventory-category" value={inventoryCategory} onChange={(event) => setInventoryCategory(event.target.value)} className="w-full min-h-11 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary-500">
+              <option value="todas">Todas las categorías</option>
+              {inventoryCategories.map((category) => <option key={category} value={category}>{category}</option>)}
+            </select>
+          </div>
+          <button type="button" onClick={() => { setInventorySearch(''); setInventoryCategory('todas'); }} disabled={!inventorySearch && inventoryCategory === 'todas'} className="min-h-11 px-4 py-2.5 border border-gray-200 rounded-xl text-sm font-bold text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-default">Limpiar filtros</button>
+        </form>
+        <p role="status" className="mt-3 text-xs text-gray-500">{loading ? 'Cargando productos…' : `${filteredProducts.length} de ${products.length} productos`}</p>
+      </div>
+
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <Loader2 className="h-10 w-10 animate-spin text-primary-600" />
@@ -344,7 +389,10 @@ const Inventory = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {products.map((product) => {
+                {filteredProducts.length === 0 && (
+                  <tr><td colSpan={6} className="px-4 py-12 text-center text-sm text-gray-500">{products.length === 0 ? 'Todavía no hay productos registrados.' : 'No hay productos que coincidan. Cambia la búsqueda o limpia los filtros.'}</td></tr>
+                )}
+                {filteredProducts.map((product) => {
                   const lowStock = parseInt(product.stock) < 10;
                   return (
                 <tr key={product.id} className={`${lowStock ? 'bg-red-50/70 hover:bg-red-100/70' : 'hover:bg-gray-50/50'} transition-colors group`}>
@@ -373,7 +421,7 @@ const Inventory = () => {
                     <span className="inline-block mt-1.5 max-w-full truncate px-2 py-0.5 bg-gray-100 text-gray-600 text-[9px] font-black uppercase rounded-lg">{product.category}</span>
                   </td>
                   <td className="px-4 py-3">
-                    <p className="font-black text-primary-700 text-sm">${(Number(product.price) * (Number(product.applies_iva) === 1 ? 1.15 : 1)).toFixed(2)}</p>
+                    <p className="font-black text-primary-700 text-sm">${priceLine(product).total.toFixed(2)}</p>
                     <p className="text-[9px] font-bold text-gray-400">Base ${parseFloat(product.price).toFixed(2)} · {Number(product.applies_iva) === 1 ? 'IVA 15%' : 'IVA 0%'}</p>
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-700">
@@ -536,11 +584,12 @@ const Inventory = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
-                    {purchaseHistory.map((purchase) => (
+                    {historyRows.map((purchase) => (
                       <tr key={purchase.id} className="hover:bg-gray-50/60">
                         <td className="px-5 py-4">
                           <p className="font-black text-sm text-gray-900">#{purchase.id}</p>
                           <p className="text-[10px] text-gray-500">{new Date(purchase.created_at).toLocaleString()}</p>
+                          <p className="mt-1 text-[10px] text-gray-600">Registrado por: <span className="font-bold">{purchase.requested_by_name || purchase.requested_by || 'Usuario no disponible'}</span></p>
                         </td>
                         <td className="px-5 py-4">
                           <div className="flex items-center gap-3">
@@ -607,6 +656,7 @@ const Inventory = () => {
                 </table>
               )}
             </div>
+            {!historyLoading && <HistoryPagination page={currentHistoryPage} total={purchaseHistory.length} onPageChange={setHistoryPage} />}
           </div>
         </div>
       )}

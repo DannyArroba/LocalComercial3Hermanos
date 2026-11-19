@@ -6,3 +6,9 @@
 backend/config.php
 entrega-hostinger/site-*/
 entrega-hostinger/*.previous
+entrega-hostinger/*.zip
+entrega-hostinger/*.sql
+/react-frontend/dist/
+/tienda.sql
+/tiendas.sql
+scripts/catalogo_ecuador/referencias/

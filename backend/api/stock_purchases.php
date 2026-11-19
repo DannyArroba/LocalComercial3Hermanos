@@ -8,6 +8,8 @@ header("Content-Type: application/json; charset=UTF-8");
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit;
 
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../lib/access.php';
+$actor = appRequirePermission($conn, 'inventory');
 
 function respond($status, $message, $data = null) {
     echo json_encode(["status" => $status, "message" => $message, "data" => $data]);
@@ -22,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                sp.cancelled_at, sp.refunded_at, sp.reversal_code, sp.reversal_reason,
                spi.product_id, spi.quantity, spi.cost_price,
                p.name AS product_name, p.image,
-               s.company_name AS supplier_name, u.email AS requested_by
+               s.company_name AS supplier_name,
+               COALESCE(NULLIF(sp.requested_by_name, ''), NULLIF(u.name, ''), NULLIF(SUBSTRING_INDEX(u.email, '@', 1), ''), 'Usuario no disponible') AS requested_by_name
         FROM stock_purchases sp
         JOIN stock_purchase_items spi ON spi.purchase_id = sp.id
         JOIN products p ON p.id = spi.product_id
@@ -32,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     ");
     $purchases = [];
     while ($row = $result->fetch_assoc()) {
+        $row['requested_by'] = $row['requested_by_name'];
         $row['image_url'] = "/api/frontend/uploads/" . $row['image'];
         $purchases[] = $row;
     }
@@ -67,9 +71,10 @@ if ($action === 'create') {
         $supplierStmt->close();
 
         $total = round($quantity * $purchaseCost, 2);
-        $userId = (int)$_SESSION['user_id'];
-        $purchaseStmt = $conn->prepare("INSERT INTO stock_purchases (user_id, supplier_id, total, status) VALUES (?, ?, ?, 'SOLICITADO')");
-        $purchaseStmt->bind_param("iid", $userId, $supplierId, $total);
+        $userId = (int)$actor['id'];
+        $requestedByName = $actor['name'];
+        $purchaseStmt = $conn->prepare("INSERT INTO stock_purchases (user_id, supplier_id, total, status, requested_by_name) VALUES (?, ?, ?, 'SOLICITADO', ?)");
+        $purchaseStmt->bind_param("iids", $userId, $supplierId, $total, $requestedByName);
         $purchaseStmt->execute();
         $purchaseId = $purchaseStmt->insert_id;
         $purchaseStmt->close();

@@ -1,6 +1,9 @@
 <?php
 session_start();
 include('../backend/db.php');
+require_once __DIR__ . '/../backend/lib/access.php';
+$actingUser = appRequirePermission($conn, 'sales');
+$served_by_name = $actingUser['name'];
 
 if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");
@@ -97,8 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finish_purchase'])) {
     try {
       $stmt = $conn->prepare("
         INSERT INTO purchases
-        (user_id, purchase_type, customer_name, customer_email, customer_phone, customer_address, customer_idnumber, subtotal, iva, total)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (user_id, purchase_type, customer_name, customer_email, customer_phone, customer_address, customer_idnumber, subtotal, iva, total, served_by_name)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ");
 
       $subtotal_db = number_format($subtotal, 2, '.', '');
@@ -106,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finish_purchase'])) {
       $total_db = number_format($total, 2, '.', '');
 
       $stmt->bind_param(
-        "issssssddd",
+        "issssssddds",
         $user_id,
         $purchase_type,
         $customer_name,
@@ -116,7 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finish_purchase'])) {
         $customer_idnumber,
         $subtotal_db,
         $iva_db,
-        $total_db
+        $total_db,
+        $served_by_name
       );
 
       $stmt->execute();

@@ -10,7 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once __DIR__ . '/../db.php';
-date_default_timezone_set('America/Bogota');
+require_once __DIR__ . '/../lib/access.php';
+appRequirePermission($conn, 'dashboard');
+date_default_timezone_set('America/Guayaquil');
+require_once __DIR__ . '/../lib/dashboard_options.php';
 
 function respond($payload) {
     echo json_encode($payload);
@@ -49,6 +52,21 @@ if (!isset($_SESSION['user_id'])) {
     respond(["status" => "error", "message" => "No autenticado"]);
 }
 
+// Calendar boundaries are shared by period navigation, totals, and chart data.
+$today = fetchScalar($conn, 'SELECT CURDATE() AS today', 'today');
+$historyFloor = '2026-05-01';
+$todayEnd = $today . ' 23:59:59';
+$firstActivity = fetchScalar($conn, "
+    SELECT MIN(activity_date) AS first_activity FROM (
+        SELECT MIN(created_at) AS activity_date FROM purchases WHERE created_at BETWEEN '$historyFloor' AND '$todayEnd'
+        UNION ALL
+        SELECT MIN(COALESCE(paid_at, received_at, created_at)) AS activity_date FROM stock_purchases WHERE COALESCE(paid_at, received_at, created_at) BETWEEN '$historyFloor' AND '$todayEnd'
+        UNION ALL
+        SELECT MIN(created_at) AS activity_date FROM sales_returns WHERE created_at BETWEEN '$historyFloor' AND '$todayEnd'
+    ) dates
+", 'first_activity', null);
+$historyStart = $firstActivity ? max($historyFloor, substr($firstActivity, 0, 10)) : min($historyFloor, $today);
+
 $activityPeriods = [];
 $periodsResult = queryOrFail($conn, "
     SELECT
@@ -61,6 +79,7 @@ $periodsResult = queryOrFail($conn, "
         SELECT DATE_FORMAT(created_at, '%Y-%m') AS period, MAX(created_at) AS last_activity,
                COUNT(*) AS sales_count, 0 AS supply_count, 0 AS return_count
         FROM purchases
+        WHERE created_at BETWEEN '$historyStart' AND '$todayEnd'
         GROUP BY DATE_FORMAT(created_at, '%Y-%m')
 
         UNION ALL
@@ -69,6 +88,7 @@ $periodsResult = queryOrFail($conn, "
                MAX(COALESCE(paid_at, received_at, created_at)) AS last_activity,
                0 AS sales_count, COUNT(*) AS supply_count, 0 AS return_count
         FROM stock_purchases
+        WHERE COALESCE(paid_at, received_at, created_at) BETWEEN '$historyStart' AND '$todayEnd'
         GROUP BY DATE_FORMAT(COALESCE(paid_at, received_at, created_at), '%Y-%m')
 
         UNION ALL
@@ -76,6 +96,7 @@ $periodsResult = queryOrFail($conn, "
         SELECT DATE_FORMAT(created_at, '%Y-%m') AS period, MAX(created_at) AS last_activity,
                0 AS sales_count, 0 AS supply_count, COUNT(*) AS return_count
         FROM sales_returns
+        WHERE created_at BETWEEN '$historyStart' AND '$todayEnd'
         GROUP BY DATE_FORMAT(created_at, '%Y-%m')
     ) activity
     WHERE period IS NOT NULL
@@ -101,31 +122,16 @@ $latestPeriod = $activityPeriods[0] ?? [
     "period" => date('Y-m'),
 ];
 
-$year = filter_input(INPUT_GET, 'year', FILTER_VALIDATE_INT);
-$month = filter_input(INPUT_GET, 'month', FILTER_VALIDATE_INT);
-$isAnnual = ($_GET['is_annual'] ?? '') === 'true';
-
-if (!$year) {
-    $year = (int)$latestPeriod["year"];
-}
-
-if (!$month) {
-    $month = (int)$latestPeriod["month"];
-}
-$month = max(1, min(12, $month));
-$lowStockThreshold = filter_input(INPUT_GET, 'low_stock_threshold', FILTER_VALIDATE_INT);
-if (!$lowStockThreshold) {
-    $lowStockThreshold = 10;
-}
-$lowStockThreshold = max(1, min(999, $lowStockThreshold));
-
-if ($isAnnual) {
-    $startDate = sprintf('%04d-01-01 00:00:00', $year);
-    $endDate = sprintf('%04d-12-31 23:59:59', $year);
-} else {
-    $startDate = sprintf('%04d-%02d-01 00:00:00', $year, $month);
-    $endDate = date("Y-m-t 23:59:59", strtotime($startDate));
-}
+$window = dashboardWindow($_GET, $today, $historyStart, $latestPeriod);
+$year = $window['year'];
+$month = $window['month'];
+$isAnnual = $window['isAnnual'];
+$startDate = $window['startDate'];
+$endDate = $window['endDate'];
+$stockSettings = dashboardStockSettings($_GET);
+$criticalStockThreshold = $stockSettings['criticalStockThreshold'];
+$lowStockMin = $stockSettings['lowStockMin'];
+$lowStockMax = $stockSettings['lowStockMax'];
 
 $periodKey = $isAnnual ? (string)$year : sprintf('%04d-%02d', $year, $month);
 $hasActivity = false;
@@ -136,7 +142,6 @@ foreach ($activityPeriods as $period) {
     }
 }
 
-$today = date('Y-m-d');
 $salesToday = money(fetchScalar(
     $conn,
     "SELECT COALESCE(SUM(total), 0) AS total FROM purchases WHERE DATE(created_at) = '$today'",
@@ -156,11 +161,17 @@ $expensesToday = money(fetchScalar(
     "total"
 ));
 
-$lowStockCount = fetchScalar($conn, "SELECT COUNT(*) AS count FROM products WHERE stock <= $lowStockThreshold", "count");
+$lowStockCount = fetchScalar($conn, "SELECT COUNT(*) AS count FROM products WHERE stock <= $criticalStockThreshold", "count");
+$expiringStockCount = fetchScalar($conn, "SELECT COUNT(*) AS count FROM products WHERE stock BETWEEN $lowStockMin AND $lowStockMax", "count");
 $totalProducts = fetchScalar($conn, "SELECT COUNT(*) AS count FROM products", "count");
 
 $recentSales = [];
-$resRecentSales = queryOrFail($conn, "SELECT * FROM purchases ORDER BY created_at DESC LIMIT 5");
+$resRecentSales = queryOrFail($conn, "
+    SELECT p.*, COALESCE(NULLIF(p.served_by_name, ''), NULLIF(u.name, ''), SUBSTRING_INDEX(u.email, '@', 1), 'Usuario no disponible') AS served_by_name
+    FROM purchases p LEFT JOIN users u ON u.id = p.user_id
+    WHERE p.created_at BETWEEN '$historyStart' AND '$todayEnd'
+    ORDER BY p.created_at DESC, p.id DESC LIMIT 5
+");
 while ($row = $resRecentSales->fetch_assoc()) {
     $recentSales[] = $row;
 }
@@ -196,7 +207,7 @@ $lowStockProducts = [];
 $resLowStockProducts = queryOrFail($conn, "
     SELECT id, name, image, price, stock
     FROM products
-    WHERE stock <= 0
+    WHERE stock <= $criticalStockThreshold
     ORDER BY stock ASC, name ASC
 ");
 while ($row = $resLowStockProducts->fetch_assoc()) {
@@ -208,7 +219,7 @@ $criticalStockProducts = [];
 $resCriticalStockProducts = queryOrFail($conn, "
     SELECT id, name, image, price, stock
     FROM products
-    WHERE stock > 0 AND stock <= $lowStockThreshold
+    WHERE stock BETWEEN $lowStockMin AND $lowStockMax
     ORDER BY stock ASC, name ASC
 ");
 while ($row = $resCriticalStockProducts->fetch_assoc()) {
@@ -229,6 +240,21 @@ $returnsTotal = money(fetchScalar(
 ));
 
 $netRevenue = money($grossRevenue - $returnsTotal);
+$collectedVat = money(fetchScalar(
+    $conn,
+    "SELECT COALESCE(SUM(iva), 0) AS total FROM purchases WHERE created_at BETWEEN '$startDate' AND '$endDate'",
+    "total"
+));
+$returnedVat = money(fetchScalar(
+    $conn,
+    "SELECT COALESCE(SUM(sri.tax_amount), 0) AS total
+     FROM sales_return_items sri
+     JOIN sales_returns sr ON sr.id = sri.return_id
+     WHERE sr.created_at BETWEEN '$startDate' AND '$endDate'",
+    "total"
+));
+$netVat = money($collectedVat - $returnedVat);
+$netSalesBeforeTax = money($netRevenue - $netVat);
 
 $salesCount = (int)fetchScalar(
     $conn,
@@ -306,7 +332,9 @@ $returnedCost = money(fetchScalar(
 ));
 
 $costOfGoodsSold = money($costOfGoodsSold - $returnedCost);
-$netProfit = money($netRevenue - $costOfGoodsSold);
+$grossProfit = money($netSalesBeforeTax - $costOfGoodsSold);
+// User-facing estimate includes collected VAT; keep the tax-exclusive result separately.
+$profitIncludingVat = money($netRevenue - $costOfGoodsSold);
 $cashBalance = money($netRevenue - $supplyExpenses);
 
 $supplierExpenses = [];
@@ -331,7 +359,7 @@ while ($row = $supplierResult->fetch_assoc()) {
 
 $seriesFormat = $isAnnual ? '%Y-%m' : '%Y-%m-%d';
 $seriesPoints = [];
-$cursor = new DateTime($startDate);
+$cursor = new DateTime($isAnnual ? date('Y-m-01 00:00:00', strtotime($startDate)) : $startDate);
 $limit = new DateTime($endDate);
 $interval = $isAnnual ? new DateInterval('P1M') : new DateInterval('P1D');
 $monthShortNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
@@ -347,6 +375,8 @@ while ($cursor <= $limit) {
         "costOfGoodsSold" => 0,
         "grossRevenue" => 0,
         "returns" => 0,
+        "collectedVat" => 0,
+        "returnedVat" => 0,
     ];
     $cursor->add($interval);
 }
@@ -354,6 +384,7 @@ while ($cursor <= $limit) {
 $salesSeries = queryOrFail($conn, "
     SELECT DATE_FORMAT(created_at, '$seriesFormat') AS period_key,
            COALESCE(SUM(total), 0) AS gross_revenue,
+           COALESCE(SUM(iva), 0) AS collected_vat,
            COUNT(*) AS sales_count
     FROM purchases
     WHERE created_at BETWEEN '$startDate' AND '$endDate'
@@ -362,19 +393,26 @@ $salesSeries = queryOrFail($conn, "
 while ($row = $salesSeries->fetch_assoc()) {
     if (isset($seriesPoints[$row["period_key"]])) {
         $seriesPoints[$row["period_key"]]["grossRevenue"] = money($row["gross_revenue"]);
+        $seriesPoints[$row["period_key"]]["collectedVat"] = money($row["collected_vat"]);
     }
 }
 
 $returnsSeries = queryOrFail($conn, "
-    SELECT DATE_FORMAT(created_at, '$seriesFormat') AS period_key,
-           COALESCE(SUM(total_refund), 0) AS returns_total
-    FROM sales_returns
-    WHERE created_at BETWEEN '$startDate' AND '$endDate'
-    GROUP BY DATE_FORMAT(created_at, '$seriesFormat')
+    SELECT DATE_FORMAT(sr.created_at, '$seriesFormat') AS period_key,
+           COALESCE(SUM(sr.total_refund), 0) AS returns_total,
+           COALESCE(SUM(taxes.returned_vat), 0) AS returned_vat
+    FROM sales_returns sr
+    LEFT JOIN (
+        SELECT return_id, SUM(tax_amount) AS returned_vat
+        FROM sales_return_items GROUP BY return_id
+    ) taxes ON taxes.return_id = sr.id
+    WHERE sr.created_at BETWEEN '$startDate' AND '$endDate'
+    GROUP BY DATE_FORMAT(sr.created_at, '$seriesFormat')
 ");
 while ($row = $returnsSeries->fetch_assoc()) {
     if (isset($seriesPoints[$row["period_key"]])) {
         $seriesPoints[$row["period_key"]]["returns"] = money($row["returns_total"]);
+        $seriesPoints[$row["period_key"]]["returnedVat"] = money($row["returned_vat"]);
     }
 }
 
@@ -422,7 +460,11 @@ while ($row = $returnedCostSeries->fetch_assoc()) {
 
 foreach ($seriesPoints as $key => $point) {
     $seriesPoints[$key]["revenue"] = money($point["grossRevenue"] - $point["returns"]);
-    $seriesPoints[$key]["profit"] = money($seriesPoints[$key]["revenue"] - $point["costOfGoodsSold"]);
+    $seriesPoints[$key]["netVat"] = money($point["collectedVat"] - $point["returnedVat"]);
+    $seriesPoints[$key]["netSalesBeforeTax"] = money($seriesPoints[$key]["revenue"] - $seriesPoints[$key]["netVat"]);
+    $seriesPoints[$key]["grossProfit"] = money($seriesPoints[$key]["netSalesBeforeTax"] - $point["costOfGoodsSold"]);
+    $seriesPoints[$key]["profitIncludingVat"] = money($seriesPoints[$key]["revenue"] - $point["costOfGoodsSold"]);
+    $seriesPoints[$key]["profit"] = $seriesPoints[$key]["profitIncludingVat"];
 }
 
 $availableYears = [];
@@ -442,15 +484,16 @@ respond([
         "salesToday" => $salesToday,
         "expensesToday" => $expensesToday,
         "lowStockCount" => $lowStockCount,
+        "expiringStockCount" => $expiringStockCount,
         "totalProducts" => $totalProducts
     ],
     "recentSales" => $recentSales,
     "topProducts" => $topProducts,
     "lowStockProducts" => $lowStockProducts,
     "criticalStockProducts" => $criticalStockProducts,
-    "stockSettings" => [
-        "lowStockThreshold" => $lowStockThreshold,
-    ],
+    "stockSettings" => $stockSettings + ["lowStockThreshold" => $lowStockMax],
+    "currentDate" => $today,
+    "historyStart" => $historyStart,
     "availablePeriods" => $activityPeriods,
     "availableYears" => $availableYears,
     "suggestedPeriod" => [
@@ -478,7 +521,14 @@ respond([
         "pendingSupplyTotal" => $pendingSupplyTotal,
         "refundedSupplyTotal" => $refundedSupplyTotal,
         "costOfGoodsSold" => $costOfGoodsSold,
-        "netProfit" => $netProfit,
+        "collectedVat" => $collectedVat,
+        "returnedVat" => $returnedVat,
+        "netVat" => $netVat,
+        "netSalesBeforeTax" => $netSalesBeforeTax,
+        "grossProfit" => $grossProfit,
+        "profitIncludingVat" => $profitIncludingVat,
+        // Compatibility for earlier clients; this value is gross profit, not net profit.
+        "netProfit" => $grossProfit,
         "cashBalance" => $cashBalance
     ]
 ]);

@@ -12,8 +12,10 @@ if (isset($_POST['register'])) {
         exit();
     }
 
-    $sql = "SELECT * FROM users WHERE email='$email' LIMIT 1";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result && $result->num_rows > 0) {
         header("Location: register.php?err=exists");
@@ -21,9 +23,10 @@ if (isset($_POST['register'])) {
     }
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (email, password) VALUES ('$email', '$hashed_password')";
+    $stmt = $conn->prepare("INSERT INTO users (email, password, role) VALUES (?, ?, 'cashier')");
+    $stmt->bind_param("ss", $email, $hashed_password);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
         header("Location: login.php?ok=registered");
         exit();
     } else {

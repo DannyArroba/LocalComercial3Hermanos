@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Swal from 'sweetalert2';
+import HistoryPagination from '../components/HistoryPagination';
 
 const RETURN_REASONS = {
   MALA_ELECCION_PRODUCTO: 'Mala elección del producto',
@@ -17,6 +18,7 @@ const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [details, setDetails] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
@@ -131,6 +133,9 @@ const Transactions = () => {
     doc.setFontSize(10);
     doc.text(`Nro. Comprobante: #000${purchase.id}`, 20, 52);
     doc.text(`Fecha: ${date}`, 20, 57);
+    doc.setFontSize(9);
+    doc.text(doc.splitTextToSize(`${purchase.purchase_type === 'DEVOLUCION' ? 'Gestionado' : 'Atendido'} por: ${purchase.served_by_name || 'Usuario no disponible'}`, 170), 20, 64);
+    doc.setFontSize(12);
 
     // Customer Info
     if (['FACTURA', 'DEVOLUCION'].includes(purchase.purchase_type) && purchase.customer_name) {
@@ -201,6 +206,8 @@ const Transactions = () => {
     (t.display_customer_name || '').toLowerCase().includes(search.toLowerCase()) ||
     (t.customer_idnumber || '').includes(search)
   );
+  const currentPage = Math.min(page, Math.max(1, Math.ceil(filteredTransactions.length / 50)));
+  const pageTransactions = filteredTransactions.slice((currentPage - 1) * 50, currentPage * 50);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -222,7 +229,7 @@ const Transactions = () => {
             placeholder="Buscar por ID o tipo..."
             className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-primary-500 transition-all font-medium text-sm shadow-sm"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
           />
         </div>
         </div>
@@ -246,10 +253,11 @@ const Transactions = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {filteredTransactions.map((t) => (
+                {pageTransactions.map((t) => (
                   <tr key={t.record_key || t.id} className={`${t.record_type === 'DEVOLUCION' ? 'bg-red-50/60 hover:bg-red-100/60' : 'hover:bg-gray-50/50'} transition-colors group`}>
                     <td className="px-4 py-3">
                       <p className={`truncate font-black text-xs ${t.record_type === 'DEVOLUCION' ? 'text-red-700' : 'text-gray-800'}`}>{t.return_code || `Venta #${t.id}`}</p>
+                      <p className="mt-1 text-[10px] text-gray-500 truncate" title={t.served_by_name || 'Usuario no disponible'}>{t.record_type === 'DEVOLUCION' ? 'Gestionó' : 'Atendió'}: {t.served_by_name || 'Usuario no disponible'}</p>
                       <span className={`mt-1 inline-flex px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-wider ${t.record_type === 'DEVOLUCION' ? 'bg-red-100 text-red-700' : t.purchase_type === 'FACTURA' ? 'bg-blue-50 text-blue-600' : 'bg-gray-100 text-gray-500'}`}>
                         {t.record_type === 'DEVOLUCION' ? 'Devolución' : t.purchase_type === 'FACTURA' ? 'Con datos' : 'Consumidor final'}
                       </span>
@@ -294,6 +302,7 @@ const Transactions = () => {
               </tbody>
             </table>
           </div>
+          <HistoryPagination page={currentPage} total={filteredTransactions.length} onPageChange={setPage} />
         </div>
       )}
 
@@ -449,6 +458,8 @@ const Transactions = () => {
                         <p className="text-sm font-black text-primary-600">${parseFloat(details.purchase.total).toFixed(2)}</p>
                       </div>
                     </div>
+
+                    <p className="text-xs text-gray-600">{details.purchase.purchase_type === 'DEVOLUCION' ? 'Gestionado' : 'Atendido'} por: <span className="font-bold text-gray-900">{details.purchase.served_by_name || 'Usuario no disponible'}</span></p>
 
                     {details.purchase.purchase_type === 'DEVOLUCION' && (
                       <div className="p-4 bg-red-50 border border-red-100 rounded-2xl text-sm">

@@ -10,6 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../lib/access.php';
+// An identified sale can look up a customer without granting the customer-management section.
+appRequirePermission($conn, $_SERVER['REQUEST_METHOD'] === 'GET' && trim($_GET['id_number'] ?? '') !== ''
+    ? ['customers', 'sales'] : 'customers');
 
 function respond($status, $message = '', $data = null) {
     $response = ["status" => $status];
@@ -128,7 +132,7 @@ if ($action === 'add') {
         $stmt->execute();
         respond("success", "Cliente registrado correctamente", ["id" => $stmt->insert_id]);
     } catch (mysqli_sql_exception $e) {
-        respond("error", $e->getCode() === 1062 ? "La cedula o el correo ya estan registrados" : $e->getMessage());
+        respond("error", $e->getCode() === 1062 ? "La cedula ya esta registrada" : $e->getMessage());
     }
 }
 
@@ -145,7 +149,7 @@ if ($action === 'update') {
         $stmt->execute();
         respond("success", "Cliente actualizado correctamente");
     } catch (mysqli_sql_exception $e) {
-        respond("error", $e->getCode() === 1062 ? "La cedula o el correo ya estan registrados" : $e->getMessage());
+        respond("error", $e->getCode() === 1062 ? "La cedula ya esta registrada" : $e->getMessage());
     }
 }
 

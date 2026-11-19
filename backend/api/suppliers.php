@@ -10,6 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../lib/access.php';
+$accessUser = appRequirePermission($conn, $_SERVER['REQUEST_METHOD'] === 'GET' ? ['suppliers', 'inventory'] : 'suppliers');
+$supplierColumns = $accessUser['role'] === 'admin' || in_array('suppliers', $accessUser['permissions'], true)
+    ? '*' : 'id, company_name';
 
 function respond($status, $message, $data = null) {
     echo json_encode(["status" => $status, "message" => $message, "data" => $data]);
@@ -26,7 +30,7 @@ if ($method === 'GET') {
     // Get all suppliers or one by id
     if (isset($_GET['id'])) {
         $id = (int)$_GET['id'];
-        $sql = "SELECT * FROM suppliers WHERE id = $id";
+        $sql = "SELECT $supplierColumns FROM suppliers WHERE id = $id";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             echo json_encode($result->fetch_assoc());
@@ -34,7 +38,7 @@ if ($method === 'GET') {
             respond("error", "Proveedor no encontrado");
         }
     } else {
-        $sql = "SELECT * FROM suppliers ORDER BY company_name ASC";
+        $sql = "SELECT $supplierColumns FROM suppliers ORDER BY company_name ASC";
         $result = $conn->query($sql);
         $suppliers = [];
         while ($row = $result->fetch_assoc()) {

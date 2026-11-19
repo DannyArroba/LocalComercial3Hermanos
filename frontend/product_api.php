@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../backend/db.php');
+require_once __DIR__ . '/../backend/lib/access.php';
+appRequirePermission($conn, 'inventory');
 
 header('Content-Type: application/json; charset=utf-8');
 

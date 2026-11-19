@@ -60,11 +60,18 @@ export const checkoutApi = {
 };
 
 export const dashboardApi = {
-  getStats: (year, month, isAnnual, lowStockThreshold) => {
+  getStats: (year, month, isAnnual, stockSettings) => {
     const params = { is_annual: isAnnual };
     if (year) params.year = year;
     if (month) params.month = month;
-    if (lowStockThreshold) params.low_stock_threshold = lowStockThreshold;
+    if (stockSettings && typeof stockSettings === 'object') {
+      const { criticalStockThreshold, lowStockMin, lowStockMax } = stockSettings;
+      if (Number.isInteger(criticalStockThreshold)) params.critical_stock_threshold = criticalStockThreshold;
+      if (Number.isInteger(lowStockMin)) params.low_stock_min = lowStockMin;
+      if (Number.isInteger(lowStockMax)) params.low_stock_max = lowStockMax;
+    } else if (Number.isInteger(stockSettings)) {
+      params.low_stock_threshold = stockSettings;
+    }
     return api.get('/dashboard.php', { params });
   },
   getPublicStats: () => api.get('/public_stats.php'),

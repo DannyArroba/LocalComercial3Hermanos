@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShoppingCart, Plus, Minus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { priceLine } from '../utils/pricing';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
@@ -31,7 +32,7 @@ const ProductCard = ({ product }) => {
         
         <div className="mt-auto flex items-center justify-between">
           <span className="text-2xl font-black text-primary-600">
-            ${parseFloat(product.price).toFixed(2)}
+            ${priceLine(product).total.toFixed(2)}
           </span>
         </div>
 

@@ -12,6 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../lib/access.php';
+$actor = appRequirePermission($conn, 'sales');
 
 function respond($status, $message, $extra = []) {
     echo json_encode(array_merge([
@@ -30,7 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents("php://input"), true) ?? [];
-$userId = (int)$_SESSION['user_id'];
+$userId = (int)$actor['id'];
+$servedByName = $actor['name'];
+$createdAt = date('Y-m-d H:i:s');
 $purchaseType = $data['purchase_type'] ?? 'CONSUMIDOR_FINAL';
 $paymentMethod = $data['payment_method'] ?? '';
 $amountReceived = isset($data['amount_received']) ? round((float)$data['amount_received'], 2) : null;
@@ -53,6 +57,9 @@ $productStmt = $conn->prepare("SELECT id, name, price, cost_price, applies_iva F
 foreach ($_SESSION['cart'] as $cartItem) {
     $productId = (int)$cartItem['id'];
     $quantity = (int)$cartItem['quantity'];
+    if ($productId <= 0 || $quantity < 1 || $quantity > 999 || (float)$cartItem['quantity'] !== (float)$quantity) {
+        respond("error", "El carrito contiene una cantidad no valida. Usa entre 1 y 999 unidades enteras.");
+    }
     $productStmt->bind_param("i", $productId);
     $productStmt->execute();
     $product = $productStmt->get_result()->fetch_assoc();
@@ -169,11 +176,11 @@ try {
         INSERT INTO purchases
         (user_id, customer_id, purchase_type, payment_method, customer_name, customer_email,
          customer_phone, customer_address, customer_idnumber, subtotal, iva, total,
-         amount_received, change_amount, transfer_reference)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         amount_received, change_amount, transfer_reference, served_by_name, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $purchaseStmt->bind_param(
-        "iisssssssddddds",
+        "iisssssssdddddsss",
         $userId,
         $customerId,
         $purchaseType,
@@ -188,7 +195,9 @@ try {
         $total,
         $amountReceived,
         $changeAmount,
-        $transferReference
+        $transferReference,
+        $servedByName,
+        $createdAt
     );
     $purchaseStmt->execute();
     $purchaseId = $purchaseStmt->insert_id;
@@ -247,7 +256,9 @@ try {
         "subtotal" => $subtotal,
         "iva" => $iva,
         "total" => $total,
-        "change_amount" => $changeAmount
+        "change_amount" => $changeAmount,
+        "served_by_name" => $servedByName,
+        "created_at" => $createdAt
     ]);
 } catch (Throwable $error) {
     $conn->rollback();

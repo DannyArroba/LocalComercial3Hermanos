@@ -1,16 +1,22 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { cartApi } from '../api';
 import Swal from 'sweetalert2';
+import { priceLine } from '../utils/pricing';
+import { useAuth } from './AuthContext';
+import { canAccess } from '../utils/access';
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const { user } = useAuth();
+  const canSell = canAccess(user, 'sales');
   const [cart, setCart] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+    if (canSell) fetchCart();
+    else { setCart([]); setIsOpen(false); }
+  }, [user?.id, canSell]);
 
   const fetchCart = async () => {
     try {
@@ -82,12 +88,10 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const cartTotal = Math.round(cart.reduce((total, item) => total + Number(item.price) * item.quantity, 0) * 100) / 100;
+  const cartTotal = Math.round(cart.reduce((total, item) => total + priceLine(item, item.quantity).base, 0) * 100) / 100;
   const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
   const ivaTotal = cart.reduce((total, item) => {
-    const lineBase = Number(item.price) * item.quantity;
-    const lineTax = Number(item.applies_iva) === 1 ? Math.round(lineBase * 0.15 * 100) / 100 : 0;
-    return total + lineTax;
+    return total + priceLine(item, item.quantity).tax;
   }, 0);
   const roundedIvaTotal = Math.round(ivaTotal * 100) / 100;
   const totalWithIva = Math.round((cartTotal + roundedIvaTotal) * 100) / 100;

@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../backend/db.php');
+require_once __DIR__ . '/../backend/lib/access.php';
+appRequirePermission($conn, 'sales');
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['user_id'])) {

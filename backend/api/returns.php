@@ -8,6 +8,8 @@ header("Content-Type: application/json; charset=UTF-8");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit;
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../lib/access.php';
+$actor = appRequirePermission($conn, 'transactions');
 
 function respond($status, $message, $data = null) {
     echo json_encode(["status" => $status, "message" => $message, "data" => $data]);
@@ -72,13 +74,14 @@ try {
     $totalRefund = round($totalRefund, 2);
 
     $returnCode = 'DEV-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(3)));
-    $userId = (int)$_SESSION['user_id'];
+    $userId = (int)$actor['id'];
+    $handledByName = $actor['name'];
     $returnStmt = $conn->prepare("
         INSERT INTO sales_returns
-        (purchase_id, user_id, return_code, customer_name, customer_idnumber, customer_phone, reason_category, reason_detail, total_refund)
-        VALUES (?, ?, ?, ?, ?, ?, ?, NULLIF(?, ''), ?)
+        (purchase_id, user_id, return_code, customer_name, customer_idnumber, customer_phone, reason_category, reason_detail, total_refund, handled_by_name)
+        VALUES (?, ?, ?, ?, ?, ?, ?, NULLIF(?, ''), ?, ?)
     ");
-    $returnStmt->bind_param('iissssssd', $purchaseId, $userId, $returnCode, $customerName, $customerIdNumber, $customerPhone, $reasonCategory, $reasonDetail, $totalRefund);
+    $returnStmt->bind_param('iissssssds', $purchaseId, $userId, $returnCode, $customerName, $customerIdNumber, $customerPhone, $reasonCategory, $reasonDetail, $totalRefund, $handledByName);
     $returnStmt->execute();
     $returnId = $returnStmt->insert_id;
     $returnStmt->close();
@@ -102,7 +105,8 @@ try {
     respond('success', 'Devolucion registrada y stock actualizado', [
         'return_id' => $returnId,
         'return_code' => $returnCode,
-        'total_refund' => $totalRefund
+        'total_refund' => $totalRefund,
+        'handled_by_name' => $handledByName
     ]);
 } catch (Throwable $error) {
     $conn->rollback();

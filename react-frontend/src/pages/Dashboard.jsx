@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { dashboardApi, transactionsApi } from '../api';
 import { TrendingUp, Package, AlertTriangle, Clock, DollarSign, ArrowRight, Users as UsersIcon, Receipt, X, Calendar, CreditCard, ShoppingBag, Download, Trophy, TrendingDown, ArrowUpRight, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,236 +6,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Swal from 'sweetalert2';
+import FinancialLineChart from '../components/FinancialLineChart';
+import { useAuth } from '../context/AuthContext';
+import { canAccess } from '../utils/access';
 
-const chartMetrics = [
-  { key: 'revenue', label: 'Ingresos', color: '#16a34a' },
-  { key: 'expenses', label: 'Gastos', color: '#f97316' },
-  { key: 'profit', label: 'Ganancia', color: '#2563eb' },
-];
-
-const FinancialLineChart = ({
-  data = [],
-  visibleMetrics,
-  onToggleMetric,
-  formatMoney,
-  periodLabel,
-  months,
-  years,
-  selectedMonth,
-  selectedYear,
-  isAnnual,
-  onMonthChange,
-  onYearChange,
-  onAnnualChange,
-}) => {
-  const [hoveredPoint, setHoveredPoint] = useState(null);
-  const [windowStart, setWindowStart] = useState(0);
-  const [windowSize, setWindowSize] = useState(Math.min(12, Math.max(1, data.length)));
-  const activeMetrics = chartMetrics.filter((metric) => visibleMetrics[metric.key]);
-  const fullData = data.length ? data : [{ label: 'Sin datos', revenue: 0, expenses: 0, profit: 0 }];
-  const safeWindowSize = Math.min(Math.max(2, windowSize), fullData.length);
-  const safeWindowStart = Math.min(windowStart, Math.max(0, fullData.length - safeWindowSize));
-  const chartData = fullData.slice(safeWindowStart, safeWindowStart + safeWindowSize);
-  const values = chartData.flatMap((point) => activeMetrics.map((metric) => Number(point[metric.key] || 0)));
-  const maxValue = Math.max(1, ...values);
-  const minValue = Math.min(0, ...values);
-  const range = maxValue - minValue || 1;
-  const width = 760;
-  const height = 300;
-  const padding = { top: 24, right: 28, bottom: 46, left: 64 };
-  const plotWidth = width - padding.left - padding.right;
-  const plotHeight = height - padding.top - padding.bottom;
-  const xFor = (index) => padding.left + (chartData.length === 1 ? plotWidth / 2 : (index / (chartData.length - 1)) * plotWidth);
-  const yFor = (value) => padding.top + ((maxValue - value) / range) * plotHeight;
-  const yTicks = Array.from({ length: 5 }, (_, index) => minValue + (range / 4) * index).reverse();
-  const xStep = Math.max(1, Math.ceil(chartData.length / 7));
-
-  useEffect(() => {
-    setWindowStart(0);
-    setWindowSize(Math.min(12, Math.max(1, data.length)));
-  }, [data]);
-
-  const handleWheel = (event) => {
-    event.preventDefault();
-    if (!fullData.length) return;
-
-    if (event.shiftKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
-      const direction = (event.deltaX || event.deltaY) > 0 ? 1 : -1;
-      setWindowStart((current) => Math.min(Math.max(0, current + direction), Math.max(0, fullData.length - safeWindowSize)));
-      return;
-    }
-
-    if (event.ctrlKey || Math.abs(event.deltaY) >= Math.abs(event.deltaX)) {
-      const direction = event.deltaY > 0 ? 1 : -1;
-      setWindowSize((current) => {
-        const next = Math.min(fullData.length, Math.max(5, current + direction * 2));
-        setWindowStart((start) => Math.min(start, Math.max(0, fullData.length - next)));
-        return next;
-      });
-    }
-  };
-
-  const showAll = () => {
-    setWindowStart(0);
-    setWindowSize(fullData.length);
-  };
-
-  const pathFor = (metricKey) => chartData
-    .map((point, index) => `${index === 0 ? 'M' : 'L'} ${xFor(index).toFixed(2)} ${yFor(Number(point[metricKey] || 0)).toFixed(2)}`)
-    .join(' ');
-
-  return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
-      <div className="p-5 border-b border-gray-50 bg-gray-50/50 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div>
-          <h2 className="text-lg font-black text-gray-900 tracking-tight">Grafica financiera</h2>
-          <p className="text-xs font-bold text-gray-400 mt-1">Evolucion de ingresos, gastos y ganancia en {periodLabel}</p>
-        </div>
-        <button
-          onClick={showAll}
-          className="w-fit px-3 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition-all bg-white text-gray-500 border-gray-200 hover:border-gray-300"
-        >
-          Ver todo
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 xl:grid-cols-[260px_1fr]">
-        <aside className="border-b xl:border-b-0 xl:border-r border-gray-100 bg-gray-50/60 p-4 space-y-4">
-          <div>
-            <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Vista</p>
-            <div className="flex gap-1 bg-gray-200 p-0.5 rounded-lg">
-              <button
-                onClick={() => onAnnualChange(false)}
-                className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${!isAnnual ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
-              >
-                Mensual
-              </button>
-              <button
-                onClick={() => onAnnualChange(true)}
-                className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${isAnnual ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
-              >
-                Anual
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            {!isAnnual && (
-              <select
-                value={selectedMonth}
-                onChange={(e) => onMonthChange(parseInt(e.target.value))}
-                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
-              >
-                {months.map((month, index) => (
-                  <option key={month} value={index + 1}>{month}</option>
-                ))}
-              </select>
-            )}
-            <select
-              value={selectedYear}
-              onChange={(e) => onYearChange(parseInt(e.target.value))}
-              className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 focus:ring-2 focus:ring-primary-500 outline-none"
-            >
-              {years.map((year) => (
-                <option key={year} value={year}>{year}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Mostrar</p>
-            <div className="space-y-2">
-              {chartMetrics.map((metric) => (
-                <button
-                  key={metric.key}
-                  onClick={() => onToggleMetric(metric.key)}
-                  className={`w-full px-3 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition-all text-left ${
-                    visibleMetrics[metric.key]
-                      ? 'bg-gray-900 text-white border-gray-900 shadow-sm'
-                      : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300'
-                  }`}
-                >
-                  <span className="inline-block w-2 h-2 rounded-full mr-1.5 align-middle" style={{ backgroundColor: metric.color }}></span>
-                  {metric.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </aside>
-
-        <div className="p-4 lg:p-6 relative min-w-0">
-          {hoveredPoint && (
-            <div className="absolute right-6 top-6 z-10 bg-gray-950 text-white rounded-xl shadow-xl px-4 py-3 min-w-44">
-              <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">{hoveredPoint.label}</p>
-              <div className="space-y-1">
-                {activeMetrics.map((metric) => (
-                  <div key={metric.key} className="flex items-center justify-between gap-4 text-xs font-bold">
-                    <span className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: metric.color }}></span>
-                      {metric.label}
-                    </span>
-                    <span>{formatMoney(hoveredPoint[metric.key])}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div className="w-full overflow-hidden" onWheel={handleWheel}>
-            <svg viewBox={`0 0 ${width} ${height}`} className="min-w-[720px] w-full h-[320px]" role="img" aria-label="Grafica financiera del periodo">
-              <rect x="0" y="0" width={width} height={height} fill="#ffffff" />
-              {yTicks.map((tick) => (
-                <g key={tick}>
-                  <line x1={padding.left} x2={width - padding.right} y1={yFor(tick)} y2={yFor(tick)} stroke="#e5e7eb" strokeDasharray="4 4" />
-                  <text x={padding.left - 10} y={yFor(tick) + 4} textAnchor="end" className="fill-gray-400 text-[10px] font-bold">
-                    ${Math.round(tick)}
-                  </text>
-                </g>
-              ))}
-
-              {chartData.map((point, index) => (
-                index % xStep === 0 || index === chartData.length - 1 ? (
-                  <g key={point.key || index}>
-                    <text x={xFor(index)} y={height - 16} textAnchor="middle" className="fill-gray-400 text-[10px] font-bold">
-                      {point.label}
-                    </text>
-                  </g>
-                ) : null
-              ))}
-
-              {activeMetrics.map((metric) => (
-                <g key={metric.key}>
-                  <path d={pathFor(metric.key)} fill="none" stroke={metric.color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                  {chartData.map((point, index) => (
-                    <circle
-                      key={`${metric.key}-${point.key || index}`}
-                      cx={xFor(index)}
-                      cy={yFor(Number(point[metric.key] || 0))}
-                      r="4.5"
-                      fill="#ffffff"
-                      stroke={metric.color}
-                      strokeWidth="3"
-                      className="cursor-pointer"
-                      onMouseEnter={() => setHoveredPoint(point)}
-                      onMouseLeave={() => setHoveredPoint(null)}
-                    />
-                  ))}
-                </g>
-              ))}
-            </svg>
-          </div>
-          <div className="mt-3 flex items-center justify-between gap-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-            <span>Rueda: acercar/alejar</span>
-            <span>{chartData[0]?.label} - {chartData[chartData.length - 1]?.label}</span>
-            <span>Shift + rueda: desplazar</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+const readStockSetting = (key, fallback) => {
+  const saved = localStorage.getItem(key);
+  const value = Number(saved);
+  return saved !== null && Number.isInteger(value) && value >= 0 && value <= 999 ? value : fallback;
 };
 
 const Dashboard = () => {
+  const { user } = useAuth();
+  const canOpenInventory = canAccess(user, 'inventory');
+  const SupplyHistoryWrapper = canOpenInventory ? Link : 'div';
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -244,10 +28,14 @@ const Dashboard = () => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [isAnnual, setIsAnnual] = useState(false);
-  const [lowStockThreshold, setLowStockThreshold] = useState(() => {
-    const saved = Number(localStorage.getItem('lowStockThreshold'));
-    return Number.isFinite(saved) && saved > 0 ? saved : 10;
+  const [criticalStockThreshold, setCriticalStockThreshold] = useState(() => readStockSetting('criticalStockThreshold', 5));
+  const [lowStockRange, setLowStockRange] = useState(() => {
+    const min = readStockSetting('lowStockMin', 6);
+    const max = readStockSetting('lowStockMax', 10);
+    return min <= max ? { min, max } : { min: 6, max: 10 };
   });
+  const { min: lowStockMin, max: lowStockMax } = lowStockRange;
+  const statsRequest = useRef(0);
   const [visibleMetrics, setVisibleMetrics] = useState({
     revenue: true,
     expenses: true,
@@ -279,31 +67,45 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchStats();
-  }, [selectedYear, selectedMonth, isAnnual, lowStockThreshold]);
+
+    const refreshDashboard = () => fetchStats();
+    const refreshInterval = window.setInterval(refreshDashboard, 30000);
+    window.addEventListener('focus', refreshDashboard);
+
+    return () => {
+      statsRequest.current += 1;
+      window.clearInterval(refreshInterval);
+      window.removeEventListener('focus', refreshDashboard);
+    };
+  }, [selectedYear, selectedMonth, isAnnual, criticalStockThreshold, lowStockMin, lowStockMax]);
 
   const fetchStats = async () => {
+    const requestId = ++statsRequest.current;
     try {
-      const res = await dashboardApi.getStats(selectedYear, selectedMonth, isAnnual, lowStockThreshold);
+      const res = await dashboardApi.getStats(selectedYear, selectedMonth, isAnnual, {
+        criticalStockThreshold, lowStockMin, lowStockMax,
+      });
+      if (requestId !== statsRequest.current) return;
       if (res.data.status === "success") {
-        if (!selectedYear) setSelectedYear(res.data.monthlyStats.year);
-        if (!selectedMonth) setSelectedMonth(res.data.monthlyStats.month);
+        setSelectedYear(res.data.monthlyStats.year);
+        setSelectedMonth(res.data.monthlyStats.month);
         setData(res.data);
       }
     } catch (err) {
-      console.error(err);
+      if (requestId === statsRequest.current) console.error(err);
     } finally {
-      setLoading(false);
+      if (requestId === statsRequest.current) setLoading(false);
     }
   };
 
-  const updateLowStockThreshold = async () => {
+  const updateCriticalStockThreshold = async () => {
     const result = await Swal.fire({
-      title: 'Alerta de bajo stock',
-      text: 'Se avisara cuando un producto tenga esta cantidad o menos.',
+      title: 'Stock crítico',
+      text: 'Mostrar productos con esta cantidad o menos. Usa 0 para ver solo los agotados. Este ajuste no cambia el rango de productos por acabarse.',
       input: 'number',
-      inputValue: lowStockThreshold,
+      inputValue: criticalStockThreshold,
       inputAttributes: {
-        min: '1',
+        min: '0',
         max: '999',
         step: '1'
       },
@@ -312,8 +114,8 @@ const Dashboard = () => {
       cancelButtonText: 'Cancelar',
       inputValidator: (value) => {
         const numberValue = Number(value);
-        if (!Number.isInteger(numberValue) || numberValue < 1 || numberValue > 999) {
-          return 'Ingresa un numero entre 1 y 999';
+        if (value === '' || !Number.isInteger(numberValue) || numberValue < 0 || numberValue > 999) {
+          return 'Ingresa un número entero entre 0 y 999';
         }
         return undefined;
       }
@@ -321,8 +123,37 @@ const Dashboard = () => {
 
     if (!result.isConfirmed) return;
     const nextThreshold = Number(result.value);
-    localStorage.setItem('lowStockThreshold', String(nextThreshold));
-    setLowStockThreshold(nextThreshold);
+    localStorage.setItem('criticalStockThreshold', String(nextThreshold));
+    setCriticalStockThreshold(nextThreshold);
+  };
+
+  const updateLowStockRange = async () => {
+    const result = await Swal.fire({
+      title: 'Productos por acabarse',
+      html: `<p class="text-sm text-gray-500 mb-4">Define el rango de unidades, incluidos ambos extremos. Este ajuste no cambia el stock crítico.</p>
+        <div class="flex gap-3 text-left">
+          <label class="flex-1 text-sm">Desde<input id="low-stock-min" type="number" min="0" max="999" step="1" value="${lowStockMin}" class="swal2-input !mx-0 !w-full" /></label>
+          <label class="flex-1 text-sm">Hasta<input id="low-stock-max" type="number" min="0" max="999" step="1" value="${lowStockMax}" class="swal2-input !mx-0 !w-full" /></label>
+        </div>`,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        const minInput = Swal.getPopup().querySelector('#low-stock-min').value;
+        const maxInput = Swal.getPopup().querySelector('#low-stock-max').value;
+        const min = Number(minInput);
+        const max = Number(maxInput);
+        if (minInput === '' || maxInput === '' || !Number.isInteger(min) || !Number.isInteger(max) || min < 0 || max > 999 || min > max) {
+          Swal.showValidationMessage('Ingresa un rango válido de enteros entre 0 y 999; el inicio debe ser menor o igual al final.');
+          return false;
+        }
+        return { min, max };
+      },
+    });
+    if (!result.isConfirmed) return;
+    localStorage.setItem('lowStockMin', String(result.value.min));
+    localStorage.setItem('lowStockMax', String(result.value.max));
+    setLowStockRange(result.value);
   };
 
   const fetchDetails = async (id) => {
@@ -366,6 +197,9 @@ const Dashboard = () => {
     doc.setFontSize(10);
     doc.text(`Nro. Comprobante: #000${purchase.id}`, 20, 52);
     doc.text(`Fecha: ${date}`, 20, 57);
+    doc.setFontSize(9);
+    doc.text(doc.splitTextToSize(`Atendido por: ${purchase.served_by_name || 'Usuario no disponible'}`, 170), 20, 64);
+    doc.setFontSize(12);
 
     // Customer Info
     if (purchase.purchase_type === 'FACTURA' && purchase.customer_name) {
@@ -467,11 +301,11 @@ const Dashboard = () => {
           <div className="p-3 bg-orange-500 text-white rounded-xl relative z-10 shadow-sm">
             <TrendingDown className="h-5 w-5" />
           </div>
-          <Link to="/inventory?history=1" className="relative z-10 hover:opacity-80 transition-opacity text-left">
+          <SupplyHistoryWrapper {...(canOpenInventory ? { to: '/inventory?history=1' } : {})} className="relative z-10 hover:opacity-80 transition-opacity text-left">
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Gastos de hoy</p>
             <p className="text-xl font-black text-gray-900 tracking-tight">{formatMoney(data.stats.expensesToday)}</p>
-            <p className="text-[9px] font-bold text-orange-600 mt-1">Ver abastecimientos</p>
-          </Link>
+            {canOpenInventory && <p className="text-[9px] font-bold text-orange-600 mt-1">Ver abastecimientos</p>}
+          </SupplyHistoryWrapper>
         </motion.div>
 
         <motion.div 
@@ -497,7 +331,7 @@ const Dashboard = () => {
             <AlertTriangle className="h-5 w-5" />
           </div>
           <Link to="/inventory" className="relative z-10 hover:opacity-80 transition-opacity text-left">
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Bajo Stock</p>
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Stock crítico</p>
             <p className="text-xl font-black text-gray-900 tracking-tight">{data.stats.lowStockCount}</p>
           </Link>
         </motion.div>
@@ -574,19 +408,19 @@ const Dashboard = () => {
               )}
             </div>
 
-            {/* Net Profit */}
+            {/* Estimated margin including collected VAT */}
             <div className="p-3 bg-primary-50 rounded-xl border border-primary-200">
               <div className="flex items-center gap-2 text-primary-600 mb-1">
                 <ArrowUpRight className="h-3 w-3" />
                 <span className="text-[9px] font-bold uppercase tracking-widest">
-                  Ganancia por ventas
+                  Ganancia estimada con IVA
                 </span>
               </div>
               <p className="text-lg font-black text-primary-700">
-                {formatMoney(data.monthlyStats.netProfit)}
+                {formatMoney(data.monthlyStats.profitIncludingVat)}
               </p>
               <p className="text-[10px] font-bold text-primary-700/70 mt-1">
-                Resultado estimado del periodo
+                Antes de gastos del local.
               </p>
             </div>
           </div>
@@ -656,21 +490,25 @@ const Dashboard = () => {
             <div className="p-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
               <h2 className="text-sm font-black text-gray-900 flex items-center gap-2">
                 <AlertTriangle className="h-4 w-4 text-red-500" />
-                Productos Sin Stock
+                Stock crítico
               </h2>
               <button
                 type="button"
-                onClick={updateLowStockThreshold}
-                title="Configurar alerta de bajo stock"
+                onClick={updateCriticalStockThreshold}
+                title="Configurar stock crítico"
+                aria-label="Configurar stock crítico"
                 className="h-8 w-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-primary-700 hover:bg-primary-50 transition-colors"
               >
                 <Settings className="h-4 w-4" />
               </button>
             </div>
+            <div className="px-4 pt-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+              De 0 a {data.stockSettings?.criticalStockThreshold ?? criticalStockThreshold} unidades · incluye agotados
+            </div>
             <div className="p-3 overflow-y-auto flex-1 max-h-[300px]">
               {data.lowStockProducts && data.lowStockProducts.length === 0 ? (
                 <div className="text-center py-4 text-gray-400">
-                  <p className="text-xs font-medium">¡Todo en stock!</p>
+                  <p className="text-xs font-medium">No hay productos con stock crítico.</p>
                 </div>
               ) : (
                 <div className="space-y-2">
@@ -706,15 +544,16 @@ const Dashboard = () => {
               </h2>
               <button
                 type="button"
-                onClick={updateLowStockThreshold}
-                title="Configurar alerta de bajo stock"
+                onClick={updateLowStockRange}
+                title="Configurar rango de productos por acabarse"
+                aria-label="Configurar rango de productos por acabarse"
                 className="h-8 w-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-primary-700 hover:bg-primary-50 transition-colors"
               >
                 <Settings className="h-4 w-4" />
               </button>
             </div>
             <div className="px-4 pt-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-              Aviso desde {data.stockSettings?.lowStockThreshold || lowStockThreshold} unidades
+              De {data.stockSettings?.lowStockMin ?? lowStockMin} a {data.stockSettings?.lowStockMax ?? lowStockMax} unidades
             </div>
             <div className="p-3 overflow-y-auto flex-1 max-h-[300px]">
               {data.criticalStockProducts && data.criticalStockProducts.length === 0 ? (
@@ -750,12 +589,16 @@ const Dashboard = () => {
 
       <FinancialLineChart
         data={data.financialSeries}
+        dataPeriodKey={`${data.monthlyStats.year}-${data.monthlyStats.isAnnual ? 'annual' : data.monthlyStats.month}`}
         visibleMetrics={visibleMetrics}
         onToggleMetric={toggleMetric}
         formatMoney={formatMoney}
         periodLabel={periodLabel}
         months={months}
         years={years}
+        availablePeriods={data.availablePeriods}
+        currentDate={data.currentDate}
+        historyStart={data.historyStart}
         selectedMonth={selectedMonth || data.monthlyStats.month}
         selectedYear={selectedYear || data.monthlyStats.year}
         isAnnual={isAnnual}
@@ -788,6 +631,7 @@ const Dashboard = () => {
                   <div>
                     <p className="font-bold text-gray-900 text-sm tracking-tight">Orden de Venta</p>
                     <p className="text-[10px] text-gray-400 font-medium">{new Date(sale.created_at).toLocaleString()}</p>
+                    <p className="text-[10px] text-gray-500">Atendió: {sale.served_by_name || 'Usuario no disponible'}</p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -802,27 +646,27 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="space-y-4">
+        {(canOpenInventory || canAccess(user, 'users')) && <div className="space-y-4">
           <h2 className="text-lg font-black text-gray-900">Accesos Directos</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Link to="/inventory" className="p-5 bg-primary-600 text-white rounded-2xl shadow-lg flex flex-col justify-between h-36 group hover:scale-[1.01] transition-all duration-300 relative overflow-hidden">
+            {canOpenInventory && <Link to="/inventory" className="p-5 bg-primary-600 text-white rounded-2xl shadow-lg flex flex-col justify-between h-36 group hover:scale-[1.01] transition-all duration-300 relative overflow-hidden">
               <div className="absolute -top-8 -right-8 w-20 h-20 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
               <Package className="h-7 w-7 opacity-40 group-hover:opacity-100 transition-opacity" />
               <div className="relative z-10">
                 <p className="font-black text-lg tracking-tight mb-1">Inventario</p>
                 <p className="text-xs text-primary-100 font-medium">Control de stock</p>
               </div>
-            </Link>
-            <Link to="/users" className="p-5 bg-gray-900 text-white rounded-2xl shadow-lg flex flex-col justify-between h-36 group hover:scale-[1.01] transition-all duration-300 relative overflow-hidden">
+            </Link>}
+            {canAccess(user, 'users') && <Link to="/users" className="p-5 bg-gray-900 text-white rounded-2xl shadow-lg flex flex-col justify-between h-36 group hover:scale-[1.01] transition-all duration-300 relative overflow-hidden">
               <div className="absolute -top-8 -right-8 w-20 h-20 bg-white/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
               <UsersIcon className="h-7 w-7 opacity-40 group-hover:opacity-100 transition-opacity" />
               <div className="relative z-10">
                 <p className="font-black text-lg tracking-tight mb-1">Personal</p>
                 <p className="text-xs text-gray-400 font-medium">Gestionar equipo</p>
               </div>
-            </Link>
+            </Link>}
           </div>
-        </div>
+        </div>}
       </div>
 
       {/* Detail Modal */}
@@ -890,6 +734,8 @@ const Dashboard = () => {
                         <p className="text-sm font-black text-primary-600">${parseFloat(details.purchase.total).toFixed(2)}</p>
                       </div>
                     </div>
+
+                    <p className="text-xs text-gray-600">Atendido por: <span className="font-bold text-gray-900">{details.purchase.served_by_name || 'Usuario no disponible'}</span></p>
 
                     {/* Products List */}
                     <div>

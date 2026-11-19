@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../backend/db.php');
+require_once __DIR__ . '/../backend/lib/access.php';
+appRequirePermission($conn, 'transactions');
 
 if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");

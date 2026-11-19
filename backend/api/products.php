@@ -41,7 +41,19 @@ if ($method === 'GET') {
         }
         $result = $conn->query($sql);
         $products = [];
+        // Variantes al mismo precio comparten producto y stock, pero conservan
+        // sus códigos comerciales para el lector de caja.
+        $scanCodes = [];
+        if ($conn->query("SHOW TABLES LIKE 'product_barcodes'")->num_rows > 0) {
+            $barcodeResult = $conn->query('SELECT product_id, barcode FROM product_barcodes');
+            while ($barcodeRow = $barcodeResult->fetch_assoc()) {
+                $scanCodes[$barcodeRow['product_id']][] = $barcodeRow['barcode'];
+            }
+        }
         while ($row = $result->fetch_assoc()) {
+            $row['scan_codes'] = array_values(array_unique(array_filter(array_merge(
+                [$row['barcode']], $scanCodes[$row['id']] ?? []
+            ), static fn($code) => $code !== null && $code !== '')));
             $row['image_url'] = "/api/frontend/uploads/" . $row['image'];
             $products[] = $row;
         }

@@ -115,6 +115,8 @@ function cart_render_html($conn) {
 }
 
 include('../backend/db.php'); // usa tu conexión
+require_once __DIR__ . '/../backend/lib/access.php';
+appRequirePermission($conn, 'sales');
 
 $action = $_POST['action'] ?? '';
 
